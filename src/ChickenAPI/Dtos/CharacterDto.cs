@@ -4,7 +4,7 @@ namespace ChickenAPI.Dtos
 {
     public class CharacterDto
     {
-        public long AccountId { get; set; }
+        public ulong AccountId { get; set; }
         public int Act4Dead { get; set; }
 
         public int Act4Kill { get; set; }

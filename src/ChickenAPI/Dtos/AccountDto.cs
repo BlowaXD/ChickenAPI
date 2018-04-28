@@ -5,14 +5,14 @@ namespace ChickenAPI.Dtos
     public class AccountDto
     {
         /// <summary>
-        /// AccountDto Id
+        /// Account Id
         /// </summary>
-        public ulong Id { get; set; }
+        public ulong AccountId { get; set; }
 
         public AuthorityType Authority { get; set; }
 
         /// <summary>
-        /// AccountDto Name
+        /// Account Name
         /// </summary>
         public string Name { get; set; }
 

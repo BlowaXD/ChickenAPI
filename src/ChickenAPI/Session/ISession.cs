@@ -8,10 +8,11 @@ namespace ChickenAPI.Session
 {
     public interface ISession
     {
-        AccountDto AccountDto { get; }
+        AccountDto Account { get; }
         Character Character { get; }
         AuthorityType Authority { get; }
 
+        bool HasCurrentMapInstance { get; }
         bool IsAuthenticated { get; }
         bool HasSelectedCharacter { get; }
 

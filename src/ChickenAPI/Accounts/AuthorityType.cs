@@ -1,7 +1,7 @@
 ﻿namespace ChickenAPI.Accounts
 {
     /// <summary>
-    /// AccountDto basic groups
+    /// Account basic groups
     /// </summary>
     public enum AuthorityType
     {
