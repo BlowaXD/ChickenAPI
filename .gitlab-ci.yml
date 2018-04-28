@@ -5,6 +5,10 @@ stages:
   - test
   - deploy
 
+tags:
+  - docker
+  - dotnet
+
 
 before_script:
   - "dotnet restore"
