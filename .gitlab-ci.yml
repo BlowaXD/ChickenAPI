@@ -1,0 +1,18 @@
+image: microsoft/dotnet:2.1-sdk-alpine
+
+stages:
+  - build
+  - test
+  - deploy
+
+
+before_script:
+  - "dotnet restore"
+
+build SDK.Core:
+  stage: build
+  variables:
+    build_path: "src/ChickenAPI"
+  script:
+    - "cd $build_path"
+    - "dotnet build"
