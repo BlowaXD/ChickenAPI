@@ -5,16 +5,15 @@ stages:
   - test
   - deploy
 
-tags:
-  - docker
-  - dotnet
-
 
 before_script:
   - "dotnet restore"
 
 build SDK.Core:
   stage: build
+  tags:
+    - docker
+    - dotnet
   variables:
     build_path: "src/ChickenAPI"
   script:
