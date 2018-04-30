@@ -1,9 +1,11 @@
-﻿using ChickenAPI.Player.Enums;
+﻿using ChickenAPI.DAL.Interfaces.Repository;
+using ChickenAPI.Player.Enums;
 
 namespace ChickenAPI.Dtos
 {
-    public class CharacterDto
+    public class CharacterDto : IMappedDto
     {
+        public ulong Id { get; set; }
         public ulong AccountId { get; set; }
         public int Act4Dead { get; set; }
 
@@ -16,7 +18,6 @@ namespace ChickenAPI.Dtos
         public string Biography { get; set; }
 
         public bool BuffBlocked { get; set; }
-        public ulong CharacterId { get; set; }
         public byte Class { get; set; }
 
         public short Compliment { get; set; }

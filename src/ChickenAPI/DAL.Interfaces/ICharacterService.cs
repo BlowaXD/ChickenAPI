@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
+using ChickenAPI.DAL.Interfaces.Repository;
 using ChickenAPI.Dtos;
 
 namespace ChickenAPI.DAL.Interfaces
 {
-    public interface ICharacterService
+    public interface ICharacterService : IMappedRepository<CharacterDto>
     {
-        void Insert(CharacterDto dto);
-        void Update(CharacterDto dto);
         IEnumerable<CharacterDto> GetActiveByAccountId(ulong accountId);
     }
 }

@@ -1,13 +1,14 @@
 ﻿using ChickenAPI.Accounts;
+using ChickenAPI.DAL.Interfaces.Repository;
 
 namespace ChickenAPI.Dtos
 {
-    public class AccountDto
+    public class AccountDto : IMappedDto
     {
         /// <summary>
         /// Account Id
         /// </summary>
-        public ulong AccountId { get; set; }
+        public ulong Id { get; set; }
 
         public AuthorityType Authority { get; set; }
 

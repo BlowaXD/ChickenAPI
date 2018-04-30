@@ -1,10 +1,10 @@
-﻿using ChickenAPI.Dtos;
+﻿using ChickenAPI.DAL.Interfaces.Repository;
+using ChickenAPI.Dtos;
 
-namespace ChickenAPI.Accounts
+namespace ChickenAPI.DAL.Interfaces
 {
-    public interface IAccountService
+    public interface IAccountService : IMappedRepository<AccountDto>
     {
         AccountDto GetByName(string name);
-        AccountDto GetById(ulong id);
     }
 }
