@@ -1,10 +1,11 @@
-﻿using ChickenAPI.Player.Enums;
+﻿using ChickenAPI.DAL.Interfaces.Repository;
+using ChickenAPI.Player.Enums;
 
 namespace ChickenAPI.Dtos
 {
-    public class PlayerSessionDto
+    public class PlayerSessionDto : IMappedDto
     {
-        public ulong SessionId { get; set; }
+        public long Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public PlayerSessionState State { get; set; }
