@@ -8,7 +8,7 @@ namespace ChickenAPI.Dtos
         /// <summary>
         /// Account Id
         /// </summary>
-        public ulong Id { get; set; }
+        public long Id { get; set; }
 
         public AuthorityType Authority { get; set; }
 

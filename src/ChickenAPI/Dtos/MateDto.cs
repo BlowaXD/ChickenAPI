@@ -1,8 +1,10 @@
-﻿namespace ChickenAPI.Dtos
+﻿using ChickenAPI.DAL.Interfaces.Repository;
+
+namespace ChickenAPI.Dtos
 {
-    public class MateDto
+    public class MateDto : IMappedDto
     {
-        public long MateId { get; set; }
+        public long Id { get; set; }
         public byte Attack { get; set; }
 
         public bool CanPickUp { get; set; }

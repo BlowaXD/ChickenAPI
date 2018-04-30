@@ -2,6 +2,6 @@
 {
     public interface IMappedDto
     {
-        ulong Id { get; set; }
+        long Id { get; set; }
     }
 }
