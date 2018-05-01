@@ -9,6 +9,7 @@ namespace ChickenAPI.DAL.Interfaces
         void RegisterSession(PlayerSessionDto dto);
         void UpdateSession(PlayerSessionDto dto);
 
+        PlayerSessionDto GetByName(string name);
         PlayerSessionDto GetById(int id);
 
         void UnregisterSession(int sessionId);
