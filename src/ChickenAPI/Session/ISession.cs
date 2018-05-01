@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using ChickenAPI.Accounts;
 using ChickenAPI.Dtos;
 using ChickenAPI.Packets;
@@ -9,6 +10,7 @@ namespace ChickenAPI.Session
     public interface ISession
     {
         int SessionId { get; }
+        IPEndPoint Ip { get; }
         AccountDto Account { get; }
         Character Character { get; }
         AuthorityType Authority { get; }
