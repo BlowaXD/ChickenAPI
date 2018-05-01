@@ -12,10 +12,22 @@ namespace ChickenAPI.Packets
             Identification = identification;
         }
 
+        public PacketHeaderAttribute(string identification, bool needCharacter)
+        {
+            Identification = identification;
+            NeedCharacter = needCharacter;
+        }
         public PacketHeaderAttribute(string identification, byte amount)
         {
             Identification = identification;
             Amount = amount;
+        }
+
+        public PacketHeaderAttribute(string identification, byte amount, bool needCharacter)
+        {
+            Identification = identification;
+            Amount = amount;
+            NeedCharacter = needCharacter;
         }
 
         #endregion
@@ -36,6 +48,8 @@ namespace ChickenAPI.Packets
         ///     Amount of tcp message to create the Packet
         /// </summary>
         public byte Amount { get; set; }
+
+        public bool NeedCharacter { get; set; }
 
         #endregion
     }

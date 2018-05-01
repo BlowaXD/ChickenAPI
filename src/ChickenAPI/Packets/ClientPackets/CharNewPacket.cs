@@ -2,7 +2,7 @@
 
 namespace ChickenAPI.Packets.ClientPackets
 {
-    [PacketHeader("Char_NEW")]
+    [PacketHeader("Char_NEW", false)]
     public class CharNewPacket : APacket
     {
         [PacketIndex(0)]

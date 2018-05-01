@@ -3,9 +3,9 @@ using ChickenAPI.Player.Enums;
 
 namespace ChickenAPI.Dtos
 {
-    public class PlayerSessionDto : IMappedDto
+    public class PlayerSessionDto
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public PlayerSessionState State { get; set; }

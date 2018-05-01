@@ -1,6 +1,6 @@
 ﻿namespace ChickenAPI.Packets.ClientPackets
 {
-    [PacketHeader("Char_DEL")]
+    [PacketHeader("Char_DEL", false)]
     public class CharacterDeletePacket : APacket
     {
         [PacketIndex(0)]
