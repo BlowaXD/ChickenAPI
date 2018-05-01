@@ -12,8 +12,8 @@ namespace ChickenAPI.Packets
         public PacketHandlerMethodReference(Action<APacket, ISession> handlerMethod, Type packetBaseParameterType)
         {
             HandlerMethod = handlerMethod;
-            PacketDefinitionParameterType = packetBaseParameterType;
-            PacketHeader = PacketDefinitionParameterType.GetCustomAttributes(typeof(PacketHeaderAttribute), true).FirstOrDefault() as PacketHeaderAttribute;
+            PacketType = packetBaseParameterType;
+            PacketHeader = PacketType.GetCustomAttributes(typeof(PacketHeaderAttribute), true).FirstOrDefault() as PacketHeaderAttribute;
             Identification = PacketHeader?.Identification;
             Authority = PacketHeader?.Authority ?? AuthorityType.User;
             if (PacketHeader != null)
@@ -30,7 +30,7 @@ namespace ChickenAPI.Packets
         public PacketHeaderAttribute PacketHeader { get; set; }
         public AuthorityType Authority { get; }
         public string Identification { get; }
-        public Type PacketDefinitionParameterType { get; }
+        public Type PacketType { get; }
         public bool NeedCharacter { get; }
 
         #endregion
