@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using ChickenAPI.Enums;
 
 namespace ChickenAPI.Dtos
 {
@@ -7,8 +7,8 @@ namespace ChickenAPI.Dtos
     {
         public Guid Id { get; set; }
         public short ChannelId { get; set; }
+        public ChannelColor Color { get; set; }
         public string WorldGroup { get; set; }
-        public HashSet<PlayerSessionDto> Players { get; set; }
         public string Ip { get; set; }
         public int Port { get; set; }
     }
