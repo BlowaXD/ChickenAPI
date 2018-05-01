@@ -5,16 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>C:\Users\Blowa\.nuget\packages\log4net\2.0.8\lib\netstandard1.3\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory">
-      <HintPath>C:\Users\Blowa\.nuget\packages\system.memory\4.5.0-preview2-26406-04\ref\netstandard2.0\System.Memory.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
