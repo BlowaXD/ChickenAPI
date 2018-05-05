@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ChickenAPI.Dtos;
 
 namespace ChickenAPI.DAL.Interfaces
@@ -15,8 +16,8 @@ namespace ChickenAPI.DAL.Interfaces
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="dto"></param>
-        void UnregisterServer(WorldServerDto dto);
+        /// <param name="id"></param>
+        void UnregisterServer(Guid id);
 
         IEnumerable<WorldServerDto> GetServers();
     }
