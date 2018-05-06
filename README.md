@@ -1,4 +1,4 @@
-<center><img src="docs/imgs/logo.svg" height="256px"></img></center>
+<img src="docs/imgs/logo_512.png" height="256px"></img>
 
 
 ## Description
