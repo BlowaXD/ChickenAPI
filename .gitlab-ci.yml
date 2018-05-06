@@ -9,7 +9,7 @@ stages:
 before_script:
   - "dotnet restore"
 
-build SDK.Core:
+build ChickenAPI:
   stage: build
   tags:
     - docker
