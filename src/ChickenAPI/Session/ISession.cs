@@ -2,6 +2,7 @@
 using System.Net;
 using ChickenAPI.Accounts;
 using ChickenAPI.Dtos;
+using ChickenAPI.Enums;
 using ChickenAPI.Packets;
 using ChickenAPI.Player;
 
@@ -10,6 +11,7 @@ namespace ChickenAPI.Session
     public interface ISession
     {
         int SessionId { get; }
+        RegionType SessionRegion { get; }
         IPEndPoint Ip { get; }
         AccountDto Account { get; }
         Character Character { get; }
