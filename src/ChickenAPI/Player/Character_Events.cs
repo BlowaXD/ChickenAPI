@@ -1,5 +1,4 @@
-﻿using System;
-using ChickenAPI.Events.Player;
+﻿using ChickenAPI.Events.Player;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.Player

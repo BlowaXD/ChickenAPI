@@ -1,7 +1,7 @@
 ﻿namespace ChickenAPI.Accounts
 {
     /// <summary>
-    /// Account basic groups
+    ///     Account basic groups
     /// </summary>
     public enum AuthorityType : short
     {
@@ -11,6 +11,6 @@
         User = 0,
         Support = 80,
         GameMaster = 100,
-        Administrator = 1000,
+        Administrator = 1000
     }
 }

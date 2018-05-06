@@ -1,6 +1,5 @@
 ﻿namespace ChickenAPI.Packets.ClientPackets
 {
-
     [PacketHeader("EntryPoint", 3, false)]
     public class EntryPointPacket : APacket
     {
@@ -20,7 +19,7 @@
 
         [PacketIndex(4)]
         public string Password { get; set; }
-        #endregion
 
+        #endregion
     }
 }

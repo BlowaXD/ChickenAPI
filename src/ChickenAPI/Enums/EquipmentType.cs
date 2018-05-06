@@ -2,7 +2,6 @@
 {
     public enum EquipmentType : byte
     {
-
         MainWeapon = 0,
         Armor = 1,
         Hat = 2,
@@ -19,6 +18,5 @@
         CostumeSuit = 13,
         CostumeHat = 14,
         WeaponSkin = 15
-
     }
 }

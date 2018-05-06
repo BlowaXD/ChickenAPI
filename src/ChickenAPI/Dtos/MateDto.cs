@@ -4,7 +4,6 @@ namespace ChickenAPI.Dtos
 {
     public class MateDto : IMappedDto
     {
-        public long Id { get; set; }
         public byte Attack { get; set; }
 
         public bool CanPickUp { get; set; }
@@ -38,5 +37,6 @@ namespace ChickenAPI.Dtos
         public short VNum { get; set; }
 
         public short Skin { get; set; }
+        public long Id { get; set; }
     }
 }

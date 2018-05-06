@@ -6,11 +6,11 @@ namespace ChickenAPI.Utils
     {
         public static ContainerBuilder Builder = new ContainerBuilder();
 
+        public static IContainer Instance { get; private set; }
+
         public static void Initialize()
         {
             Instance = Builder.Build();
         }
-
-        public static IContainer Instance { get; private set; }
     }
 }

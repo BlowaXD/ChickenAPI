@@ -37,6 +37,5 @@ namespace ChickenAPI.Utils
 
             File.WriteAllText(path, valueSerialized);
         }
-
     }
 }

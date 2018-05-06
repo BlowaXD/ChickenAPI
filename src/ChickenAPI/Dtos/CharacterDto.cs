@@ -5,7 +5,6 @@ namespace ChickenAPI.Dtos
 {
     public class CharacterDto : IMappedDto
     {
-        public long Id { get; set; }
         public long AccountId { get; set; }
         public int Act4Dead { get; set; }
 
@@ -112,5 +111,6 @@ namespace ChickenAPI.Dtos
         public int TalentWin { get; set; }
 
         public bool WhisperBlocked { get; set; }
+        public long Id { get; set; }
     }
 }

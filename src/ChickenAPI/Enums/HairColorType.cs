@@ -1,5 +1,4 @@
-﻿
-namespace ChickenAPI.Player.Enums
+﻿namespace ChickenAPI.Player.Enums
 {
     public enum HairColorType : byte
     {

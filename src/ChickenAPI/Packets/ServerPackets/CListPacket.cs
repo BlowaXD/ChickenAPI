@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
-using ChickenAPI.Player;
+using ChickenAPI.Player.Enums;
 
 namespace ChickenAPI.Packets.ServerPackets
 {
-
     [PacketHeader("clist")]
     public class ClistPacket : APacket
     {
         #region Properties
+
         [PacketIndex(0)]
         public byte Slot { get; set; }
 

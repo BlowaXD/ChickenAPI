@@ -5,7 +5,6 @@
         #region Properties
 
         /// <summary>
-        /// 
         /// </summary>
         public string OriginalContent { get; set; }
 

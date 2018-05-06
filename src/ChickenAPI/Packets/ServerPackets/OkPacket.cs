@@ -3,6 +3,5 @@
     [PacketHeader("OK")]
     public class OkPacket : APacket
     {
-        
     }
 }

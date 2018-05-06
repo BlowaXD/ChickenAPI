@@ -3,22 +3,22 @@
     public interface IPlugin
     {
         /// <summary>
-        /// Name of the plugin
+        ///     Name of the plugin
         /// </summary>
         string Name { get; }
 
         /// <summary>
-        /// Called when this plugin is disabled
+        ///     Called when this plugin is disabled
         /// </summary>
         void OnDisable();
 
         /// <summary>
-        /// Called when this plugin is enabled
+        ///     Called when this plugin is enabled
         /// </summary>
         void OnEnable();
 
         /// <summary>
-        /// Called when this plugin is loaded but before it has been enabled
+        ///     Called when this plugin is loaded but before it has been enabled
         /// </summary>
         void OnLoad();
 

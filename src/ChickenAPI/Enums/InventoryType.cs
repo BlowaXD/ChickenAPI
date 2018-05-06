@@ -13,6 +13,6 @@
         Warehouse = 10,
         FamilyWareHouse = 11,
         PetWarehouse = 12,
-        PartnerInventory = 13,
+        PartnerInventory = 13
     }
 }

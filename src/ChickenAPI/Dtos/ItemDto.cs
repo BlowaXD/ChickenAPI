@@ -4,12 +4,10 @@ using ChickenAPI.Enums;
 namespace ChickenAPI.Dtos
 {
     /// <summary>
-    /// Items
+    ///     Items
     /// </summary>
     public class ItemDto : IMappedDto
     {
-        public long Id { get; set; }
-
         public byte BasicUpgrade { get; set; }
 
         public byte CellonLvl { get; set; }
@@ -163,5 +161,6 @@ namespace ChickenAPI.Dtos
         public short WaterResistance { get; set; }
 
         public byte Width { get; set; }
+        public long Id { get; set; }
     }
 }
