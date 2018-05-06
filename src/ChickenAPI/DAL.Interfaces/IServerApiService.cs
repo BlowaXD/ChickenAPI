@@ -7,16 +7,22 @@ namespace ChickenAPI.DAL.Interfaces
     public interface IServerApiService
     {
         /// <summary>
+        /// Register the server in the global server list
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns>true if the ServerApi failed to register</returns>
+        /// <returns></returns>
         bool RegisterServer(WorldServerDto dto);
-
+        
         /// <summary>
+        /// Unregister the server from global server list
         /// </summary>
         /// <param name="id"></param>
         void UnregisterServer(Guid id);
 
+        /// <summary>
+        /// Retrieve all servers from global server list
+        /// </summary>
+        /// <returns></returns>
         IEnumerable<WorldServerDto> GetServers();
     }
 }

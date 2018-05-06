@@ -5,6 +5,9 @@ namespace ChickenAPI.Dtos
 {
     public class AccountDto : IMappedDto
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public AuthorityType Authority { get; set; }
 
         /// <summary>
