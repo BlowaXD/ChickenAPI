@@ -7,5 +7,6 @@ namespace ChickenAPI.DAL.Interfaces
     public interface ICharacterService : IMappedRepository<CharacterDto>
     {
         IEnumerable<CharacterDto> GetActiveByAccountId(long accountId);
+        CharacterDto GetByAccountIdAndSlot(long accountId, byte packetSlot);
     }
 }
