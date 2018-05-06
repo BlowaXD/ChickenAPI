@@ -1,5 +1,5 @@
 ﻿using ChickenAPI.DAL.Interfaces.Repository;
-using ChickenAPI.Player.Enums;
+using ChickenAPI.Enums;
 
 namespace ChickenAPI.Dtos
 {

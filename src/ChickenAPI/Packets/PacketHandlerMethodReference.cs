@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using ChickenAPI.Accounts;
+using ChickenAPI.Enums;
 using ChickenAPI.Session;
 
 namespace ChickenAPI.Packets

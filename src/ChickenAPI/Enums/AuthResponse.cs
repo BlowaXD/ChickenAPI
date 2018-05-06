@@ -1,4 +1,4 @@
-﻿namespace ChickenAPI.Accounts
+﻿namespace ChickenAPI.Enums
 {
     public enum AuthResponse
     {

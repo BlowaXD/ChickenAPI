@@ -1,5 +1,5 @@
 ﻿using System;
-using ChickenAPI.Player.Enums;
+using ChickenAPI.Enums;
 
 namespace ChickenAPI.Dtos
 {

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ChickenAPI.Player.Enums;
+using ChickenAPI.Enums;
 
 namespace ChickenAPI.Packets.ServerPackets
 {

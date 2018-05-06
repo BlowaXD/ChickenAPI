@@ -1,4 +1,4 @@
-﻿namespace ChickenAPI.Player.Enums
+﻿namespace ChickenAPI.Enums
 {
     public enum CharacterState : byte
     {

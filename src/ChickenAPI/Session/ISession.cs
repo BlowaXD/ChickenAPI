@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using ChickenAPI.Accounts;
 using ChickenAPI.Dtos;
 using ChickenAPI.Enums;
 using ChickenAPI.Packets;

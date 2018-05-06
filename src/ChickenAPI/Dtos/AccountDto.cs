@@ -1,5 +1,5 @@
-﻿using ChickenAPI.Accounts;
-using ChickenAPI.DAL.Interfaces.Repository;
+﻿using ChickenAPI.DAL.Interfaces.Repository;
+using ChickenAPI.Enums;
 
 namespace ChickenAPI.Dtos
 {

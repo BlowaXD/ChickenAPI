@@ -1,5 +1,5 @@
 ﻿using System;
-using ChickenAPI.Accounts;
+using ChickenAPI.Enums;
 
 namespace ChickenAPI.Packets
 {
