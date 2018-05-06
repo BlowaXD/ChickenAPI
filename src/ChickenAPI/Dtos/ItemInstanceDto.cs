@@ -10,5 +10,7 @@ namespace ChickenAPI.Dtos
         public ItemDto Item { get; set; }
 
         public long Vnum { get; set; }
+
+        public byte Design { get; set; }
     }
 }
