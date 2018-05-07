@@ -2,6 +2,7 @@
 using ChickenAPI.DAL.Interfaces.Repository;
 using ChickenAPI.Dtos;
 using ChickenAPI.Enums;
+using ChickenAPI.Enums.Game.Character;
 
 namespace ChickenAPI.DAL.Interfaces
 {

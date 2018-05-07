@@ -1,4 +1,5 @@
 ﻿using ChickenAPI.Enums;
+using ChickenAPI.Enums.Game.Character;
 
 namespace ChickenAPI.Packets.ClientPackets
 {

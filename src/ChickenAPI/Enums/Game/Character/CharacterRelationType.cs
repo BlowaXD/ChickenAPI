@@ -1,4 +1,4 @@
-﻿namespace ChickenAPI.Enums
+﻿namespace ChickenAPI.Enums.Game.Character
 {
     public enum CharacterRelationType : short
     {
