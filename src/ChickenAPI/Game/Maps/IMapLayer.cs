@@ -26,7 +26,8 @@ namespace ChickenAPI.Game.Maps
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
+        /// <param name="range"></param>
         /// <returns></returns>
-        IEnumerable<IEntity> GetEntitiesInRange(int x, int y);
+        IEnumerable<IEntity> GetEntitiesInRange(int x, int y, int range);
     }
 }

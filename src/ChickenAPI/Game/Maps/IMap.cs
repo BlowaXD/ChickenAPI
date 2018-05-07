@@ -24,17 +24,17 @@ namespace ChickenAPI.Game.Maps
         /// <summary>
         /// Map Width
         /// </summary>
-        int Width { get; }
+        short Width { get; }
 
         /// <summary>
         /// Map Height
         /// </summary>
-        int Height { get; }
+        short Height { get; }
 
         /// <summary>
         /// Get the Map Grid
         /// </summary>
-        int[] Grid { get; }
+        byte[] Grid { get; }
 
         /// <summary>
         /// Get if the map is walkable
