@@ -1,4 +1,4 @@
-﻿namespace ChickenAPI.Enums
+﻿namespace ChickenAPI.Enums.Game.Entity
 {
     public enum MateType : byte
     {
