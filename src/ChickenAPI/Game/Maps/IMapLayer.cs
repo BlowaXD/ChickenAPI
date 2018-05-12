@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using ChickenAPI.ECS;
+using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Game.Entities;
 using ChickenAPI.Session;
 
 namespace ChickenAPI.Game.Maps

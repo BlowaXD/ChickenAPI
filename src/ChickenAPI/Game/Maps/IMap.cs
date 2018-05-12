@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ChickenAPI.Game.Entities;
 using ChickenAPI.Session;
 
 namespace ChickenAPI.Game.Maps

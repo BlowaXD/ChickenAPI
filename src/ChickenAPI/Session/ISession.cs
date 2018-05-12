@@ -3,7 +3,7 @@ using System.Net;
 using ChickenAPI.Dtos;
 using ChickenAPI.Enums;
 using ChickenAPI.Packets;
-using ChickenAPI.Player;
+using Character = ChickenAPI.Game.Entities.Player.Character;
 
 namespace ChickenAPI.Session
 {
