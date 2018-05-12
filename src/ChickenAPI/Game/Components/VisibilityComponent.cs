@@ -25,7 +25,7 @@ namespace ChickenAPI.Game.Components
         {
         }
 
-        protected virtual void OnVisibilityChange(IEntity sender, VisibilityChangeArgs e)
+        private static void OnVisibilityChange(IEntity sender, VisibilityChangeArgs e)
         {
             VisibilityChange?.Invoke(sender, e);
         }

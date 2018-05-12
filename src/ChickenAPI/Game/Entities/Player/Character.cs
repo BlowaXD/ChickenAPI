@@ -5,15 +5,19 @@ using ChickenAPI.ECS.Contexts;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
+using ChickenAPI.Packets;
+using ChickenAPI.Session;
 
 namespace ChickenAPI.Game.Entities.Player
 {
-    public partial class Character : IEntity
+    public partial class Character : IPlayerEntity
     {
         private readonly Dictionary<Type, IComponent> _components;
+        private readonly ISession _session;
 
-        public Character()
+        public Character(ISession session)
         {
+            _session = session;
             _components = new Dictionary<Type, IComponent>
             {
                 { typeof(VisibilityComponent), new VisibilityComponent(this) }
@@ -39,5 +43,9 @@ namespace ChickenAPI.Game.Entities.Player
         public bool HasComponent<T>(T component) where T : IComponent => _components.ContainsKey(typeof(T));
 
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
+
+        public void SendPacket(APacket packet) => _session.SendPacket(packet);
+
+        public void SendPackets(IEnumerable<APacket> packets) => _session.SendPackets(packets);
     }
 }

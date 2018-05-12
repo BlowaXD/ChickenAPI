@@ -5,8 +5,8 @@ namespace ChickenAPI.Game.Entities.Player
 {
     public partial class Character
     {
-        public event TypedSenderEventHandler<Game.Entities.Player.Character, ConnectEventArgs> Connected;
-        public event TypedSenderEventHandler<Game.Entities.Player.Character, ConnectEventArgs> Disconnected;
+        public event TypedSenderEventHandler<Character, ConnectEventArgs> Connected;
+        public event TypedSenderEventHandler<Character, ConnectEventArgs> Disconnected;
 
         protected virtual void OnConnected(ConnectEventArgs e)
         {
