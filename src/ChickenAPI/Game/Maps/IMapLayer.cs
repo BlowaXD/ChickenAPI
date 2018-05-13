@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
-using ChickenAPI.ECS;
+using ChickenAPI.Data.AccessLayer.Repository;
+using ChickenAPI.ECS.Contexts;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Session;
 
 namespace ChickenAPI.Game.Maps
 {
-    public interface IMapLayer
+    public interface IMapLayer : ISynchronizedDto, IContext
     {
         /// <summary>
         /// Get the base map of the layer
         /// </summary>
         IMap Map { get; }
+
         Dictionary<int, ISession> Sessions { get; }
         Dictionary<long, IEntity> Entities { get; }
 

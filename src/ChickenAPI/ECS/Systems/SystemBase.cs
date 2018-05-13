@@ -25,7 +25,7 @@ namespace ChickenAPI.ECS.Systems
         /// </remarks>
         protected virtual Expression<Func<IEntity, bool>> Filter { get; }
 
-        public void Execute(IEntity entity)
+        public virtual void Execute(IEntity entity)
         {
             throw new NotImplementedException();
         }

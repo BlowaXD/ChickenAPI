@@ -1,4 +1,4 @@
-﻿using ChickenAPI.DAL.Interfaces.Repository;
+﻿using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Contexts;
 using ChickenAPI.Enums.Game.Entity;
@@ -41,7 +41,7 @@ namespace ChickenAPI.ECS.Entities
         /// <typeparam name="T"></typeparam>
         /// <param name="component"></param>
         /// <returns></returns>
-        bool HasComponent<T>(T component) where T : IComponent;
+        bool HasComponent<T>() where T : IComponent;
 
         /// <summary>
         /// Get the component from the actual <see cref="IEntity"/>

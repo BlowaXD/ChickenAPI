@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
-using ChickenAPI.Session;
+using ChickenAPI.ECS.Contexts;
 
 namespace ChickenAPI.Game.Maps
 {
-    public interface IMap
+    public interface IMap : IContext
     {
+        short Id { get; set; }
+
         /// <summary>
         /// This layer is the base map where everyone will be by default
         /// </summary>

@@ -1,4 +1,4 @@
-﻿namespace ChickenAPI.Enums.Entity
+﻿namespace ChickenAPI.Enums.Game.Entity
 {
     public enum MonsterType
     {
