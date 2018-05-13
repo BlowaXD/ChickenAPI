@@ -1,6 +1,6 @@
 # ChickenAPI
 
-<img src="docs/_media/logo_512.png" height="256px"></img>
+<img src="_media/logo.svg" height="256px"></img>
 
 ## Description
 

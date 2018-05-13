@@ -1,11 +1,9 @@
 ﻿using System.IO;
 
-namespace ChickenAPI.Plugin
+namespace ChickenAPI.Plugins
 {
     public interface IPluginManager
     {
-        DirectoryInfo GetPluginDirectory();
-        DirectoryInfo GetConfigDirectory();
         IPlugin LoadPlugin(FileInfo file);
         IPlugin[] LoadPlugins(DirectoryInfo directory);
     }

@@ -1,4 +1,4 @@
-﻿namespace ChickenAPI.Plugin
+﻿namespace ChickenAPI.Plugins
 {
     public interface IPlugin
     {

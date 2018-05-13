@@ -19,3 +19,12 @@ build ChickenAPI:
   script:
     - "cd $build_path"
     - "dotnet build"
+
+build samples:
+  stage: build
+  tags:
+    - docker
+    - dotnet
+  script:
+    - "cd samples/ChickenAPI.HelloWorldPlugin"
+    - "dotnet build"
