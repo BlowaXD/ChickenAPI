@@ -60,21 +60,21 @@ namespace ChickenAPI.Data.AccessLayer.Repository
         Task DeleteAsync(TObject obj);
 
         /// <summary>
-        /// Delete all objects given in parameter from data storage
+        /// Asynchronously delete all objects given in parameter from data storage
         /// </summary>
         /// <param name="objs"></param>
         /// <returns></returns>
         Task DeleteAsync(IEnumerable<TObject> objs);
 
         /// <summary>
-        /// Delete the object from the data storage with the given id
+        /// Asynchronously delete the object from the data storage with the given id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         Task DeleteByIdAsync(TObjectId id);
 
         /// <summary>
-        /// Delete all the objects from the data storage with the given id
+        /// Asynchronously delete all the objects from the data storage with the given id
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>

@@ -4,7 +4,7 @@ using ChickenAPI.Data.TransferObjects;
 
 namespace ChickenAPI.Data.AccessLayer
 {
-    public interface IItemInstanceService : ISynchronizedSynchronousRepository<ItemInstanceDto>
+    public interface IItemInstanceService : ISynchronizedRepository<ItemInstanceDto>
     {
         /// <summary>
         /// Will return all the weared gear in the <see cref="CharacterDto"/> inventory by its id

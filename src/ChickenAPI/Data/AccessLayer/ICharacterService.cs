@@ -5,7 +5,7 @@ using ChickenAPI.Enums.Game.Character;
 
 namespace ChickenAPI.Data.AccessLayer
 {
-    public interface ICharacterService : IMappedSynchronousRepository<CharacterDto>
+    public interface ICharacterService : IMappedRepository<CharacterDto>
     {
         /// <summary>
         /// Will return all the <see cref="CharacterDto"/> that are in <see cref="CharacterState.Active"/> state
