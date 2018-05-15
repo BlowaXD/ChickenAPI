@@ -15,7 +15,7 @@ namespace ChickenAPI.Data.AccessLayer.Repository
         /// Insert object given in parameter into data storage
         /// </summary>
         /// <param name="obj"></param>
-        void Insert(TObject obj);
+        TObject Insert(TObject obj);
 
         /// <summary>
         /// Insert all the objects given in parameter into data storage
@@ -27,7 +27,7 @@ namespace ChickenAPI.Data.AccessLayer.Repository
         /// Updates the object given in parameter into data storage
         /// </summary>
         /// <param name="obj"></param>
-        void Update(TObject obj);
+        TObject Update(TObject obj);
 
         /// <summary>
         /// Updates all the objects given in parameter into data storage

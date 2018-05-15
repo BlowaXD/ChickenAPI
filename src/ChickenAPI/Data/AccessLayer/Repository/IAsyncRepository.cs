@@ -26,7 +26,7 @@ namespace ChickenAPI.Data.AccessLayer.Repository
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        Task InsertAsync(TObject obj);
+        Task<TObject> InsertAsync(TObject obj);
 
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace ChickenAPI.Data.AccessLayer.Repository
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        Task UpdateAsync(TObject obj);
+        Task<TObject> UpdateAsync(TObject obj);
 
         /// <summary>
         /// Asynchronously update all objects given in parameter into data storage
