@@ -3,14 +3,22 @@ using System.Threading.Tasks;
 
 namespace ChickenAPI.Data.AccessLayer.Repository
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<TObject, in TObjectId> where TObject : class
     {
-        void InsertOrUpdate(T obj);
-        Task InsertOrUpdateAsync(T obj);
-        void InsertOrUpdate(IEnumerable<T> objs);
-        Task InsertOrUpdateAsync(IEnumerable<T> objs);
+        TObject GetById(TObjectId id);
 
-        void Delete(T obj);
-        void Delete(IEnumerable<T> objs);
+        void Insert(TObject obj);
+        void Insert(IEnumerable<TObject> objs);
+
+
+        void Update(TObject obj);
+        void Update(IEnumerable<TObject> objs);
+
+
+        void Delete(TObject obj);
+        void Delete(IEnumerable<TObject> objs);
+
+        void DeleteById(TObjectId id);
+        void DeleteByIds(IEnumerable<TObjectId> ids);
     }
 }
