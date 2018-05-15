@@ -37,13 +37,47 @@ namespace ChickenAPI.Data.AccessLayer.Repository
         /// <returns></returns>
         Task InsertAsync(IEnumerable<TObject> objs);
 
+
+        /// <summary>
+        /// Asynchronously update objects given in parameter into data storage
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         Task UpdateAsync(TObject obj);
+
+        /// <summary>
+        /// Asynchronously update all objects given in parameter into data storage
+        /// </summary>
+        /// <param name="objs"></param>
+        /// <returns></returns>
         Task UpdateAsync(IEnumerable<TObject> objs);
 
+        /// <summary>
+        /// Delete all objects given in parameter from data storage
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         Task DeleteAsync(TObject obj);
+
+        /// <summary>
+        /// Delete all objects given in parameter from data storage
+        /// </summary>
+        /// <param name="objs"></param>
+        /// <returns></returns>
         Task DeleteAsync(IEnumerable<TObject> objs);
 
+        /// <summary>
+        /// Delete the object from the data storage with the given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         Task DeleteByIdAsync(TObjectId id);
+
+        /// <summary>
+        /// Delete all the objects from the data storage with the given id
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
         Task DeleteByIdsAsync(IEnumerable<TObjectId> ids);
     }
 }

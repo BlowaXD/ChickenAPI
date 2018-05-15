@@ -4,7 +4,7 @@ using ChickenAPI.Data.TransferObjects;
 
 namespace ChickenAPI.Data.AccessLayer
 {
-    public interface IAccountService : IMappedRepository<AccountDto>
+    public interface IAccountService : IMappedSynchronousRepository<AccountDto>
     {
         /// <summary>
         /// Will return the AccountDto associated to name given as parameter

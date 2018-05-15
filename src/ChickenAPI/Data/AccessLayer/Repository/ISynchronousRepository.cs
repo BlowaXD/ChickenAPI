@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ChickenAPI.Data.AccessLayer.Repository
 {
-    public interface IRepository<TObject, in TObjectId> where TObject : class
+    public interface ISynchronousRepository<TObject, in TObjectId> where TObject : class
     {
         TObject GetById(TObjectId id);
 
