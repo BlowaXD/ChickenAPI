@@ -48,7 +48,7 @@ namespace ChickenAPI.Game.Systems.Visibility
             {
                 var player = i as IPlayerEntity;
 
-                player?.SendPacket(new InfoPacket());
+                player?.SendPacket(new InfoPacketBase());
             }
         }
 
@@ -81,7 +81,7 @@ namespace ChickenAPI.Game.Systems.Visibility
                         continue;
                 }
 
-                player?.SendPacket(new OutPacket { EntityId = entity.Id, Type = outPacketType });
+                player?.SendPacket(new OutPacketBase { EntityId = entity.Id, Type = outPacketType });
             }
         }
     }

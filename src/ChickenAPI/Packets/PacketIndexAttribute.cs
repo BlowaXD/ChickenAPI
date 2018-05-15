@@ -6,7 +6,7 @@ namespace ChickenAPI.Packets
     {
         #region Instantiation
 
-        /// <summary> Specify the Index of the packet to parse this property to. </summary>
+        /// <summary> Specify the Index of the packetBase to parse this property to. </summary>
         /// <param
         ///     name="index">
         ///     The zero based index starting from header (exclusive).

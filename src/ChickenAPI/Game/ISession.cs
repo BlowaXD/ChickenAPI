@@ -24,8 +24,8 @@ namespace ChickenAPI.Game
         bool IsAuthenticated { get; }
         bool HasSelectedCharacter { get; }
 
-        void SendPacket(APacket packet);
-        void SendPackets(IEnumerable<APacket> packets);
+        void SendPacket(IPacket packetBase);
+        void SendPackets(IEnumerable<IPacket> packets);
 
         void InitializeAccount(AccountDto account);
         void InitializeCharacter(CharacterDto character);

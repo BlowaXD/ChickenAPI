@@ -3,7 +3,7 @@
 namespace ChickenAPI.Packets.ServerPackets
 {
     [PacketHeader("out")]
-    public class OutPacket : APacket
+    public class OutPacketBase : PacketBase
     {
         public OutPacketType Type { get; set; }
 

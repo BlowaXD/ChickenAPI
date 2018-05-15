@@ -1,7 +1,7 @@
 ﻿namespace ChickenAPI.Packets.ServerPackets
 {
     [PacketHeader("info")]
-    public class InfoPacket : APacket
+    public class InfoPacketBase : PacketBase
     {
         [PacketIndex(0)]
         public string Message { get; set; }

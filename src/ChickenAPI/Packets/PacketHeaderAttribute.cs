@@ -33,7 +33,7 @@ namespace ChickenAPI.Packets
         #region Properties
 
         /// <summary>
-        ///     Permission to handle the packet
+        ///     Permission to handle the packetBase
         /// </summary>
         public AuthorityType Authority { get; set; }
 

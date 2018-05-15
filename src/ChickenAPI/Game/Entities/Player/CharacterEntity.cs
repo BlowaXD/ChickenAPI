@@ -43,8 +43,8 @@ namespace ChickenAPI.Game.Entities.Player
 
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
 
-        public void SendPacket(APacket packet) => _session.SendPacket(packet);
+        public void SendPacket(IPacket packetBase) => _session.SendPacket(packetBase);
 
-        public void SendPackets(IEnumerable<APacket> packets) => _session.SendPackets(packets);
+        public void SendPackets(IEnumerable<IPacket> packets) => _session.SendPackets(packets);
     }
 }

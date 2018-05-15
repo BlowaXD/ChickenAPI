@@ -5,7 +5,7 @@ using ChickenAPI.Enums.Game.Character;
 namespace ChickenAPI.Packets.ServerPackets
 {
     [PacketHeader("clist")]
-    public class ClistPacket : APacket
+    public class ClistPacketBase : PacketBase
     {
         #region Properties
 

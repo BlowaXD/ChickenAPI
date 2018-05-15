@@ -1,7 +1,7 @@
 ﻿namespace ChickenAPI.Packets.ClientPackets
 {
     [PacketHeader("select", NeedCharacter = false)]
-    public class SelectPacket : APacket
+    public class SelectPacketBase : PacketBase
     {
         [PacketIndex(0)]
         public byte Slot { get; set; }

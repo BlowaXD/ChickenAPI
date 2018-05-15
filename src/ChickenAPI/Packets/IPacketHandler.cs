@@ -7,6 +7,6 @@ namespace ChickenAPI.Packets
     {
         void Register(PacketHandlerMethodReference method);
         PacketHandlerMethodReference GetPacketHandlerMethodReference(string header);
-        void Handle(APacket packet, ISession session, Type type);
+        void Handle(IPacket packetBase, ISession session, Type type);
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace ChickenAPI.Packets.ClientPackets
 {
     [PacketHeader("Char_DEL", false)]
-    public class CharacterDeletePacket : APacket
+    public class CharacterDeletePacketBase : PacketBase
     {
         [PacketIndex(0)]
         public byte Slot { get; set; }

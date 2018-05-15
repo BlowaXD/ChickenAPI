@@ -9,7 +9,7 @@ namespace ChickenAPI.Packets
     {
         #region Instantiation
 
-        public PacketHandlerMethodReference(Action<APacket, ISession> handlerMethod, Type packetBaseParameterType)
+        public PacketHandlerMethodReference(Action<IPacket, ISession> handlerMethod, Type packetBaseParameterType)
         {
             HandlerMethod = handlerMethod;
             PacketType = packetBaseParameterType;
@@ -26,7 +26,7 @@ namespace ChickenAPI.Packets
 
         #region Properties
 
-        public Action<APacket, ISession> HandlerMethod { get; }
+        public Action<IPacket, ISession> HandlerMethod { get; }
         public PacketHeaderAttribute PacketHeader { get; set; }
         public AuthorityType Authority { get; }
         public string Identification { get; }

@@ -1,7 +1,7 @@
 ﻿namespace ChickenAPI.Packets.ServerPackets
 {
     [PacketHeader("clist_start")]
-    public class ClistStartPacket : APacket
+    public class ClistStartPacketBase : PacketBase
     {
         #region Properties
 

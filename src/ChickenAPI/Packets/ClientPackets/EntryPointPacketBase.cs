@@ -1,7 +1,7 @@
 ﻿namespace ChickenAPI.Packets.ClientPackets
 {
     [PacketHeader("EntryPoint", 3, false)]
-    public class EntryPointPacket : APacket
+    public class EntryPointPacketBase : PacketBase
     {
         #region Properties
 

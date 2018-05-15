@@ -6,7 +6,7 @@ namespace ChickenAPI.ECS.Entities
 {
     public interface IPlayerEntity : IEntity
     {
-        void SendPacket(APacket packet);
-        void SendPackets(IEnumerable<APacket> packets);
+        void SendPacket(IPacket packetBase);
+        void SendPackets(IEnumerable<IPacket> packets);
     }
 }
