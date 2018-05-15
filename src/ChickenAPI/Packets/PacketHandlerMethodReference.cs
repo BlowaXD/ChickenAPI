@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ChickenAPI.Enums;
-using ChickenAPI.Game;
+using ChickenAPI.Game.Network;
 
 namespace ChickenAPI.Packets
 {

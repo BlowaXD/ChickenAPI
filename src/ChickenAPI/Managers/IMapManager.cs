@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using ChickenAPI.Game;
+using ChickenAPI.Game.Network;
 using ChickenAPI.Game.Maps;
 
 namespace ChickenAPI.Managers

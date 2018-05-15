@@ -5,6 +5,7 @@ using ChickenAPI.ECS.Contexts;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
+using ChickenAPI.Game.Network;
 using ChickenAPI.Packets;
 
 namespace ChickenAPI.Game.Entities.Player
@@ -12,16 +13,17 @@ namespace ChickenAPI.Game.Entities.Player
     public class CharacterEntity : IPlayerEntity
     {
         private readonly Dictionary<Type, IComponent> _components;
-        private readonly ISession _session;
 
         public CharacterEntity(ISession session)
         {
-            _session = session;
+            Session = session;
             _components = new Dictionary<Type, IComponent>
             {
                 { typeof(VisibilityComponent), new VisibilityComponent(this) }
             };
         }
+
+        public ISession Session { get; }
 
         public long Id { get; set; }
 
