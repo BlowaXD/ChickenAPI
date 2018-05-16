@@ -19,6 +19,7 @@ namespace ChickenAPI.Game.Network
         IPEndPoint Ip { get; }
         
         AccountDto Account { get; }
+        IPlayerEntity Player { get; }
 
         void InitializeAccount(AccountDto dto);
         void InitializeEntity(IPlayerEntity ett);
