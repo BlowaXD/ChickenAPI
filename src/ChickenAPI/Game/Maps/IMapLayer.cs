@@ -7,7 +7,7 @@ using ChickenAPI.Game.Network;
 
 namespace ChickenAPI.Game.Maps
 {
-    public interface IMapLayer : ISynchronizedDto, IContext
+    public interface IMapLayer : ISynchronizedDto
     {
         /// <summary>
         /// Get the base map of the layer
@@ -31,6 +31,6 @@ namespace ChickenAPI.Game.Maps
         /// <param name="y"></param>
         /// <param name="range"></param>
         /// <returns></returns>
-        IEnumerable<IEntity> GetEntitiesInRange(int x, int y, int range);
+        IEnumerable<IEntity> GetEntitiesInRange(short x, short y, short range);
     }
 }
