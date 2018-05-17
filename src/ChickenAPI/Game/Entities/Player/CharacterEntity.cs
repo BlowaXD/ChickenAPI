@@ -56,7 +56,8 @@ namespace ChickenAPI.Game.Entities.Player
 
         public void Dispose()
         {
-            // not yet implemented
+            // TODO Implement a real dispose pattern
+            GC.SuppressFinalize(this);
         }
     }
 }
