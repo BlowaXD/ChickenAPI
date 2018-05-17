@@ -22,7 +22,7 @@ namespace ChickenAPI.Utils
         /// </summary>
         /// <param name="consoleLayout"></param>
         /// <param name="fileLayout"></param>
-        public static void Initialize(string consoleLayout = DefaultLayout, string fileLayout = DefaultLayout)
+        public static void Initialize(string consoleLayout, string fileLayout)
         {
             var config = new LoggingConfiguration();
             var consoleTarget = new ColoredConsoleTarget();
@@ -43,6 +43,11 @@ namespace ChickenAPI.Utils
             config.LoggingRules.Add(rule2);
 
             LogManager.Configuration = config;
+        }
+
+        public static void Initialize()
+        {
+            Initialize(DefaultLayout, DefaultLayout);
         }
 
         public static Logger GetLogger<TClass>() 
