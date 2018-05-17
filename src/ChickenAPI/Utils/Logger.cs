@@ -1,15 +1,48 @@
 ﻿using System;
 using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 namespace ChickenAPI.Utils
 {
     public class Logger
     {
-        private ILogger _log { get; set; }
+        private ILogger _log { get; }
+
+        private const string DefaultLayout = "${date}: [${level}][${logger}] ${message}";
 
         private Logger(Type type)
         {
             _log = LogManager.GetLogger(type.ToString());
+        }
+
+        /// <summary>
+        /// Initialize logger's configuration.
+        /// Please refer to https://github.com/nlog/NLog/wiki/Layout-Renderers for custom layouts.
+        /// </summary>
+        /// <param name="consoleLayout"></param>
+        /// <param name="fileLayout"></param>
+        public static void Initialize(string consoleLayout = DefaultLayout, string fileLayout = DefaultLayout)
+        {
+            var config = new LoggingConfiguration();
+            var consoleTarget = new ColoredConsoleTarget();
+            var fileTarget = new FileTarget();
+
+            consoleTarget.Layout = consoleLayout;
+
+            fileTarget.Layout = fileLayout;
+            fileTarget.FileName = "logs/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss");
+
+            config.AddTarget("console", consoleTarget);
+            config.AddTarget("file", fileTarget);
+
+            var rule1 = new LoggingRule("*", LogLevel.Debug, consoleTarget);
+            config.LoggingRules.Add(rule1);
+
+            var rule2 = new LoggingRule("*", LogLevel.Debug, fileTarget);
+            config.LoggingRules.Add(rule2);
+
+            LogManager.Configuration = config;
         }
 
         public static Logger GetLogger<TClass>() 
