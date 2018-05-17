@@ -45,6 +45,7 @@ namespace ChickenAPI.Game.Entities.Player
 
         public void TransferEntity(IEntityManager manager)
         {
+            EntityManager.TransferEntity(this, manager);
         }
 
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
@@ -55,6 +56,7 @@ namespace ChickenAPI.Game.Entities.Player
 
         public void Dispose()
         {
+            // not yet implemented
         }
     }
 }
