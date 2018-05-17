@@ -9,7 +9,7 @@ namespace ChickenAPI.Game.Systems.Movable
 {
     public class MovableSystem : NotifiableSystemBase
     {
-        public MovableSystem(IContext context) : base(context)
+        public MovableSystem(IEntityManager entityManager) : base(entityManager)
         {
         }
 

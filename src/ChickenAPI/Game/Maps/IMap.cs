@@ -3,7 +3,7 @@ using ChickenAPI.ECS.Contexts;
 
 namespace ChickenAPI.Game.Maps
 {
-    public interface IMap : IContext
+    public interface IMap : IEntityManager
     {
         short Id { get; set; }
 

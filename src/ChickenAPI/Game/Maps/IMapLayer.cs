@@ -7,15 +7,14 @@ using ChickenAPI.Game.Network;
 
 namespace ChickenAPI.Game.Maps
 {
-    public interface IMapLayer : ISynchronizedDto, IContext
+    public interface IMapLayer : ISynchronizedDto, IEntityManager
     {
         /// <summary>
         /// Get the base map of the layer
         /// </summary>
         IMap Map { get; }
 
-        Dictionary<int, ISession> Sessions { get; }
-        Dictionary<long, IEntity> Entities { get; }
+        IReadOnlyCollection<IPlayerEntity> Players { get; }
 
         /// <summary>
         /// Returns all entities with the same type

@@ -7,12 +7,12 @@ namespace ChickenAPI.ECS.Systems
 {
     public abstract class SystemBase : ISystem
     {
-        protected SystemBase(IContext context)
+        protected SystemBase(IEntityManager entityManager)
         {
-            Context = context;
+            EntityManager = entityManager;
         }
         
-        public IContext Context { get; }
+        public IEntityManager EntityManager { get; }
 
         private Func<IEntity, bool> _filter;
 

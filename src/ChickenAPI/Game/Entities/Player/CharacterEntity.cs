@@ -27,18 +27,18 @@ namespace ChickenAPI.Game.Entities.Player
 
         public long Id { get; set; }
 
-        public IContext Context => null;
+        public IEntityManager EntityManager => null;
 
         public EntityType Type => EntityType.Player;
 
         public void AddComponent<T>(T component) where T : IComponent
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void RemoveComponent<T>(T component) where T : IComponent
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool HasComponent<T>() where T : IComponent => _components.ContainsKey(typeof(T));
@@ -48,5 +48,10 @@ namespace ChickenAPI.Game.Entities.Player
         public void SendPacket(IPacket packetBase) => Session.SendPacket(packetBase);
 
         public void SendPackets(IEnumerable<IPacket> packets) => Session.SendPackets(packets);
+
+        public void Dispose()
+        {
+            
+        }
     }
 }

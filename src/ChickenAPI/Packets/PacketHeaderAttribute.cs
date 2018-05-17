@@ -7,7 +7,11 @@ namespace ChickenAPI.Packets
     {
         #region Instantiation
 
-        public PacketHeaderAttribute(string identification) => Identification = identification;
+        public PacketHeaderAttribute(string identification)
+        {
+            Identification = identification;
+            NeedCharacter = true;
+        }
 
         public PacketHeaderAttribute(string identification, bool needCharacter)
         {

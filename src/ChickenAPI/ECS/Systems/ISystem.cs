@@ -5,7 +5,7 @@ namespace ChickenAPI.ECS.Systems
 {
     public interface ISystem
     {
-        IContext Context { get; }
+        IEntityManager EntityManager { get; }
 
         /// <summary>
         /// Executes the system logic for the entity passed as parameter.

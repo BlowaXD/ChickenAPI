@@ -1,4 +1,5 @@
-﻿using ChickenAPI.Data.AccessLayer.Repository;
+﻿using System;
+using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Contexts;
 using ChickenAPI.Enums.Game.Entity;
@@ -8,12 +9,12 @@ namespace ChickenAPI.ECS.Entities
     /// <summary>
     /// Defines an entity
     /// </summary>
-    public interface IEntity : IMappedDto
+    public interface IEntity : IMappedDto, IDisposable
     {
         /// <summary>
-        /// Gets the context where the Entity is registered
+        /// Gets the entityManager where the Entity is registered
         /// </summary>
-        IContext Context { get; }
+        IEntityManager EntityManager { get; }
 
         /// <summary>
         /// Gets the entity type

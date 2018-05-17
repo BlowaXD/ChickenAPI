@@ -16,7 +16,7 @@ namespace ChickenAPI.Game.Systems.Visibility
         protected override Expression<Func<IEntity, bool>> Filter =>
             entity => entity.Type == EntityType.Player || entity.Type == EntityType.Monster || entity.Type == EntityType.Mate || entity.Type == EntityType.Npc;
 
-        public VisibilitySystem(IContext context) : base(context)
+        public VisibilitySystem(IEntityManager entityManager) : base(entityManager)
         {
         }
 
@@ -44,7 +44,7 @@ namespace ChickenAPI.Game.Systems.Visibility
                 return;
             }
 
-            foreach (IEntity i in entity.Context.Entities.Where(Match))
+            foreach (IEntity i in entity.EntityManager.Entities.Where(Match))
             {
                 var player = i as IPlayerEntity;
 
@@ -60,7 +60,7 @@ namespace ChickenAPI.Game.Systems.Visibility
                 return;
             }
 
-            foreach (IEntity entityy in entity.Context.Entities.Where(Match))
+            foreach (IEntity entityy in entity.EntityManager.Entities.Where(Match))
             {
                 var player = entityy as IPlayerEntity;
                 OutPacketType outPacketType;

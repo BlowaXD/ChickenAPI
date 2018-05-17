@@ -6,7 +6,7 @@ namespace ChickenAPI.ECS.Systems
 {
     public abstract class NotifiableSystemBase : SystemBase, INotifiableSystem
     {
-        protected NotifiableSystemBase(IContext context) : base(context)
+        protected NotifiableSystemBase(IEntityManager entityManager) : base(entityManager)
         {
         }
 
