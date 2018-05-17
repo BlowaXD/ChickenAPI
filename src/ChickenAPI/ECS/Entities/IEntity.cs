@@ -6,6 +6,7 @@ using ChickenAPI.Enums.Game.Entity;
 
 namespace ChickenAPI.ECS.Entities
 {
+    /// <inheritdoc cref="IDisposable" />
     /// <summary>
     /// Defines an entity
     /// </summary>
@@ -15,6 +16,12 @@ namespace ChickenAPI.ECS.Entities
         /// Gets the entityManager where the Entity is registered
         /// </summary>
         IEntityManager EntityManager { get; }
+
+        /// <summary>
+        /// Will transfer the Entity to another entity manager
+        /// </summary>
+        /// <param name="manager"></param>
+        void TransferEntity(IEntityManager manager);
 
         /// <summary>
         /// Gets the entity type
@@ -40,7 +47,6 @@ namespace ChickenAPI.ECS.Entities
         /// Returns if the entity contains the component of type <see cref="T"/>
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="component"></param>
         /// <returns></returns>
         bool HasComponent<T>() where T : IComponent;
 

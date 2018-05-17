@@ -43,6 +43,10 @@ namespace ChickenAPI.Game.Entities.Player
 
         public bool HasComponent<T>() where T : IComponent => _components.ContainsKey(typeof(T));
 
+        public void TransferEntity(IEntityManager manager)
+        {
+        }
+
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
 
         public void SendPacket(IPacket packetBase) => Session.SendPacket(packetBase);
@@ -51,7 +55,6 @@ namespace ChickenAPI.Game.Entities.Player
 
         public void Dispose()
         {
-            
         }
     }
 }

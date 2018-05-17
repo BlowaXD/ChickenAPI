@@ -103,6 +103,20 @@ namespace ChickenAPI.ECS.Contexts
         /// <returns>Deleted state</returns>
         bool DeleteEntity(IEntity entity);
 
+        /// <summary>
+        /// Transfer the entity contained in the entity manger to another one by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="manager"></param>
+        void TransferEntity(long id, IEntityManager manager);
+
+        /// <summary>
+        /// Transfer the entity contained in the entity manger to another one
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="manager"></param>
+        void TransferEntity(IEntity entity, IEntityManager manager);
+
         #endregion
         #region System
 
