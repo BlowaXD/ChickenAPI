@@ -14,5 +14,6 @@
     <PackageReference Include="Autofac" Version="4.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="NLog" Version="4.5.4" />
+    <PackageReference Include="NLog.Config" Version="4.5.4" />
   </ItemGroup>
 </Project>
