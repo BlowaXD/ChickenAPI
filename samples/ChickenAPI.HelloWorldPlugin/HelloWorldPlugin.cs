@@ -11,20 +11,22 @@ namespace ChickenAPI.HelloWorldPlugin
         private const string PluginName = "ChickenAPI-HelloWorld";
         public string Name => PluginName;
 
+        private static readonly Logger Logger = Logger.GetLogger<HelloWorldPlugin>();
+
         public void OnDisable()
         {
-            Logger.Log.Info($"[{PluginName}] Disabled !");
+            Logger?.Info($"[{PluginName}] Disabled !");
         }
 
         public void OnEnable()
         {
-            Logger.Log.Info($"[{PluginName}] Enabled !");
+            Logger?.Info($"[{PluginName}] Enabled !");
         }
 
         public void OnLoad()
         {
             ReloadConfig();
-            Logger.Log.Info($"[{PluginName}] Loaded, let's do the work !");
+            Logger?.Info($"[{PluginName}] Loaded, let's do the work !");
             if (_configuration.PrintHeader)
             {
                 Console.WriteLine("Hello World");
