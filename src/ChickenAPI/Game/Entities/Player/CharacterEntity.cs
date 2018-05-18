@@ -18,7 +18,8 @@ namespace ChickenAPI.Game.Entities.Player
             Session = session;
             _components = new Dictionary<Type, IComponent>
             {
-                { typeof(VisibilityComponent), new VisibilityComponent(this) }
+                { typeof(VisibilityComponent), new VisibilityComponent(this) },
+                { typeof(MovableComponent), new MovableComponent(this) }
             };
         }
 
@@ -26,7 +27,7 @@ namespace ChickenAPI.Game.Entities.Player
 
         public long Id { get; set; }
 
-        public IEntityManager EntityManager => null;
+        public IEntityManager EntityManager { get; set; }
 
         public EntityType Type => EntityType.Player;
 
@@ -44,7 +45,23 @@ namespace ChickenAPI.Game.Entities.Player
 
         public void TransferEntity(IEntityManager manager)
         {
-            EntityManager.TransferEntity(this, manager);
+            if (EntityManager == null)
+            {
+                EntityManager = manager;
+            }
+            else
+            {
+                EntityManager.TransferEntity(this, manager);
+            }
+
+            /*
+            SendPacket(GenerateCInfo());
+            SendPacket(GenerateCMode());
+            SendPacket(GenerateAt());
+            SendPacket(GenerateCond());
+            SendPacket(GenerateCMap(manager));
+            SendPacket(GenerateIn());
+            */
         }
 
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
