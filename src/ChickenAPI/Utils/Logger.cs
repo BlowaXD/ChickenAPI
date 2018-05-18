@@ -7,18 +7,15 @@ namespace ChickenAPI.Utils
 {
     public class Logger
     {
-        private ILogger _log { get; }
-
         private const string DefaultLayout = "${date}: [${level}][${logger}] ${message}";
 
-        private Logger(Type type)
-        {
-            _log = LogManager.GetLogger(type.ToString());
-        }
+        private Logger(Type type) => _log = LogManager.GetLogger(type.ToString());
+
+        private ILogger _log { get; }
 
         /// <summary>
-        /// Initialize logger's configuration.
-        /// Please refer to https://github.com/nlog/NLog/wiki/Layout-Renderers for custom layouts.
+        ///     Initialize logger's configuration.
+        ///     Please refer to https://github.com/nlog/NLog/wiki/Layout-Renderers for custom layouts.
         /// </summary>
         /// <param name="consoleLayout"></param>
         /// <param name="fileLayout"></param>
@@ -50,11 +47,8 @@ namespace ChickenAPI.Utils
             Initialize(DefaultLayout, DefaultLayout);
         }
 
-        public static Logger GetLogger<TClass>() 
-            where TClass : class
-        {
-            return new Logger(typeof(TClass));
-        }
+        public static Logger GetLogger<TClass>()
+        where TClass : class => new Logger(typeof(TClass));
 
         public void Trace(string msg)
         {

@@ -6,22 +6,13 @@ using ChickenAPI.Utils;
 namespace ChickenAPI.Game.Components
 {
     /// <summary>
-    /// 
     /// </summary>
     public class MovableComponent : IComponent
     {
-        public MovableComponent(IEntity entity)
-        {
-            Entity = entity;
-        }
-
-        public IEntity Entity { get; set; }
-
-
-        public static event TypedSenderEventHandler<IEntity, MoveEventArgs> Move;
+        public MovableComponent(IEntity entity) => Entity = entity;
 
         /// <summary>
-        /// Entity Walking Speed
+        ///     Entity Walking Speed
         /// </summary>
         public byte Speed { get; set; }
 
@@ -29,6 +20,11 @@ namespace ChickenAPI.Game.Components
         public Position<short> Actual { get; set; }
         public DateTime LastMove { get; private set; }
         public DateTime NextMove { get; set; }
+
+        public IEntity Entity { get; set; }
+
+
+        public static event TypedSenderEventHandler<IEntity, MoveEventArgs> Move;
 
         private static void OnMove(IEntity sender, MoveEventArgs e)
         {

@@ -1,5 +1,4 @@
-﻿using ChickenAPI.ECS.Contexts;
-using ChickenAPI.ECS.Entities;
+﻿using ChickenAPI.ECS.Entities;
 
 namespace ChickenAPI.ECS.Systems
 {
@@ -8,13 +7,13 @@ namespace ChickenAPI.ECS.Systems
         IEntityManager EntityManager { get; }
 
         /// <summary>
-        /// Executes the system logic for the entity passed as parameter.
+        ///     Executes the system logic for the entity passed as parameter.
         /// </summary>
         /// <param name="entity">Entity</param>
         void Execute(IEntity entity);
 
         /// <summary>
-        /// Check if the entity matches the system filter predicate.
+        ///     Check if the entity matches the system filter predicate.
         /// </summary>
         /// <param name="entity">Entity</param>
         /// <returns></returns>

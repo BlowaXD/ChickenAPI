@@ -5,21 +5,21 @@ namespace ChickenAPI.Events
     public interface IEventManager
     {
         /// <summary>
-        /// Register an EventHandler
+        ///     Register an EventHandler
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="callback"></param>
         void Register<T>(EventHandler<ChickenEventArgs> callback) where T : ChickenEventArgs;
 
         /// <summary>
-        /// Unregister the event handler from the list of callbacks
+        ///     Unregister the event handler from the list of callbacks
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="callback"></param>
         void Unregister<T>(EventHandler<ChickenEventArgs> callback) where T : ChickenEventArgs;
 
         /// <summary>
-        /// Invoke the event
+        ///     Invoke the event
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="sender"></param>

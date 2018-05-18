@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Linq.Expressions;
-using ChickenAPI.ECS.Contexts;
 using ChickenAPI.ECS.Entities;
 
 namespace ChickenAPI.ECS.Systems
 {
     public abstract class SystemBase : ISystem
     {
-        protected SystemBase(IEntityManager entityManager)
-        {
-            EntityManager = entityManager;
-        }
-        
-        public IEntityManager EntityManager { get; }
-
         private Func<IEntity, bool> _filter;
+
+        protected SystemBase(IEntityManager entityManager) => EntityManager = entityManager;
 
 
         /// <summary>
-        /// Gets filter of the system.
+        ///     Gets filter of the system.
         /// </summary>
         /// <remarks>
-        /// This filter is used to check if the entities needs to be updated by this system.
+        ///     This filter is used to check if the entities needs to be updated by this system.
         /// </remarks>
         protected virtual Expression<Func<IEntity, bool>> Filter { get; }
+
+        public IEntityManager EntityManager { get; }
 
         public virtual void Execute(IEntity entity)
         {

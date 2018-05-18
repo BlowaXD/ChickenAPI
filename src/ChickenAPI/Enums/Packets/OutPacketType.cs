@@ -4,6 +4,6 @@
     {
         Character = 1,
         MateOrNpc = 2,
-        Monster = 3,
+        Monster = 3
     }
 }

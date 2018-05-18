@@ -2,7 +2,6 @@
 using System.Net;
 using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.ECS.Entities;
-using ChickenAPI.Enums;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Packets;
 
@@ -17,7 +16,7 @@ namespace ChickenAPI.Game.Network
         bool IsAuthenticated { get; }
 
         IPEndPoint Ip { get; }
-        
+
         AccountDto Account { get; }
         IPlayerEntity Player { get; }
 

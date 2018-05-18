@@ -1,5 +1,4 @@
 ﻿using System;
-using ChickenAPI.ECS.Contexts;
 using ChickenAPI.ECS.Entities;
 
 namespace ChickenAPI.ECS.Systems
