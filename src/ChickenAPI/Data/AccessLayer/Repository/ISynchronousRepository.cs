@@ -11,6 +11,14 @@ namespace ChickenAPI.Data.AccessLayer.Repository
         /// <returns></returns>
         TObject GetById(TObjectId id);
 
+
+        /// <summary>
+        ///     Returns all the objects from data storage by their ids
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        IEnumerable<TObject> GetByIds(IEnumerable<TObjectId> ids);
+
         /// <summary>
         ///     Insert object given in parameter into data storage
         /// </summary>
