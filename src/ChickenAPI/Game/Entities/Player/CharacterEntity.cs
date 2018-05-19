@@ -4,8 +4,10 @@ using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
+using ChickenAPI.Game.Maps;
 using ChickenAPI.Game.Network;
 using ChickenAPI.Packets;
+using ChickenAPI.Packets.ServerPackets;
 
 namespace ChickenAPI.Game.Entities.Player
 {
@@ -55,13 +57,15 @@ namespace ChickenAPI.Game.Entities.Player
             }
 
             /*
-            SendPacket(GenerateCInfo());
-            SendPacket(GenerateCMode());
-            SendPacket(GenerateAt());
-            SendPacket(GenerateCond());
-            SendPacket(GenerateCMap(manager));
-            SendPacket(GenerateIn());
-            */
+            if (manager is IMap map)
+            {
+                SendPacket(new CInfoPacketBase());
+                SendPacket(new CModePacketBase());
+                SendPacket(new AtPacketBase());
+                SendPacket(new CondPacketBase());
+                SendPacket(new CMapPacketBase(map));
+                SendPacket(new InPacketBase());
+            }*/
         }
 
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
