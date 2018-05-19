@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChickenAPI.Packets
+﻿namespace ChickenAPI.Packets
 {
     public interface IPacket
     {

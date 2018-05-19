@@ -1,5 +1,6 @@
 ﻿using System;
 using ChickenAPI.ECS.Entities;
+using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Network;
 
 namespace ChickenAPI.Packets
@@ -19,13 +20,13 @@ namespace ChickenAPI.Packets
         GamePacketHandler GetGamePacketHandler(string header);
 
         /// <summary>
-        /// Handle the CharacterScreen packet
+        ///     Handle the CharacterScreen packet
         /// </summary>
         /// <param name="handlingInfo"></param>
         void Handle((IPacket, ISession) handlingInfo);
 
         /// <summary>
-        /// Handle the Game packet
+        ///     Handle the Game packet
         /// </summary>
         /// <param name="handlingInfo"></param>
         void Handle((IPacket, IPlayerEntity) handlingInfo);

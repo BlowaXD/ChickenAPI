@@ -5,7 +5,7 @@ namespace ChickenAPI.Data.AccessLayer
     public interface ILanguageService
     {
         /// <summary>
-        /// Will return the string by its Key & Region
+        ///     Will return the string by its Key & Region
         /// </summary>
         /// <param name="key"></param>
         /// <param name="type"></param>

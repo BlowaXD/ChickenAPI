@@ -2,6 +2,6 @@
 {
     public enum MapLayerType
     {
-        BaseMapLayer,
+        BaseMapLayer
     }
 }

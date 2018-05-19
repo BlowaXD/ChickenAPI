@@ -1,5 +1,6 @@
 ﻿using System;
 using NLog;
+using NLog.Conditions;
 using NLog.Config;
 using NLog.Targets;
 
@@ -7,18 +8,15 @@ namespace ChickenAPI.Utils
 {
     public class Logger
     {
-        private ILogger _log { get; }
+        private const string DefaultLayout = "[${date}][${level:uppercase=true}][${logger:shortName=true}] ${message}";
+        
+        private Logger(Type type) => Log = LogManager.GetLogger(type.ToString());
 
-        private const string DefaultLayout = "${date}: [${level}][${logger}] ${message}";
-
-        private Logger(Type type)
-        {
-            _log = LogManager.GetLogger(type.ToString());
-        }
+        private ILogger Log { get; }
 
         /// <summary>
-        /// Initialize logger's configuration.
-        /// Please refer to https://github.com/nlog/NLog/wiki/Layout-Renderers for custom layouts.
+        ///     Initialize logger's configuration.
+        ///     Please refer to https://github.com/nlog/NLog/wiki/Layout-Renderers for custom layouts.
         /// </summary>
         /// <param name="consoleLayout"></param>
         /// <param name="fileLayout"></param>
@@ -30,6 +28,12 @@ namespace ChickenAPI.Utils
 
             consoleTarget.Layout = consoleLayout;
 
+            var highlightRule = new ConsoleRowHighlightingRule
+            {
+                Condition = ConditionParser.ParseExpression("level == LogLevel.Info"),
+                ForegroundColor = ConsoleOutputColor.Green
+            };
+            consoleTarget.RowHighlightingRules.Add(highlightRule);
             fileTarget.Layout = fileLayout;
             fileTarget.FileName = "logs/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss");
 
@@ -50,40 +54,37 @@ namespace ChickenAPI.Utils
             Initialize(DefaultLayout, DefaultLayout);
         }
 
-        public static Logger GetLogger<TClass>() 
-            where TClass : class
-        {
-            return new Logger(typeof(TClass));
-        }
+        public static Logger GetLogger<TClass>()
+        where TClass : class => new Logger(typeof(TClass));
 
         public void Trace(string msg)
         {
-            _log?.Trace(msg);
+            Log?.Trace(msg);
         }
 
         public void Debug(string msg)
         {
-            _log?.Debug(msg);
+            Log?.Debug(msg);
         }
 
         public void Info(string msg)
         {
-            _log?.Info(msg);
+            Log?.Info(msg);
         }
 
         public void Warn(string msg)
         {
-            _log?.Warn(msg);
+            Log?.Warn(msg);
         }
 
         public void Error(string msg, Exception ex)
         {
-            _log?.Error(ex, msg);
+            Log?.Error(ex, msg);
         }
 
         public void Fatal(string msg, Exception ex)
         {
-            _log?.Fatal(ex, msg);
+            Log?.Fatal(ex, msg);
         }
     }
 }

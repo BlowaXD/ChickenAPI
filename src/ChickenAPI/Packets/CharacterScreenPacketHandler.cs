@@ -6,7 +6,7 @@ using ChickenAPI.Game.Network;
 namespace ChickenAPI.Packets
 {
     /// <summary>
-    /// Packet that does not need to be ingame to be handled
+    ///     Packet that does not need to be ingame to be handled
     /// </summary>
     public class CharacterScreenPacketHandler
     {

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ChickenAPI.Events
 {
     /// <summary>
-    /// A simple Event Manager
+    ///     A simple Event Manager
     /// </summary>
     public class SimpleEventManager : IEventManager
     {

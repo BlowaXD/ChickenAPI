@@ -3,7 +3,6 @@
 namespace ChickenAPI.ECS.Systems
 {
     /// <summary>
-    /// 
     /// </summary>
     public interface INotifiableSystem : ISystem
     {
