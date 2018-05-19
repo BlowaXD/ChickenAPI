@@ -8,7 +8,7 @@ namespace ChickenAPI.Utils
 {
     public class Logger
     {
-        private const string DefaultLayout = "[${date}][${level:uppercase=true}][${logger:shortName=true}] ${message}";
+        private const string DefaultLayout = "[${date}][${level:uppercase=true}][${logger:shortName=true}] ${message} ${exception:format=tostring}";
         
         private Logger(Type type) => Log = LogManager.GetLogger(type.ToString());
 
@@ -28,14 +28,20 @@ namespace ChickenAPI.Utils
 
             consoleTarget.Layout = consoleLayout;
 
-            var highlightRule = new ConsoleRowHighlightingRule
+            var infoHighlightRule = new ConsoleRowHighlightingRule
             {
                 Condition = ConditionParser.ParseExpression("level == LogLevel.Info"),
                 ForegroundColor = ConsoleOutputColor.Green
             };
-            consoleTarget.RowHighlightingRules.Add(highlightRule);
+            var errorHighlightRule = new ConsoleRowHighlightingRule
+            {
+                Condition = ConditionParser.ParseExpression("level == LogLevel.Error"),
+                ForegroundColor = ConsoleOutputColor.Red
+            };
+            consoleTarget.RowHighlightingRules.Add(infoHighlightRule);
+            consoleTarget.RowHighlightingRules.Add(errorHighlightRule);
             fileTarget.Layout = fileLayout;
-            fileTarget.FileName = "logs/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss");
+            fileTarget.FileName = "logs/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss") + ".log";
 
             config.AddTarget("console", consoleTarget);
             config.AddTarget("file", fileTarget);
