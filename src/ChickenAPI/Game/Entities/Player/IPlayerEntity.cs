@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ChickenAPI.ECS.Entities;
 using ChickenAPI.Game.Network;
 using ChickenAPI.Packets;
 
-namespace ChickenAPI.ECS.Entities
+namespace ChickenAPI.Game.Entities.Player
 {
     public interface IPlayerEntity : IEntity
     {
+        ISession Session { get; }
         void SendPacket(IPacket packetBase);
         void SendPackets(IEnumerable<IPacket> packets);
-
-        ISession Session { get; }
     }
 }

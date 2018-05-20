@@ -6,7 +6,6 @@ namespace ChickenAPI.Data.TransferObjects
     public class AccountDto : IMappedDto
     {
         /// <summary>
-        /// 
         /// </summary>
         public AuthorityType Authority { get; set; }
 

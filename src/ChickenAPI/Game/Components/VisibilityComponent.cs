@@ -7,9 +7,11 @@ namespace ChickenAPI.Game.Components
 {
     public class VisibilityComponent : ComponentBase
     {
-        public static event TypedSenderEventHandler<IEntity, VisibilityChangeArgs> VisibilityChange;
-
         private bool _isVisible;
+
+        public VisibilityComponent(IEntity entity) : base(entity)
+        {
+        }
 
         public bool IsVisible
         {
@@ -21,9 +23,7 @@ namespace ChickenAPI.Game.Components
             }
         }
 
-        public VisibilityComponent(IEntity entity) : base(entity)
-        {
-        }
+        public static event TypedSenderEventHandler<IEntity, VisibilityChangeArgs> VisibilityChange;
 
         private static void OnVisibilityChange(IEntity sender, VisibilityChangeArgs e)
         {

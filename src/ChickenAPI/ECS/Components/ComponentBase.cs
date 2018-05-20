@@ -4,12 +4,10 @@ namespace ChickenAPI.ECS.Components
 {
     public abstract class ComponentBase : IComponent
     {
-        protected ComponentBase(IEntity entity)
-        {
-            Owner = entity;
-        }
-
         protected readonly IEntity Owner;
+
+        protected ComponentBase(IEntity entity) => Owner = entity;
+
         public IEntity Entity => Owner;
     }
 }

@@ -5,13 +5,16 @@ using ChickenAPI.Game.Network;
 
 namespace ChickenAPI.Packets
 {
-    public class PacketHandlerMethodReference
+    /// <summary>
+    ///     Packet that does not need to be ingame to be handled
+    /// </summary>
+    public class CharacterScreenPacketHandler
     {
         #region Instantiation
 
-        public PacketHandlerMethodReference(Action<IPacket, ISession> handlerMethod, Type packetBaseParameterType)
+        public CharacterScreenPacketHandler(Action<IPacket, ISession> handler, Type packetBaseParameterType)
         {
-            HandlerMethod = handlerMethod;
+            Handler = handler;
             PacketType = packetBaseParameterType;
             PacketHeader = PacketType.GetCustomAttributes(typeof(PacketHeaderAttribute), true).FirstOrDefault() as PacketHeaderAttribute;
             Identification = PacketHeader?.Identification;
@@ -26,8 +29,8 @@ namespace ChickenAPI.Packets
 
         #region Properties
 
-        public Action<IPacket, ISession> HandlerMethod { get; }
-        public PacketHeaderAttribute PacketHeader { get; set; }
+        public Action<IPacket, ISession> Handler { get; }
+        public PacketHeaderAttribute PacketHeader { get; }
         public AuthorityType Authority { get; }
         public string Identification { get; }
         public Type PacketType { get; }

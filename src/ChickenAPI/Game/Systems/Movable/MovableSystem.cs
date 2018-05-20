@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using ChickenAPI.ECS.Contexts;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.ECS.Systems;
 using ChickenAPI.Game.Components;
@@ -9,7 +8,7 @@ namespace ChickenAPI.Game.Systems.Movable
 {
     public class MovableSystem : NotifiableSystemBase
     {
-        public MovableSystem(IContext context) : base(context)
+        public MovableSystem(IEntityManager entityManager) : base(entityManager)
         {
         }
 
@@ -22,7 +21,7 @@ namespace ChickenAPI.Game.Systems.Movable
 
         public override void Execute(IEntity entity, SystemEventArgs e)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

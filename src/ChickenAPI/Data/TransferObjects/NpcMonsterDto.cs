@@ -8,14 +8,14 @@ namespace ChickenAPI.Data.TransferObjects
         #region Properties
 
         /// <summary>
-        /// Also associated to "Vnum"
+        ///     Also associated to "Vnum"
         /// </summary>
         public long Id { get; set; }
 
         public string Name { get; set; }
 
         /// <summary>
-        /// Like Mandra
+        ///     Like Mandra
         /// </summary>
         public bool CantWalk { get; set; }
 
@@ -69,37 +69,37 @@ namespace ChickenAPI.Data.TransferObjects
         public short DistanceDefenceDodge { get; set; }
 
         /// <summary>
-        /// ElementType
+        ///     ElementType
         /// </summary>
         public ElementType Element { get; set; }
 
         /// <summary>
-        /// Element % in stats
+        ///     Element % in stats
         /// </summary>
         public short ElementRate { get; set; }
 
         /// <summary>
-        /// Fire Resistance
+        ///     Fire Resistance
         /// </summary>
         public sbyte FireResistance { get; set; }
 
         /// <summary>
-        /// Hero level of the monster
+        ///     Hero level of the monster
         /// </summary>
         public byte HeroLevel { get; set; }
 
         /// <summary>
-        /// Hero Xp Granted by monster on Kill
+        ///     Hero Xp Granted by monster on Kill
         /// </summary>
         public int HeroXp { get; set; }
 
         /// <summary>
-        /// Is Hostile
+        ///     Is Hostile
         /// </summary>
         public bool IsHostile { get; set; }
 
         /// <summary>
-        /// Is Hostile if you attack a monster of the same type
+        ///     Is Hostile if you attack a monster of the same type
         /// </summary>
         public bool IsHostileGroup { get; set; }
 
@@ -126,7 +126,7 @@ namespace ChickenAPI.Data.TransferObjects
         public byte RaceType { get; set; }
 
         /// <summary>
-        /// In Deciseconds
+        ///     In Deciseconds
         /// </summary>
         public int RespawnTime { get; set; }
 

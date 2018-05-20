@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ChickenAPI.ECS.Components;
-using ChickenAPI.ECS.Contexts;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
@@ -19,7 +18,8 @@ namespace ChickenAPI.Game.Entities.Player
             Session = session;
             _components = new Dictionary<Type, IComponent>
             {
-                { typeof(VisibilityComponent), new VisibilityComponent(this) }
+                { typeof(VisibilityComponent), new VisibilityComponent(this) },
+                { typeof(MovableComponent), new MovableComponent(this) }
             };
         }
 
@@ -27,26 +27,53 @@ namespace ChickenAPI.Game.Entities.Player
 
         public long Id { get; set; }
 
-        public IContext Context => null;
+        public IEntityManager EntityManager { get; set; }
 
         public EntityType Type => EntityType.Player;
 
         public void AddComponent<T>(T component) where T : IComponent
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void RemoveComponent<T>(T component) where T : IComponent
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool HasComponent<T>() where T : IComponent => _components.ContainsKey(typeof(T));
 
+        public void TransferEntity(IEntityManager manager)
+        {
+            if (EntityManager == null)
+            {
+                EntityManager = manager;
+            }
+            else
+            {
+                EntityManager.TransferEntity(this, manager);
+            }
+
+            /*
+            SendPacket(GenerateCInfo());
+            SendPacket(GenerateCMode());
+            SendPacket(GenerateAt());
+            SendPacket(GenerateCond());
+            SendPacket(GenerateCMap(manager));
+            SendPacket(GenerateIn());
+            */
+        }
+
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
 
-        public void SendPacket(IPacket packetBase) => _session.SendPacket(packetBase);
+        public void SendPacket(IPacket packetBase) => Session.SendPacket(packetBase);
 
-        public void SendPackets(IEnumerable<IPacket> packets) => _session.SendPackets(packets);
+        public void SendPackets(IEnumerable<IPacket> packets) => Session.SendPackets(packets);
+
+        public void Dispose()
+        {
+            // TODO Implement a real dispose pattern
+            GC.SuppressFinalize(this);
+        }
     }
 }
