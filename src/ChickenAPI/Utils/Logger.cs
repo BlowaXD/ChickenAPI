@@ -38,8 +38,15 @@ namespace ChickenAPI.Utils
                 Condition = ConditionParser.ParseExpression("level == LogLevel.Error"),
                 ForegroundColor = ConsoleOutputColor.Red
             };
+            var warnHighlightingRule = new ConsoleRowHighlightingRule
+            {
+                Condition = ConditionParser.ParseExpression("level == LogLevel.Warn"),
+                ForegroundColor = ConsoleOutputColor.DarkYellow
+            };
             consoleTarget.RowHighlightingRules.Add(infoHighlightRule);
             consoleTarget.RowHighlightingRules.Add(errorHighlightRule);
+            consoleTarget.RowHighlightingRules.Add(warnHighlightingRule);
+
             fileTarget.Layout = fileLayout;
             fileTarget.FileName = "logs/" + DateTime.Now.ToString("yyyy-MM-dd HH_mm_ss") + ".log";
 

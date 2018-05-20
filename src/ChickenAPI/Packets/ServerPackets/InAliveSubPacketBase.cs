@@ -9,10 +9,10 @@ namespace ChickenAPI.Packets.ServerPackets
     {
         #region Properties
         [PacketIndex(0)]
-        public int Hp { get; set; }
+        public int HpPercentage { get; set; }
 
         [PacketIndex(1)]
-        public int Mp { get; set; }
+        public int MpPercentage { get; set; }
 
         #endregion
     }
