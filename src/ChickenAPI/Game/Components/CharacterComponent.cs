@@ -10,6 +10,7 @@ namespace ChickenAPI.Game.Components
 
         public IEntity Entity { get; }
         public long Id { get; set; }
+        public short MapId { get; set; }
         public byte Slot { get; set; }
         public CharacterClassType Class { get; set; }
         public GenderType Gender { get; set; }
