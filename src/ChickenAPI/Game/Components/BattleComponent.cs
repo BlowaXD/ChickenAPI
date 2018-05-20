@@ -17,6 +17,10 @@ namespace ChickenAPI.Game.Components
 
         public int MpMax { get; set; }
 
+        public bool CanAttack { get; set; }
+
+        public bool CanMove { get; set; }
+
         public IEntity Entity { get; }
     }
 }

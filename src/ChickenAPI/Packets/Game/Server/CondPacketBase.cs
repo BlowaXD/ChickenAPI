@@ -16,8 +16,8 @@ namespace ChickenAPI.Packets.ServerPackets
 
             VisualType = VisualType.Character;
             VisualId = character.Id;
-            CanAttack = character.CanAttack;
-            CanMove = character.CanMove;
+            CanAttack = entity.GetComponent<BattleComponent>().CanAttack;
+            CanMove = entity.GetComponent<BattleComponent>().CanMove;
             Speed = entity.GetComponent<MovableComponent>().Speed;
         }
         #region Properties

@@ -15,8 +15,6 @@ namespace ChickenAPI.Game.Components
 
         public AuthorityType Authority { get; set; }
 
-        public IEntity Entity { get; }
-
         public long Id { get; set; }
 
         public short MapId { get; set; }
@@ -35,8 +33,6 @@ namespace ChickenAPI.Game.Components
 
         public short Morph { get; set; }
 
-        public bool CanAttack { get; set; }
-
-        public bool CanMove { get; set; }
+        public IEntity Entity { get; }
     }
 }
