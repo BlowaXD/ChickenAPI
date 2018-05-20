@@ -5,6 +5,5 @@ namespace ChickenAPI.Data.AccessLayer
 {
     public interface IMapService : IMappedRepository<MapDto>
     {
-        
     }
 }

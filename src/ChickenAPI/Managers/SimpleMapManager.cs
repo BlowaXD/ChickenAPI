@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Autofac;
 using ChickenAPI.Data.AccessLayer;
+using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Maps;
 using ChickenAPI.Game.Network;
 using ChickenAPI.Utils;
@@ -14,15 +15,21 @@ namespace ChickenAPI.Managers
         private readonly Dictionary<Guid, IMapLayer> _mapLayersById = new Dictionary<Guid, IMapLayer>();
 
         public IReadOnlyDictionary<long, IMap> Maps => _maps;
-
-        public void ChangeMapLayer(ISession session, Guid mapLayerId)
+        public void ChangeMap(IPlayerEntity player, long mapId)
         {
+            ChangeMapLayer(player, _maps[mapId].BaseLayer);
         }
 
-        public void ChangeMapLayer(ISession session, IMapLayer layer)
+        public void ChangeMapLayer(IPlayerEntity player, Guid mapLayerId)
+        {
+            ChangeMapLayer(player, _mapLayersById[mapLayerId]);
+        }
+
+        public void ChangeMapLayer(IPlayerEntity player, IMapLayer layer)
         {
             throw new NotImplementedException();
         }
+
 
         public IMapLayer GetBaseMapLayer(long mapId)
         {
@@ -32,11 +39,6 @@ namespace ChickenAPI.Managers
         public IMapLayer GetBaseMapLayer(IMap map)
         {
             return map.BaseLayer;
-        }
-
-        public void Initialize()
-        {
-            Container.Instance.Resolve<IMapService>();
         }
     }
 }
