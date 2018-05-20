@@ -3,7 +3,7 @@ using ChickenAPI.ECS.Entities;
 
 namespace ChickenAPI.Game.Maps
 {
-    public interface IMap : IEntityManager
+    public interface IMap
     {
         short Id { get; set; }
 
@@ -43,6 +43,6 @@ namespace ChickenAPI.Game.Maps
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        bool IsWalkable(int x, int y);
+        bool IsWalkable(short x, short y);
     }
 }

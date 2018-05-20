@@ -11,8 +11,8 @@ namespace ChickenAPI.Game.Maps
 
         bool IsAvailable { get; }
 
-        int X { get; }
-        int Y { get; }
+        short X { get; }
+        short Y { get; }
 
         /// <summary>
         ///     Where the portal is placed
