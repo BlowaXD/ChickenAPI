@@ -12,7 +12,7 @@ namespace ChickenAPI.Packets.ServerPackets
         public CMapPacketBase(IMap map)
         {
             Type = 0;
-            Id = map.Id;
+            Id = Convert.ToInt16(map.Id);
             MapType = 1;
         }
 

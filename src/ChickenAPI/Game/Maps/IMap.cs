@@ -8,12 +8,12 @@ namespace ChickenAPI.Game.Maps
         /// <summary>
         ///     This is the mapId
         /// </summary>
-        short Id { get; set; }
+        long Id { get; }
 
         /// <summary>
         ///     This is the music id on this map
         /// </summary>
-        int MusicId { get; set; }
+        int MusicId { get; }
 
         /// <summary>
         ///     This layer is the base map where everyone will be by default

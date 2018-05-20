@@ -11,7 +11,8 @@ namespace ChickenAPI.Game.Maps
             ParentEntityManager = null;
         }
 
-        public short Id { get; set; }
+        public long Id { get; }
+        public int MusicId { get; }
         public IMapLayer BaseLayer { get; }
         public HashSet<IMapLayer> Layers { get; }
         public HashSet<IPortal> Portals { get; }
