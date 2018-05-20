@@ -19,7 +19,7 @@ namespace ChickenAPI.Game.Maps
         public Guid Id { get; set; }
         public IMap Map { get; }
         public IReadOnlyCollection<IPlayerEntity> Players { get; }
-        public IEnumerable<IEntity> GetEntitiesByType(EntityType type) => _entities.Where(s => s.Type == type);
+        public IEnumerable<IEntity> GetEntitiesByType(EntityType type) => Entities.Where(s => s.Type == type);
 
         public IEnumerable<IEntity> GetEntitiesInRange(int x, int y, int range) => throw new NotImplementedException();
     }

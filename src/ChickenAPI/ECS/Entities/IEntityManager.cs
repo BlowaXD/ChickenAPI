@@ -43,14 +43,14 @@ namespace ChickenAPI.ECS.Entities
 
         long NextEntityId { get; }
 
-        IReadOnlyCollection<IEntity> Entities { get; }
+        IEnumerable<IEntity> Entities { get; }
 
         /// <summary>
         ///     Creates a new entity.
         /// </summary>
         /// <typeparam name="TEntity">Entity concrete type.</typeparam>
         /// <returns>New entity</returns>
-        TEntity CreateEntity<TEntity>() where TEntity : class, IEntity;
+        TEntity CreateEntity<TEntity>() where TEntity : class, IEntity, new();
 
         /// <summary>
         ///     Get the entity from entity manager by its id
