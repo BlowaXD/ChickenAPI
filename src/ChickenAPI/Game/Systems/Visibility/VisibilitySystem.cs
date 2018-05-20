@@ -63,18 +63,18 @@ namespace ChickenAPI.Game.Systems.Visibility
             foreach (IEntity entityy in entity.EntityManager.Entities.Where(Match))
             {
                 var player = entityy as IPlayerEntity;
-                OutPacketType outPacketType;
+                VisualType outPacketType;
                 switch (entity.Type)
                 {
                     case EntityType.Player:
-                        outPacketType = OutPacketType.Character;
+                        outPacketType = VisualType.Character;
                         break;
                     case EntityType.Mate:
                     case EntityType.Npc:
-                        outPacketType = OutPacketType.MateOrNpc;
+                        outPacketType = VisualType.Npc;
                         break;
                     case EntityType.Monster:
-                        outPacketType = OutPacketType.Monster;
+                        outPacketType = VisualType.Monster;
                         break;
                     default:
                         // unhandled

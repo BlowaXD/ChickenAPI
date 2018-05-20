@@ -14,7 +14,7 @@ namespace ChickenAPI.Packets.ServerPackets
             var family = entity.GetComponent<FamilyComponent>();
 
             Name = entity.GetComponent<NameComponent>().Name;
-            Unknown1 = "- "; //TODO: Find signification
+            Unknown1 = "-"; //TODO: Find signification
             Unknown2 = -1; //TODO: Find signification 
             FamilyId = family.FamilyId;
             FamilyName = family.FamilyName;

@@ -34,5 +34,9 @@ namespace ChickenAPI.Game.Components
         public bool ArenaWinner { get; set; }
 
         public short Morph { get; set; }
+
+        public bool CanAttack { get; set; }
+
+        public bool CanMove { get; set; }
     }
 }

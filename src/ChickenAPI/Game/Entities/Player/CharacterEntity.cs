@@ -65,9 +65,9 @@ namespace ChickenAPI.Game.Entities.Player
             if (manager is IMapLayer map)
             {
                 SendPacket(new CInfoPacketBase(this));
-                SendPacket(new CModePacketBase());
+                SendPacket(new CModePacketBase(this));
                 SendPacket(new AtPacketBase(this));
-                SendPacket(new CondPacketBase());
+                SendPacket(new CondPacketBase(this));
                 SendPacket(new CMapPacketBase(map.Map));
                 SendPacket(new InPacketBase(this));
             }
