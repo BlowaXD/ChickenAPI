@@ -40,7 +40,7 @@ namespace ChickenAPI.ECS.Entities
 
         public TEntity CreateEntity<TEntity>() where TEntity : class, IEntity, new()
         {
-            TEntity entity = new TEntity { Id = NextEntityId };
+            var entity = new TEntity { Id = NextEntityId };
             RegisterEntity(entity);
             return entity;
         }
@@ -51,12 +51,12 @@ namespace ChickenAPI.ECS.Entities
 
         public void RegisterEntity<T>(T entity) where T : IEntity
         {
-            throw new System.NotImplementedException();
+            _entities[entity.Id] = entity;
         }
 
         public void UnregisterEntity<T>(T entity) where T : IEntity
         {
-            throw new System.NotImplementedException();
+            _entities.Remove(entity.Id);
         }
 
         public bool HasEntity(IEntity entity) => HasEntity(entity.Id);
