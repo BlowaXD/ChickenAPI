@@ -23,8 +23,13 @@ namespace ChickenAPI.Game.Entities.Player
             {
                 { typeof(VisibilityComponent), new VisibilityComponent(this) },
                 { typeof(MovableComponent), new MovableComponent(this) },
-                {typeof(BattleComponent), new BattleComponent(this) },
-                {typeof(CharacterComponent), new CharacterComponent(this) }
+                { typeof(BattleComponent), new BattleComponent(this) },
+                { typeof(CharacterComponent), new CharacterComponent(this) },
+                { typeof(ExperienceComponent), new ExperienceComponent(this) },
+                { typeof(FamilyComponent), new FamilyComponent(this) },
+                { typeof(InventoryComponent), new InventoryComponent(this) },
+                { typeof(NameComponent), new NameComponent(this) },
+                { typeof(SpecialistComponent), new SpecialistComponent(this) }
             };
         }
 
