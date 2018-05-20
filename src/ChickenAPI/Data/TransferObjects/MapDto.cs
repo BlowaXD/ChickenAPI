@@ -1,8 +1,10 @@
-﻿namespace ChickenAPI.Data.TransferObjects
+﻿using ChickenAPI.Data.AccessLayer.Repository;
+
+namespace ChickenAPI.Data.TransferObjects
 {
-    public class MapDto
+    public class MapDto : IMappedDto
     {
-        public short Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public bool AllowShop { get; set; }
         public bool AllowPvp { get; set; }

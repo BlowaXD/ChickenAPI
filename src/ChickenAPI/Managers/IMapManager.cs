@@ -7,13 +7,14 @@ namespace ChickenAPI.Managers
 {
     public interface IMapManager
     {
-        IDictionary<short, IMap> Maps { get; set; }
+        IReadOnlyDictionary<long, IMap> Maps { get; }
 
         void ChangeMapLayer(ISession session, Guid mapLayerId);
         void ChangeMapLayer(ISession session, IMapLayer layer);
 
-        IMapLayer GetBaseMapLayer(short mapId);
+        IMapLayer GetBaseMapLayer(long mapId);
         IMapLayer GetBaseMapLayer(IMap map);
-        IMapLayer GenerateMapLayer(IMap map);
+
+        void Initialize();
     }
 }

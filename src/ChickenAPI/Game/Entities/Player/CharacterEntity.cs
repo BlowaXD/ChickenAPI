@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
@@ -21,7 +22,9 @@ namespace ChickenAPI.Game.Entities.Player
             _components = new Dictionary<Type, IComponent>
             {
                 { typeof(VisibilityComponent), new VisibilityComponent(this) },
-                { typeof(MovableComponent), new MovableComponent(this) }
+                { typeof(MovableComponent), new MovableComponent(this) },
+                {typeof(BattleComponent), new BattleComponent(this) },
+                {typeof(CharacterComponent), new CharacterComponent(this) }
             };
         }
 
@@ -35,15 +38,18 @@ namespace ChickenAPI.Game.Entities.Player
 
         public void AddComponent<T>(T component) where T : IComponent
         {
-            throw new NotImplementedException();
+            _components.Add(typeof(T), component);
         }
 
         public void RemoveComponent<T>(T component) where T : IComponent
         {
-            throw new NotImplementedException();
+            _components.Remove(typeof(T));
         }
 
-        public bool HasComponent<T>() where T : IComponent => _components.ContainsKey(typeof(T));
+        public bool HasComponent<T>() where T : IComponent
+        {
+            return _components.ContainsKey(typeof(T));
+        }
 
         public void TransferEntity(IEntityManager manager)
         {
@@ -56,16 +62,15 @@ namespace ChickenAPI.Game.Entities.Player
                 EntityManager.TransferEntity(this, manager);
             }
 
-            /*
-            if (manager is IMap map)
+            if (manager is IMapLayer map)
             {
                 SendPacket(new CInfoPacketBase());
                 SendPacket(new CModePacketBase());
                 SendPacket(new AtPacketBase());
                 SendPacket(new CondPacketBase());
-                SendPacket(new CMapPacketBase(map));
-                SendPacket(new InPacketBase());
-            }*/
+                SendPacket(new CMapPacketBase(map.Map));
+                SendPacket(new InPacketBase(this));
+            }
         }
 
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
