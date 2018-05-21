@@ -51,6 +51,6 @@ namespace ChickenAPI.Game.Maps
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        bool IsWalkable(int x, int y);
+        bool IsWalkable(short x, short y);
     }
 }

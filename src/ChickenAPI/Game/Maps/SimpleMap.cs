@@ -29,7 +29,7 @@ namespace ChickenAPI.Game.Maps
         public short Width { get; }
         public short Height { get; }
         public byte[] Grid { get; }
-        public bool IsWalkable(int x, int y)
+        public bool IsWalkable(short x, short y)
         {
             try
             {
