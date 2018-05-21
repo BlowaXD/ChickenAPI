@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using Autofac;
-using ChickenAPI.Data.AccessLayer;
+using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Maps;
-using ChickenAPI.Game.Network;
-using ChickenAPI.Utils;
 
 namespace ChickenAPI.Managers
 {
     public class SimpleMapManager : IMapManager
     {
+        public SimpleMapManager(IEnumerable<MapDto> dtos)
+        {
+            foreach (MapDto dto in dtos)
+            {
+                _maps[dto.Id] = new SimpleMap(dto);
+            }
+        }
+
         private readonly Dictionary<long, IMap> _maps = new Dictionary<long, IMap>();
         private readonly Dictionary<Guid, IMapLayer> _mapLayersById = new Dictionary<Guid, IMapLayer>();
 
@@ -27,9 +32,8 @@ namespace ChickenAPI.Managers
 
         public void ChangeMapLayer(IPlayerEntity player, IMapLayer layer)
         {
-            throw new NotImplementedException();
+            player.TransferEntity(layer);
         }
-
 
         public IMapLayer GetBaseMapLayer(long mapId)
         {
