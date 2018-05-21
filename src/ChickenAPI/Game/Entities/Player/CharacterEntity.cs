@@ -67,15 +67,17 @@ namespace ChickenAPI.Game.Entities.Player
                 EntityManager.TransferEntity(this, manager);
             }
 
-            if (manager is IMapLayer map)
+            if (!(manager is IMapLayer map))
             {
-                SendPacket(new CInfoPacketBase(this));
-                SendPacket(new CModePacketBase(this));
-                SendPacket(new AtPacketBase(this));
-                SendPacket(new CondPacketBase(this));
-                SendPacket(new CMapPacketBase(map.Map));
-                SendPacket(new InPacketBase(this));
+                return;
             }
+
+            SendPacket(new CInfoPacketBase(this));
+            SendPacket(new CModePacketBase(this));
+            SendPacket(new AtPacketBase(this));
+            SendPacket(new CondPacketBase(this));
+            SendPacket(new CMapPacketBase(map.Map));
+            SendPacket(new InPacketBase(this));
         }
 
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;

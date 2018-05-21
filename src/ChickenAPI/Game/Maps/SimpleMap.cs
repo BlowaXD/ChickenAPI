@@ -33,7 +33,7 @@ namespace ChickenAPI.Game.Maps
         {
             try
             {
-                byte gridCell = Grid[x * y];
+                byte gridCell = Grid[x + y * Width];
                 return gridCell == 0 || gridCell == 2 || gridCell >= 16 && gridCell <= 19;
             }
             catch (Exception)
