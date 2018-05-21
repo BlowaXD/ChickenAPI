@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.ECS.Entities;
-using ChickenAPI.ECS.Systems;
-using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Maps
 {
@@ -29,6 +27,7 @@ namespace ChickenAPI.Game.Maps
         public short Width { get; }
         public short Height { get; }
         public byte[] Grid { get; }
+
         public bool IsWalkable(short x, short y)
         {
             try

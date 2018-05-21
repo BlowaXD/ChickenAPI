@@ -8,6 +8,7 @@ using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Maps;
 using ChickenAPI.Game.Network;
 using ChickenAPI.Packets;
+using ChickenAPI.Packets.Game.Server;
 using ChickenAPI.Packets.ServerPackets;
 
 namespace ChickenAPI.Game.Entities.Player
@@ -74,10 +75,29 @@ namespace ChickenAPI.Game.Entities.Player
 
             SendPacket(new CInfoPacketBase(this));
             SendPacket(new CModePacketBase(this));
+            // eq
+            // Equipment()
+
+            SendPacket(new LevPacket(this));
+            // Stat()
             SendPacket(new AtPacketBase(this));
             SendPacket(new CondPacketBase(this));
             SendPacket(new CMapPacketBase(map.Map));
+            // StatChar()
             SendPacket(new InPacketBase(this));
+            // Pairy()
+            // Pst()
+            // mates In()
+            // Act6() : Act()
+            // PInitPacket
+            // ScPacket
+            // ScpStcPacket
+            // FcPacket
+            // Act4Raid ? DgPacket() : RaidMbf
+            // MapDesignObjects()
+            // MapDesignObjectsEffects
+            // MapItems()
+            // Gp()
         }
 
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;

@@ -10,7 +10,12 @@ namespace ChickenAPI.Game.Components
     /// </summary>
     public class MovableComponent : IComponent
     {
-        public MovableComponent(IEntity entity) => Entity = entity;
+        public MovableComponent(IEntity entity)
+        {
+            Entity = entity;
+            Destination = new Position<short>();
+            Actual = new Position<short>();
+        }
 
         /// <summary>
         ///     Entity Walking Speed

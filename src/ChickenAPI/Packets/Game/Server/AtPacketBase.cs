@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ChickenAPI.Game.Components;
+﻿using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Maps;
 

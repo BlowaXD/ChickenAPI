@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ChickenAPI.Enums.Game.Maps;
 using ChickenAPI.Game.Maps;
 
 namespace ChickenAPI.Packets.ServerPackets

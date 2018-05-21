@@ -26,8 +26,7 @@ namespace ChickenAPI.Game.Maps
         /// <summary>
         ///     Get all entities in the area between X and Y
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="pos"></param>
         /// <param name="range"></param>
         /// <returns></returns>
         IEnumerable<IEntity> GetEntitiesInRange(Position<short> pos, int range);

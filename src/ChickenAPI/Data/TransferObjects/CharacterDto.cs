@@ -5,6 +5,7 @@ namespace ChickenAPI.Data.TransferObjects
 {
     public class CharacterDto : IMappedDto
     {
+        public long Id { get; set; }
         public long AccountId { get; set; }
         public int Act4Dead { get; set; }
 
@@ -12,12 +13,12 @@ namespace ChickenAPI.Data.TransferObjects
 
         public int Act4Points { get; set; }
 
-        public int ArenaWinner { get; set; }
+        public bool ArenaWinner { get; set; }
 
         public string Biography { get; set; }
 
         public bool BuffBlocked { get; set; }
-        public byte Class { get; set; }
+        public CharacterClassType Class { get; set; }
 
         public short Compliment { get; set; }
 
@@ -111,6 +112,5 @@ namespace ChickenAPI.Data.TransferObjects
         public int TalentWin { get; set; }
 
         public bool WhisperBlocked { get; set; }
-        public long Id { get; set; }
     }
 }

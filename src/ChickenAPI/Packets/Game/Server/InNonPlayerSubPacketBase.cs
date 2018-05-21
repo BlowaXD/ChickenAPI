@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ChickenAPI.Packets.ServerPackets
+﻿namespace ChickenAPI.Packets.ServerPackets
 {
     [PacketHeader("in_non_player_subpacket")]
     public class InNonPlayerSubPacketBase : PacketBase

@@ -5,9 +5,15 @@ namespace ChickenAPI.Game.Components
 {
     public class BattleComponent : IComponent
     {
-        public short Morph { get; set; }
 
-        public BattleComponent(IEntity entity) => Entity = entity;
+        public BattleComponent(IEntity entity)
+        {
+            Hp = 100;
+            HpMax = 200;
+            Mp = 100;
+            MpMax = 200;
+            Entity = entity;
+        }
 
         public int Hp { get; set; }
 
@@ -16,6 +22,7 @@ namespace ChickenAPI.Game.Components
         public int Mp { get; set; }
 
         public int MpMax { get; set; }
+        public short Morph { get; set; }
 
         public bool CanAttack { get; set; }
 

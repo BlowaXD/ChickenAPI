@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ChickenAPI.Packets.ServerPackets
+﻿namespace ChickenAPI.Packets.ServerPackets
 {
     [PacketHeader("in_item_subpacket")]
     public class InItemSubPacketBase : PacketBase
