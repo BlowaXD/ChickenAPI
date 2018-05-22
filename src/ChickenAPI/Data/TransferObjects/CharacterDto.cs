@@ -50,7 +50,7 @@ namespace ChickenAPI.Data.TransferObjects
 
         public byte HeroLevel { get; set; }
 
-        public long HeroXp { get; set; }
+        public int HeroXp { get; set; }
 
         public int Hp { get; set; }
 
@@ -58,11 +58,11 @@ namespace ChickenAPI.Data.TransferObjects
 
         public byte JobLevel { get; set; }
 
-        public long JobLevelXp { get; set; }
+        public int JobLevelXp { get; set; }
 
         public byte Level { get; set; }
 
-        public long LevelXp { get; set; }
+        public int LevelXp { get; set; }
 
         public short MapId { get; set; }
 

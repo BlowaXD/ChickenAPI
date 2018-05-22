@@ -24,7 +24,7 @@ namespace ChickenAPI.Game.Maps
 
         public IEnumerable<IEntity> GetEntitiesInRange(Position<short> pos, int range) => Entities.Where(e => e.HasComponent<MovableComponent>() && GetDistance(pos, e.GetComponent<MovableComponent>().Actual) < range);
 
-        public static int GetDistance(Position<short> current, Position<short> target)
+        private static int GetDistance(Position<short> current, Position<short> target)
         {
             return Math.Abs(current.X - target.X) + Math.Abs(current.Y - target.Y);
         }

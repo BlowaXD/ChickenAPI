@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
+using ChickenAPI.Enums.Game.Character;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Maps;
@@ -10,6 +11,7 @@ using ChickenAPI.Game.Network;
 using ChickenAPI.Packets;
 using ChickenAPI.Packets.Game.Server;
 using ChickenAPI.Packets.ServerPackets;
+using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Entities.Player
 {
@@ -17,19 +19,56 @@ namespace ChickenAPI.Game.Entities.Player
     {
         private readonly Dictionary<Type, IComponent> _components;
 
-        public CharacterEntity(ISession session)
+        public CharacterEntity(ISession session, CharacterDto dto)
         {
             Session = session;
             _components = new Dictionary<Type, IComponent>
             {
                 { typeof(VisibilityComponent), new VisibilityComponent(this) },
-                { typeof(MovableComponent), new MovableComponent(this) },
+                { typeof(MovableComponent), new MovableComponent(this)
+                {
+                    Actual = new Position<short>
+                    {
+                        X = dto.MapX,
+                        Y = dto.MapY,
+                    },
+                    Destination = new Position<short>
+                    {
+                        X = dto.MapX,
+                        Y = dto.MapY,
+                    },
+                }},
                 { typeof(BattleComponent), new BattleComponent(this) },
-                { typeof(CharacterComponent), new CharacterComponent(this) },
-                { typeof(ExperienceComponent), new ExperienceComponent(this) },
+                { typeof(CharacterComponent), new CharacterComponent(this)
+                {
+                    Id = dto.Id,
+                    Authority = session.Account.Authority,
+                    ArenaWinner = dto.ArenaWinner,
+                    Class = dto.Class,
+                    MapId = dto.MapId,
+                    Compliment = dto.Compliment,
+                    Gender = dto.Gender,
+                    HairColor = dto.HairColor,
+                    HairStyle = dto.HairStyle,
+                    ReputIcon = ReputationIconType.Beginner, // todo GetReputIcon (IAlgorithmService)
+                    Reputation = dto.Reput,
+                    Slot = dto.Slot
+                } },
+                { typeof(ExperienceComponent), new ExperienceComponent(this)
+                {
+                    Level = dto.Level,
+                    LevelXp = dto.LevelXp,
+                    JobLevel = dto.JobLevel,
+                    JobLevelXp = dto.JobLevelXp,
+                    HeroLevel = dto.HeroLevel,
+                    HeroLevelXp = dto.HeroXp,
+                }},
                 { typeof(FamilyComponent), new FamilyComponent(this) },
                 { typeof(InventoryComponent), new InventoryComponent(this) },
-                { typeof(NameComponent), new NameComponent(this) },
+                { typeof(NameComponent), new NameComponent(this)
+                {
+                    Name = dto.Name
+                } },
                 { typeof(SpecialistComponent), new SpecialistComponent(this) }
             };
         }

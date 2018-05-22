@@ -65,7 +65,7 @@ namespace ChickenAPI.ECS.Entities
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        T GetEntity<T>(long id) where T : IEntity;
+        T GetEntity<T>(long id) where T : class, IEntity;
 
         /// <summary>
         ///     Register an entity to the entity container

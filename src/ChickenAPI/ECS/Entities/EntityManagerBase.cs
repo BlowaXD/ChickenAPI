@@ -45,9 +45,15 @@ namespace ChickenAPI.ECS.Entities
             return entity;
         }
 
-        public IEntity GetEntity(long id) => throw new System.NotImplementedException();
+        public IEntity GetEntity(long id)
+        {
+            return !_entities.TryGetValue(id, out IEntity entity) ? null : entity;
+        }
 
-        public T GetEntity<T>(long id) where T : IEntity => throw new System.NotImplementedException();
+        public T GetEntity<T>(long id) where T : class, IEntity
+        {
+            return !_entities.TryGetValue(id, out IEntity entity) ? null : entity as T;
+        }
 
         public void RegisterEntity<T>(T entity) where T : IEntity
         {
@@ -67,12 +73,19 @@ namespace ChickenAPI.ECS.Entities
 
         public void TransferEntity(long id, IEntityManager manager)
         {
-            throw new System.NotImplementedException();
+            if (!_entities.TryGetValue(id, out IEntity entity))
+            {
+                return;
+            }
+
+            TransferEntity(entity, manager);
         }
 
         public void TransferEntity(IEntity entity, IEntityManager manager)
         {
-            throw new System.NotImplementedException();
+            UnregisterEntity(entity);
+            manager.RegisterEntity(entity);
+            entity.TransferEntity(manager);
         }
 
         public void StartSystemUpdate(int delay)

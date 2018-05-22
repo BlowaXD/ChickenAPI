@@ -13,7 +13,7 @@ namespace ChickenAPI.Game.Components
 
         public ReputationIconType ReputIcon { get; set; }
 
-        public int Reputation { get; set; }
+        public long Reputation { get; set; }
 
         public AuthorityType Authority { get; set; }
 

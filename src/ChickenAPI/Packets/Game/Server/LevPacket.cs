@@ -46,7 +46,7 @@ namespace ChickenAPI.Packets.Game.Server
         public int JobLevelXpMax { get; set; }
 
         [PacketIndex(6)]
-        public int Reputation { get; set; }
+        public long Reputation { get; set; }
 
         [PacketIndex(7)]
         public int Cp { get; set; }

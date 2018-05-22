@@ -2,6 +2,7 @@
 {
     public enum ReputationIconType : byte
     {
+        Beginner
         //TODO: Fill this
     }
 }
