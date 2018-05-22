@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Maps;
 using ChickenAPI.Game.Network;
 
@@ -7,13 +8,13 @@ namespace ChickenAPI.Managers
 {
     public interface IMapManager
     {
-        IDictionary<short, IMap> Maps { get; set; }
+        IReadOnlyDictionary<long, IMap> Maps { get; }
 
-        void ChangeMapLayer(ISession session, Guid mapLayerId);
-        void ChangeMapLayer(ISession session, IMapLayer layer);
+        void ChangeMap(IPlayerEntity player, long mapId);
+        void ChangeMapLayer(IPlayerEntity player, Guid mapLayerId);
+        void ChangeMapLayer(IPlayerEntity player, IMapLayer layer);
 
-        IMapLayer GetBaseMapLayer(short mapId);
+        IMapLayer GetBaseMapLayer(long mapId);
         IMapLayer GetBaseMapLayer(IMap map);
-        IMapLayer GenerateMapLayer(IMap map);
     }
 }

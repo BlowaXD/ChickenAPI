@@ -1,4 +1,6 @@
-﻿namespace ChickenAPI.Utils
+﻿using System;
+
+namespace ChickenAPI.Utils
 {
     public class Position<T>
     {

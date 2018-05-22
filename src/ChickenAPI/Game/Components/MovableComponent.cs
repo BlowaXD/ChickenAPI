@@ -1,6 +1,7 @@
 ﻿using System;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
+using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Components
@@ -9,12 +10,19 @@ namespace ChickenAPI.Game.Components
     /// </summary>
     public class MovableComponent : IComponent
     {
-        public MovableComponent(IEntity entity) => Entity = entity;
+        public MovableComponent(IEntity entity)
+        {
+            Entity = entity;
+            Destination = new Position<short>();
+            Actual = new Position<short>();
+        }
 
         /// <summary>
         ///     Entity Walking Speed
         /// </summary>
         public byte Speed { get; set; }
+
+        public Direction Direction { get; set; }
 
         public Position<short> Destination { get; set; }
         public Position<short> Actual { get; set; }

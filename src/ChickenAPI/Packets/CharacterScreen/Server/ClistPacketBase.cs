@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using ChickenAPI.Enums.Game.Character;
+using ChickenAPI.Game.Components;
+using ChickenAPI.Game.Entities.Player;
 
 namespace ChickenAPI.Packets.ServerPackets
 {
@@ -18,13 +20,13 @@ namespace ChickenAPI.Packets.ServerPackets
         public byte Unknown { get; set; }
 
         [PacketIndex(3)]
-        public byte Gender { get; set; }
+        public GenderType Gender { get; set; }
 
         [PacketIndex(4)]
-        public byte HairStyle { get; set; }
+        public HairStyleType HairStyle { get; set; }
 
         [PacketIndex(5)]
-        public byte HairColor { get; set; }
+        public HairColorType HairColor { get; set; }
 
         [PacketIndex(6)]
         public byte Unknown1 { get; set; }

@@ -3,6 +3,7 @@ using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Entities.Player;
+using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Maps
 {
@@ -25,10 +26,9 @@ namespace ChickenAPI.Game.Maps
         /// <summary>
         ///     Get all entities in the area between X and Y
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="pos"></param>
         /// <param name="range"></param>
         /// <returns></returns>
-        IEnumerable<IEntity> GetEntitiesInRange(int x, int y, int range);
+        IEnumerable<IEntity> GetEntitiesInRange(Position<short> pos, int range);
     }
 }

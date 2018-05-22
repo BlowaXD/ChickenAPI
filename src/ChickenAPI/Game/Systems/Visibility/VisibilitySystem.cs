@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Enums.Packets;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Packets.ServerPackets;
@@ -44,11 +43,12 @@ namespace ChickenAPI.Game.Systems.Visibility
                 return;
             }
 
-            foreach (IEntity i in entity.EntityManager.Entities.Where(Match))
+            foreach (IEntity entityy in entity.EntityManager.Entities.Where(Match))
             {
-                var player = i as IPlayerEntity;
-
-                player?.SendPacket(new InfoPacketBase());
+                if (entityy is IPlayerEntity player)
+                {
+                    player.SendPacket(new InPacketBase(player));
+                }
             }
         }
 
@@ -62,26 +62,10 @@ namespace ChickenAPI.Game.Systems.Visibility
 
             foreach (IEntity entityy in entity.EntityManager.Entities.Where(Match))
             {
-                var player = entityy as IPlayerEntity;
-                OutPacketType outPacketType;
-                switch (entity.Type)
+                if (entityy is IPlayerEntity player)
                 {
-                    case EntityType.Player:
-                        outPacketType = OutPacketType.Character;
-                        break;
-                    case EntityType.Mate:
-                    case EntityType.Npc:
-                        outPacketType = OutPacketType.MateOrNpc;
-                        break;
-                    case EntityType.Monster:
-                        outPacketType = OutPacketType.Monster;
-                        break;
-                    default:
-                        // unhandled
-                        continue;
+                    player.SendPacket(new OutPacketBase(player));
                 }
-
-                player?.SendPacket(new OutPacketBase { EntityId = entity.Id, Type = outPacketType });
             }
         }
     }

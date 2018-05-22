@@ -1,7 +1,9 @@
-﻿namespace ChickenAPI.Data.AccessLayer
+﻿using ChickenAPI.Data.AccessLayer.Repository;
+using ChickenAPI.Data.TransferObjects;
+
+namespace ChickenAPI.Data.AccessLayer
 {
-    public interface IMapService
+    public interface IMapService : IMappedRepository<MapDto>
     {
-        // TODO
     }
 }

@@ -21,6 +21,7 @@ namespace ChickenAPI.Game.Network
         IPlayerEntity Player { get; }
 
         void InitializeAccount(AccountDto dto);
+        void InitializeCharacterId(long id);
         void InitializeEntity(IPlayerEntity ett);
 
         void SendPacket(IPacket packetBase);

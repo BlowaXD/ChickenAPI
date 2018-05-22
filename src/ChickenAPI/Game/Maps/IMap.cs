@@ -5,7 +5,15 @@ namespace ChickenAPI.Game.Maps
 {
     public interface IMap : IEntityManager
     {
-        short Id { get; set; }
+        /// <summary>
+        ///     This is the mapId
+        /// </summary>
+        long Id { get; }
+
+        /// <summary>
+        ///     This is the music id on this map
+        /// </summary>
+        int MusicId { get; }
 
         /// <summary>
         ///     This layer is the base map where everyone will be by default
@@ -43,6 +51,6 @@ namespace ChickenAPI.Game.Maps
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        bool IsWalkable(int x, int y);
+        bool IsWalkable(short x, short y);
     }
 }

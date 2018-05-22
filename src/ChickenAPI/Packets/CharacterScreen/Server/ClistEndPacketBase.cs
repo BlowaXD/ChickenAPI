@@ -3,5 +3,6 @@
     [PacketHeader("clist_end")]
     public class ClistEndPacketBase : PacketBase
     {
+        // Useless packet
     }
 }
