@@ -15,7 +15,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetLevelXp(CharacterClassType type, int level);
+        int GetLevelXp(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the JobLevelXp stat based on <see cref="CharacterClassType"/> and level
@@ -24,7 +24,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetJobLevelXp(CharacterClassType type, int level);
+        int GetJobLevelXp(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the HeroLevelXp stat based on <see cref="CharacterClassType"/> and level
@@ -33,7 +33,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetHeroLevelXp(CharacterClassType type, int level);
+        int GetHeroLevelXp(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the SpLevelXp stat based on <see cref="SpType"/> and level
@@ -42,7 +42,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetSpLevelXp(SpType type, int level);
+        int GetSpLevelXp(SpType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Fairy Level Xp stat based on the fairy's level
@@ -50,7 +50,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// </summary>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetFairyLevelXp(int level);
+        int GetFairyLevelXp(byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Fairy Level Xp stat based on the fairy's level
@@ -58,7 +58,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// </summary>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetFamilyLevelXp(int level);
+        int GetFamilyLevelXp(byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Speed stat based on <see cref="CharacterClassType"/> and level
@@ -67,7 +67,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetSpeed(CharacterClassType type, int level);
+        int GetSpeed(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Close Defence stat based on <see cref="CharacterClassType"/> and level
@@ -76,7 +76,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetDefenceClose(CharacterClassType type, int level);
+        int GetDefenceClose(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Ranged Defence stat based on <see cref="CharacterClassType"/> and level
@@ -85,7 +85,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetDefenceRange(CharacterClassType type, int level);
+        int GetDefenceRange(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Magic Defence stat
@@ -94,7 +94,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetDefenceMagic(CharacterClassType type, int level);
+        int GetDefenceMagic(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Dodge close stat based on <see cref="CharacterClassType"/> and level
@@ -103,7 +103,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetDodgeClose(CharacterClassType type, int level);
+        int GetDodgeClose(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Dodge Ranged stat based on <see cref="CharacterClassType"/> and level
@@ -112,7 +112,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetDodgeRanged(CharacterClassType type, int level);
+        int GetDodgeRanged(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Dodge Magic stat based on <see cref="CharacterClassType"/> and level
@@ -122,7 +122,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetDodgeMagic(CharacterClassType type, int level);
+        int GetDodgeMagic(CharacterClassType type, byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the minimum attack range stat based on <see cref="CharacterClassType"/> and level
@@ -131,6 +131,6 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetMinimumAttackRange(CharacterClassType type, int level);
+        int GetMinimumAttackRange(CharacterClassType type, byte level);
     }
 }
