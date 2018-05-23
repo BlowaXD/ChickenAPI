@@ -42,7 +42,7 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="type"></param>
         /// <param name="level"></param>
         /// <returns></returns>
-        int GetSpLevelXp(SpType type, byte level);
+        int GetSpLevelXp(byte level);
 
         /// <summary>
         /// This method will search through algorithm service and return the Fairy Level Xp stat based on the fairy's level
