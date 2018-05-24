@@ -1,4 +1,5 @@
-﻿using ChickenAPI.Enums;
+﻿using System;
+using ChickenAPI.Enums;
 using ChickenAPI.Enums.Game.Character;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
@@ -69,24 +70,38 @@ namespace ChickenAPI.Packets.ServerPackets
             InCharacterSubPacket = new InCharacterSubPacketBase
             {
                 Authority = entity.Session.Account.Authority > AuthorityType.GameMaster ? (byte)2 : (byte)0,
-                Class = character.Class,
-                Equipment = str.Substring(0, 0b101111), // str.Length - 1 will call to length and so its much slower KAPPAAAAAAAAAAAA
                 Gender = character.Gender,
-                HairColor = character.HairColor,
                 HairStyle = character.HairStyle,
+                HairColor = character.HairColor,
+                Class = character.Class,
+                Equipment = str.Substring(0, 0b101111), // str.Length - 1 will call to length and so its much slower KAPPAAAAAAAAAAAA,
+                InAliveSubPacketBase = new InAliveSubPacketBase
+                {
+                    HpPercentage = (byte)Math.Ceiling(battle.Hp / battle.HpMax * 100D),
+                    MpPercentage = (byte)Math.Ceiling(battle.Mp / battle.MpMax * 100D)
+                },
+                IsSitting = false,
+                GroupId = -1,
+                FairyId = 0,
+                FairyElement = 0,
+                Unknown1 = 0,
+                FairyMorph = 0,
+                Unknown2 = 0,
+                Morph = 0,
+                EquipmentRare = "00 00",
+                FamilyId = -1,
+                FamilyName = "-", // if not put -1
+                ReputationIcon = 0,
+                Invisible = entity.GetComponent<VisibilityComponent>().IsVisible,
+                SpUpgrade = 0,
+                Faction = FactionType.Neutral, // todo faction system
+                SpDesign = 0,
+                Level = entity.GetComponent<ExperienceComponent>().Level,
+                FamilyLevel = 0,
                 ArenaWinner = character.ArenaWinner,
                 Compliment = character.Compliment,
-                Faction = FactionType.Neutral, // todo faction system
-                FamilyId = -1, // if not put -1
-                FamilyName = "-", // if not put -1
-                FamilyLevel = 0,
-                Level = entity.GetComponent<ExperienceComponent>().Level,
-                HeroLevel = entity.GetComponent<ExperienceComponent>().HeroLevel,
-            };
-            InAliveSubPacket = new InAliveSubPacketBase
-            {
-                HpPercentage = battle.Hp,
-                MpPercentage = battle.Mp,
+                Size = 10,
+                HeroLevel = entity.GetComponent<ExperienceComponent>().HeroLevel
             };
         }
 
@@ -115,9 +130,6 @@ namespace ChickenAPI.Packets.ServerPackets
 
         [PacketIndex(7, IsOptional = true, RemoveSeparator = true)]
         public InCharacterSubPacketBase InCharacterSubPacket { get; set; }
-
-        [PacketIndex(8, IsOptional = true, RemoveSeparator = true)]
-        public InAliveSubPacketBase InAliveSubPacket { get; set; }
 
         [PacketIndex(9, IsOptional = true, RemoveSeparator = true)]
         public InItemSubPacketBase InItemSubPacket { get; set; }
