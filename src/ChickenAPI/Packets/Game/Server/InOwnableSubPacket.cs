@@ -1,4 +1,4 @@
-﻿namespace ChickenAPI.Packets.ServerPackets
+﻿namespace ChickenAPI.Packets.Game.Server
 {
     [PacketHeader("in_ownable_subpacket")]
     public class InOwnableSubPacketBase : PacketBase

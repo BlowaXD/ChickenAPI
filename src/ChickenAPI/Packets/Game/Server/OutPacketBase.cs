@@ -2,7 +2,7 @@
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
 
-namespace ChickenAPI.Packets.ServerPackets
+namespace ChickenAPI.Packets.Game.Server
 {
     [PacketHeader("out")]
     public class OutPacketBase : PacketBase

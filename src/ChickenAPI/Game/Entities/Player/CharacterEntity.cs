@@ -10,7 +10,6 @@ using ChickenAPI.Game.Maps;
 using ChickenAPI.Game.Network;
 using ChickenAPI.Packets;
 using ChickenAPI.Packets.Game.Server;
-using ChickenAPI.Packets.ServerPackets;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Entities.Player

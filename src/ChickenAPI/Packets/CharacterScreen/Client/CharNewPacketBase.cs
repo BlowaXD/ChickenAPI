@@ -1,6 +1,6 @@
 ﻿using ChickenAPI.Enums.Game.Character;
 
-namespace ChickenAPI.Packets.ClientPackets
+namespace ChickenAPI.Packets.CharacterScreen.Client
 {
     [PacketHeader("Char_NEW", false)]
     public class CharNewPacketBase : PacketBase
