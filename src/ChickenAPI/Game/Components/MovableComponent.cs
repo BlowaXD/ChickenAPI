@@ -22,7 +22,7 @@ namespace ChickenAPI.Game.Components
         /// </summary>
         public byte Speed { get; set; }
 
-        public Direction Direction { get; set; }
+        public DirectionType DirectionType { get; set; }
 
         public Position<short> Destination { get; set; }
         public Position<short> Actual { get; set; }
