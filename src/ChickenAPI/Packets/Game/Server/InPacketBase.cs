@@ -15,7 +15,7 @@ namespace ChickenAPI.Packets.Game.Server
         {CharacterId}
         {PositionX}
         {PositionY}
-        {Direction}
+        {DirectionType}
         {(Undercover ? (byte)AuthorityType.User : Authority < AuthorityType.GameMaster ? 0 : 2)}
         {(byte)Gender}
         {(byte)HairStyle}
@@ -66,7 +66,7 @@ namespace ChickenAPI.Packets.Game.Server
             VNum = character.Id;
             PositionX = entity.GetComponent<MovableComponent>().Actual.X;
             PositionY = entity.GetComponent<MovableComponent>().Actual.Y;
-            Direction = entity.GetComponent<MovableComponent>().Direction;
+            DirectionType = entity.GetComponent<MovableComponent>().DirectionType;
             InCharacterSubPacket = new InCharacterSubPacketBase
             {
                 Authority = entity.Session.Account.Authority > AuthorityType.GameMaster ? (byte)2 : (byte)0,
@@ -123,7 +123,7 @@ namespace ChickenAPI.Packets.Game.Server
         public short PositionY { get; set; }
 
         [PacketIndex(5, IsOptional = true)]
-        public Direction? Direction { get; set; }
+        public DirectionType? DirectionType { get; set; }
 
         [PacketIndex(6, IsOptional = true)]
         public short? Amount { get; set; }

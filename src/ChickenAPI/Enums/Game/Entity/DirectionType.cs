@@ -1,6 +1,6 @@
 ﻿namespace ChickenAPI.Enums.Game.Entity
 {
-    public enum Direction
+    public enum DirectionType
     {
         
     }
