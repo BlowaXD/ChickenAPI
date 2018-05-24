@@ -6,7 +6,7 @@ using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
-using ChickenAPI.Packets.ServerPackets;
+using ChickenAPI.Packets.Game.Server;
 
 namespace ChickenAPI.Game.Systems.Visibility
 {

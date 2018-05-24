@@ -5,12 +5,12 @@ using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
 
-namespace ChickenAPI.Packets.ServerPackets
+namespace ChickenAPI.Packets.Game.Server
 {
     /*
         $"in 
         1
-        {CharacterName}
+        {Name}
         - 
         {CharacterId}
         {PositionX}

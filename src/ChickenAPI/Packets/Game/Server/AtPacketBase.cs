@@ -2,7 +2,7 @@
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Maps;
 
-namespace ChickenAPI.Packets.ServerPackets
+namespace ChickenAPI.Packets.Game.Server
 {
     [PacketHeader("at")]
     public class AtPacketBase : PacketBase

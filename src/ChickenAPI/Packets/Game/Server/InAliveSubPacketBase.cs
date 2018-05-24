@@ -1,4 +1,4 @@
-﻿namespace ChickenAPI.Packets.ServerPackets
+﻿namespace ChickenAPI.Packets.Game.Server
 {
     [PacketHeader("in_alive_subpacket")]
     public class InAliveSubPacketBase : PacketBase

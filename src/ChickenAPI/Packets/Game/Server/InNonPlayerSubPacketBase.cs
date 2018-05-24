@@ -1,4 +1,4 @@
-﻿namespace ChickenAPI.Packets.ServerPackets
+﻿namespace ChickenAPI.Packets.Game.Server
 {
     [PacketHeader("in_non_player_subpacket")]
     public class InNonPlayerSubPacketBase : PacketBase
