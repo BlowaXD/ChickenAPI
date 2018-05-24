@@ -11,6 +11,8 @@ namespace ChickenAPI.Game.Components
 
         public short Compliment { get; set; }
 
+        public short Dignity { get; set; }
+
         public ReputationIconType ReputIcon { get; set; }
 
         public long Reputation { get; set; }

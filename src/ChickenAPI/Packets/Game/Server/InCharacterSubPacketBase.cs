@@ -25,42 +25,72 @@ namespace ChickenAPI.Packets.ServerPackets
         public string Equipment { get; set; }
 
         [PacketIndex(6)]
-        public long FamilyId { get; set; }
+        public InAliveSubPacketBase InAliveSubPacketBase { get; set; }
 
         [PacketIndex(7)]
-        public string FamilyName { get; set; }
+        public bool IsSitting { get; set; }
 
         [PacketIndex(8)]
-        public short ReputationIcon { get; set; }
+        public long GroupId { get; set; }
 
         [PacketIndex(9)]
-        public bool Invisible { get; set; }
+        public byte FairyId { get; set; }
 
         [PacketIndex(10)]
-        public long Morph { get; set; }
+        public byte FairyElement { get; set; }
 
         [PacketIndex(11)]
-        public FactionType Faction { get; set; }
+        public byte Unknown1 { get; set; }
 
         [PacketIndex(12)]
-        public long MorphDesign { get; set; }
+        public byte FairyMorph { get; set; }
 
         [PacketIndex(13)]
-        public byte Level { get; set; }
+        public byte Unknown2 { get; set; }
 
         [PacketIndex(14)]
-        public byte FamilyLevel { get; set; }
+        public long Morph { get; set; }
 
         [PacketIndex(15)]
-        public bool ArenaWinner { get; set; }
+        public string EquipmentRare { get; set; }
 
         [PacketIndex(16)]
-        public int Compliment { get; set; }
+        public long FamilyId { get; set; }
 
         [PacketIndex(17)]
-        public short Size { get; set; }
+        public string FamilyName { get; set; }
 
         [PacketIndex(18)]
+        public short ReputationIcon { get; set; }
+
+        [PacketIndex(19)]
+        public bool Invisible { get; set; }
+
+        [PacketIndex(20)]
+        public long SpUpgrade { get; set; }
+
+        [PacketIndex(21)]
+        public FactionType Faction { get; set; }
+
+        [PacketIndex(22)]
+        public long SpDesign { get; set; }
+
+        [PacketIndex(23)]
+        public byte Level { get; set; }
+
+        [PacketIndex(24)]
+        public byte FamilyLevel { get; set; }
+
+        [PacketIndex(25)]
+        public bool ArenaWinner { get; set; }
+
+        [PacketIndex(26)]
+        public int Compliment { get; set; }
+
+        [PacketIndex(27)]
+        public short Size { get; set; }
+
+        [PacketIndex(28)]
         public short HeroLevel { get; set; }
         #endregion
     }

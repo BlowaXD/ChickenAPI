@@ -5,10 +5,10 @@
     {
         #region Properties
         [PacketIndex(0)]
-        public int HpPercentage { get; set; }
+        public byte HpPercentage { get; set; }
 
         [PacketIndex(1)]
-        public int MpPercentage { get; set; }
+        public byte MpPercentage { get; set; }
 
         #endregion
     }
