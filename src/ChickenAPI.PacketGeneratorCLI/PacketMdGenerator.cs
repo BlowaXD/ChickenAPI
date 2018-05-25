@@ -57,7 +57,7 @@ namespace ChickenAPI.PacketGeneratorCLI
                 "### Sent by Server\n\n" + GetPackets($"{path}/CharacterScreen/Server", "CharacterScreen/Server/") + "\n\n" +
                 "## Game Packets (sent/received only in game)\n\n" +
                 "### Sent by Client\n\n" + GetPackets($"{path}/Game/Client", "Game/Client/") + "\n\n" +
-                "### Sent by Server\r\n" + GetPackets($"{path}/Game/Server", "Game/Server/");
+                "### Sent by Server\n\n" + GetPackets($"{path}/Game/Server", "Game/Server/");
             Console.WriteLine(tmp);
         }
     }
