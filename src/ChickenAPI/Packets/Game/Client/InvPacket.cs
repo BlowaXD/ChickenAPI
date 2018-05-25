@@ -1,10 +1,12 @@
-﻿namespace ChickenAPI.Packets.Game.Client
+﻿using ChickenAPI.Enums.Game.Items;
+
+namespace ChickenAPI.Packets.Game.Client
 {
     [PacketHeader("inv")]
     public class InvPacket : PacketBase
     {
         [PacketIndex(0)]
-        public short InventoryType { get; set; }
+        public InventoryType InventoryType { get; set; }
 
         [PacketIndex(1)]
         public short InventorySlot { get; set; }
