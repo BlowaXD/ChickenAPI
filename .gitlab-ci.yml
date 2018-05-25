@@ -5,10 +5,6 @@ stages:
   - test
   - deploy
 
-
-before_script:
-  - "dotnet restore"
-
 build ChickenAPI:
   stage: build
   tags:
@@ -45,6 +41,14 @@ test Packet List Markdown:
   tags:
     - docker
     - dotnet
+  variables:
+    file: /tmp/supposed_file
   script:
-   - chmod +x scripts/packet_list.sh > /tmp/supposed_file # generate the packet list markdown file
-   - diff /tmp/supposed_file src/ChickenAPI/Packets/README.md # compare the repository one and the previously generated one
+   - chmod +x scripts/packet_list.sh > $file # generate the packet list markdown file
+   - cat $file
+   - diff $file src/ChickenAPI/Packets/README.md # compare the repository one and the previously generated one
+   - mkdir artifacts
+   - mv $file artifacts
+  artifacts:
+    - artifacts
+
