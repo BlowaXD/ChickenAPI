@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ChickenAPI.Packets.Game.Client
+﻿namespace ChickenAPI.Packets.Game.Client
 {
     [PacketHeader("mlobj")]
     public class GenerateMapDesignObject : PacketBase
