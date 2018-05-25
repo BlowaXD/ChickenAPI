@@ -39,3 +39,12 @@ test ChickenAPI:
   script:
     - "cd $build_path"
     - "dotnet test"
+
+test Packet List Markdown:
+  stage: test
+  tags:
+    - docker
+    - dotnet
+  script:
+   - chmod +x scripts/packet_list.sh > /tmp/supposed_file # generate the packet list markdown file
+   - diff /tmp/supposed_file src/ChickenAPI/Packets/README.md # compare the repository one and the previously generated one
