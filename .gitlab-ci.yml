@@ -47,8 +47,9 @@ test Packet List Markdown:
    - chmod +x scripts/packet_list.sh > $file # generate the packet list markdown file
    - cat $file
    - diff $file src/ChickenAPI/Packets/README.md # compare the repository one and the previously generated one
-   - mkdir artifacts
-   - mv $file artifacts
+   - mv $file supposed_packet_md.md
   artifacts:
-    - artifacts
+    paths:
+    - supposed_packet_md.md
+    expire_in: 1 week
 
