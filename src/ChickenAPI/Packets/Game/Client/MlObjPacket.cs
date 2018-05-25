@@ -1,7 +1,7 @@
 ﻿namespace ChickenAPI.Packets.Game.Client
 {
     [PacketHeader("mlobj")]
-    public class GenerateMapDesignObject : PacketBase
+    public class MlobjPacket : PacketBase
     {
         [PacketIndex(0)]
         public bool Deleted { get; set; }
