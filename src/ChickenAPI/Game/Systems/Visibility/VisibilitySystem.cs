@@ -31,7 +31,6 @@ namespace ChickenAPI.Game.Systems.Visibility
                     SetVisible(entity, visibleEvent);
                     break;
             }
-
             throw new NotImplementedException();
         }
 
@@ -45,10 +44,23 @@ namespace ChickenAPI.Game.Systems.Visibility
 
             foreach (IEntity entityy in entity.EntityManager.Entities.Where(Match))
             {
-                if (entityy is IPlayerEntity player)
+                if (!(entity is IPlayerEntity session))
                 {
-                    player.SendPacket(new InPacketBase(player));
+                    continue;
                 }
+
+                if (!(entityy is IPlayerEntity player))
+                {
+                    continue;
+                }
+
+                if (args.IsChangingMapLayer)
+                {
+                    session.SendPacket(new InPacketBase(player));
+                }
+
+                player.SendPacket(new InPacketBase(player));
+                // todo player entity
             }
         }
 
