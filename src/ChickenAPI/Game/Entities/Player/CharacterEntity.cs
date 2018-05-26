@@ -17,6 +17,7 @@ namespace ChickenAPI.Game.Entities.Player
 {
     public class CharacterEntity : IPlayerEntity
     {
+        private static readonly Logger Log = Logger.GetLogger<CharacterEntity>();
         private readonly Dictionary<Type, IComponent> _components;
 
         public CharacterEntity(ISession session, CharacterDto dto)
@@ -109,10 +110,12 @@ namespace ChickenAPI.Game.Entities.Player
             if (EntityManager == null)
             {
                 EntityManager = manager;
+                Log.Info($"[ENTITY:{Id}] Initializing EntityManager");
+                EntityManager.RegisterEntity(this);
             }
             else
             {
-                EntityManager.NotifySystem<VisibilitySystem>(this, new VisibilitySetInvisibleEventArgs { Broadcast = true });
+                EntityManager.NotifySystem<VisibilitySystem>(this, new VisibilitySetInvisibleEventArgs { Broadcast = true, IsChangingMapLayer = true });
                 EntityManager.TransferEntity(this, manager);
             }
 
@@ -120,12 +123,6 @@ namespace ChickenAPI.Game.Entities.Player
             {
                 return;
             }
-
-            map.NotifySystem<VisibilitySystem>(this, new VisibilitySetVisibleEventArgs()
-            {
-                Broadcast = true,
-                IsChangingMapLayer = true
-            });
 
             SendPacket(new CInfoPacketBase(this));
             SendPacket(new CModePacketBase(this));
@@ -152,6 +149,12 @@ namespace ChickenAPI.Game.Entities.Player
             // MapDesignObjectsEffects
             // MapItems()
             // Gp()
+
+            map.NotifySystem<VisibilitySystem>(this, new VisibilitySetVisibleEventArgs
+            {
+                Broadcast = true,
+                IsChangingMapLayer = true
+            });
         }
 
         public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
