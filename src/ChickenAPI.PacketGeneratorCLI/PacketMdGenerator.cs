@@ -39,7 +39,7 @@ namespace ChickenAPI.PacketGeneratorCLI
             var stringBuilder = new StringBuilder();
             foreach (PacketFile s in files.OrderBy(s => s.Header))
             {
-                stringBuilder.Append($"- [x] [{s.Header}]({s.FilePath})\n");
+                stringBuilder.AppendLine($"- [x] [{s.Header}]({s.FilePath})");
             }
 
             return stringBuilder.ToString();
