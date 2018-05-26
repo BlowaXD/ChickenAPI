@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using ChickenAPI.ECS.Entities;
+using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Components;
+using ChickenAPI.Game.Systems.Visibility;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Maps
@@ -16,6 +18,10 @@ namespace ChickenAPI.Game.Maps
             Map = map;
             ParentEntityManager = map;
             Players = new List<IPlayerEntity>();
+            _notifiableSystems = new Dictionary<Type, INotifiableSystem>
+            {
+                { typeof(VisibilitySystem), new VisibilitySystem(this) }
+            };
         }
         public Guid Id { get; set; }
         public IMap Map { get; }
