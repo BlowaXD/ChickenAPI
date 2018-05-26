@@ -25,11 +25,16 @@
 
 ### Sent by Client
 
+- [x] [addobj](Game/Client/AddobjPacket.cs)
 - [x] [compl](Game/Client/ComplimentPacket.cs)
 - [x] [dir](Game/Client/DirectionPacket.cs)
 - [x] [eqinfo](Game/Client/EquipmentInfoPacket.cs)
 - [x] [glmk](Game/Client/CreateFamilyPacket.cs)
 - [x] [gop](Game/Client/CharacterOptionPacket.cs)
+- [x] [inv](Game/Client/InvPacket.cs)
+- [x] [mlobj](Game/Client/MlObjPacket.cs)
+- [x] [mvi](Game/Client/MviPacket.cs)
+- [x] [rmvobj](Game/Client/RmvobjPacket.cs)
 - [x] [walk](Game/Client/WalkPacket.cs)
 
 

@@ -34,6 +34,9 @@ Pull requests are accepted however, we are still in a development phasis to make
 - Kraken
 - SylEze
 - DarkyZ
+- Eastrall
+- Steve-Nzr
+- Godness-Cookie
 
 Special Thanks :
 OpenNos contributors, that amount of work helped us to develop ChickenAPI with a lot of informations
