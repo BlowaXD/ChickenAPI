@@ -7,11 +7,13 @@ namespace ChickenAPI.Game.Components
 {
     public class InventoryComponent : IComponent
     {
-        public const byte InventorySize = 196;
+        public const byte INVENTORY_SIZE = 196;
+
+        public const short MAX_ITEMS_PER_SLOT = 999;
 
         public InventoryComponent(IEntity entity)
         {
-            ItemInstances = new ItemInstanceDto[InventorySize];
+            ItemInstances = new ItemInstanceDto[INVENTORY_SIZE];
             Entity = entity;
         }
 
