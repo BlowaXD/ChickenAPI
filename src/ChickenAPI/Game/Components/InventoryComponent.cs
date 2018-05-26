@@ -1,14 +1,21 @@
 ﻿using ChickenAPI.Data.TransferObjects.Item;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
+using ChickenAPI.Enums.Game.Items;
 
 namespace ChickenAPI.Game.Components
 {
     public class InventoryComponent : IComponent
     {
-        public InventoryComponent(IEntity entity) => Entity = entity;
+        public const byte InventorySize = 196;
 
-        public ItemInstanceDto ItemInstances { get; set; }
+        public InventoryComponent(IEntity entity)
+        {
+            ItemInstances = new ItemInstanceDto[InventorySize];
+            Entity = entity;
+        }
+
+        public ItemInstanceDto[] ItemInstances { get; set; }
 
         public IEntity Entity { get; }
     }
