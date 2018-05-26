@@ -15,10 +15,11 @@ namespace ChickenAPI.Game.Maps
     {
         public SimpleMapLayer(IMap map)
         {
+            Id = Guid.NewGuid();
             Map = map;
             ParentEntityManager = map;
             Players = new List<IPlayerEntity>();
-            _notifiableSystems = new Dictionary<Type, INotifiableSystem>
+            NotifiableSystems = new Dictionary<Type, INotifiableSystem>
             {
                 { typeof(VisibilitySystem), new VisibilitySystem(this) }
             };

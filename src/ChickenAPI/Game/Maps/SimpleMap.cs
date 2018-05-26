@@ -7,11 +7,12 @@ namespace ChickenAPI.Game.Maps
 {
     public class SimpleMap : EntityManagerBase, IMap
     {
+        private IMapLayer _baseMapLayer;
         public SimpleMap(MapDto map)
         {
             Id = map.Id;
             MusicId = map.Music;
-            BaseLayer = new SimpleMapLayer(this);
+            _baseMapLayer = new SimpleMapLayer(this);
             Layers = new HashSet<IMapLayer>();
             Portals = new HashSet<IPortal>();
             Width = map.Width;
@@ -21,7 +22,11 @@ namespace ChickenAPI.Game.Maps
 
         public long Id { get; }
         public int MusicId { get; }
-        public IMapLayer BaseLayer { get; }
+
+        public IMapLayer BaseLayer
+        {
+            get => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this));
+        }
         public HashSet<IMapLayer> Layers { get; }
         public HashSet<IPortal> Portals { get; }
         public short Width { get; }
