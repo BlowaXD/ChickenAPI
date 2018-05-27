@@ -10,6 +10,6 @@
         public byte Unknown2 { get; set; } // always set to 1
 
         [PacketIndex(2)]
-        public int PlayerID { get; set; }
+        public int PlayerId { get; set; }
     }
 }
