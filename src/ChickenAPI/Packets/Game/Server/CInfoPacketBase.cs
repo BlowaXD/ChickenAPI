@@ -15,7 +15,7 @@ namespace ChickenAPI.Packets.Game.Server
 
             Name = entity.GetComponent<NameComponent>().Name;
             Unknown1 = "-"; //TODO: Find signification
-            Unknown2 = -1; //TODO: Find signification 
+            GroupId = -1; //TODO: Find signification 
             FamilyId = family.FamilyId;
             FamilyName = family.FamilyName;
             CharacterId = character.Id;
@@ -27,7 +27,7 @@ namespace ChickenAPI.Packets.Game.Server
             Icon = character.ReputIcon;
             Compliment = character.Compliment;
             Morph = character.Morph;
-            Invisible = entity.GetComponent<VisibilityComponent>().IsVisible;
+            Invisible = !entity.GetComponent<VisibilityComponent>().IsVisible;
             FamilyLevel = family.FamilyLevel;
             SpUpgrade = entity.GetComponent<SpecialistComponent>().Upgrade;
             ArenaWinner = character.ArenaWinner;
@@ -41,7 +41,7 @@ namespace ChickenAPI.Packets.Game.Server
         public string Unknown1 { get; set; }
 
         [PacketIndex(2)]
-        public short Unknown2 { get; set; }
+        public short GroupId { get; set; }
 
         [PacketIndex(3)]
         public long FamilyId { get; set; }

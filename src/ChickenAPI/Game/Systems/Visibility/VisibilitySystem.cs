@@ -72,7 +72,7 @@ namespace ChickenAPI.Game.Systems.Visibility
                 }
 
                 player.SendPacket(new InPacketBase(session));
-                // todo player entity
+                // todo monster/npc entity
             }
         }
 
