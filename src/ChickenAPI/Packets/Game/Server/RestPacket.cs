@@ -7,7 +7,7 @@
         public byte Unknown1 { get; set; } // always set to 1
 
         [PacketIndex(1)]
-        public int PlayerID { get; set; }
+        public int PlayerId { get; set; }
 
         [PacketIndex(2)]
         public byte Unknown2 { get; set; } // always set to 0
