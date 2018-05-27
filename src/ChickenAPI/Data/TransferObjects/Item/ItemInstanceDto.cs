@@ -9,6 +9,11 @@ namespace ChickenAPI.Data.TransferObjects.Item
         public ItemDto Item { get; set; }
 
         public byte Design { get; set; }
+
         public Guid Id { get; set; }
+
+        public short Amount { get; set; }
+
+        public byte Slot { get; set; }
     }
 }
