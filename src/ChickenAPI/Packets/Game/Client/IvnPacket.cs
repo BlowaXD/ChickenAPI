@@ -2,8 +2,8 @@
 
 namespace ChickenAPI.Packets.Game.Client
 {
-    [PacketHeader("inv")]
-    public class InvPacket : PacketBase
+    [PacketHeader("ivn")]
+    public class IvnPacket : PacketBase
     {
         [PacketIndex(0)]
         public InventoryType InventoryType { get; set; }
