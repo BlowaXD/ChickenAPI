@@ -43,13 +43,13 @@ namespace ChickenAPI.Packets.Game.Server
         public byte FairyElement { get; set; }
 
         [PacketIndex(12)]
-        public byte Unknown1 { get; set; }
+        public byte IsBoostedFairy { get; set; }
 
         [PacketIndex(13)]
         public byte FairyMorph { get; set; }
 
         [PacketIndex(14)]
-        public byte Unknown2 { get; set; }
+        public byte EntryType { get; set; }
 
         [PacketIndex(15)]
         public long Morph { get; set; }
