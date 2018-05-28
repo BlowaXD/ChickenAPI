@@ -1,4 +1,5 @@
-﻿using ChickenAPI.Data.AccessLayer.Repository;
+﻿using System.Collections.Generic;
+using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Utils;
 
@@ -13,6 +14,10 @@ namespace ChickenAPI.Data.TransferObjects
         public Position<short> Position { get; set; }
 
         public long MapId { get; set; }
+
+        public List<DropDto> Drops { get; set; }
+        public List<BCardDto> BCards { get; set; }
+        public List<NpcMonsterSkillDto> Skills { get; set; }
 
         public NpcMonsterDto Data { get; set; }
     }

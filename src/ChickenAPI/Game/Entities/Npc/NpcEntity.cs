@@ -21,7 +21,7 @@ namespace ChickenAPI.Game.Entities.Npc
 
         public override void Dispose()
         {
-            throw new System.NotImplementedException();
+            GC.SuppressFinalize(this);
         }
     }
 }
