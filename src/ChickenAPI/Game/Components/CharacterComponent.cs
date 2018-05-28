@@ -1,13 +1,34 @@
-﻿using ChickenAPI.ECS.Components;
+﻿using ChickenAPI.Data.TransferObjects;
+using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums;
 using ChickenAPI.Enums.Game.Character;
+using ChickenAPI.Game.Entities.Player;
 
 namespace ChickenAPI.Game.Components
 {
     public class CharacterComponent : IComponent
     {
         public CharacterComponent(IEntity entity) => Entity = entity;
+
+        public CharacterComponent(IEntity entity, CharacterDto dto)
+        {
+            Entity = entity;
+
+            Id = dto.Id;
+            Authority = ((IPlayerEntity)entity).Session.Account.Authority;
+            ArenaWinner = dto.ArenaWinner;
+            Class = dto.Class;
+            MapId = dto.MapId;
+            Compliment = dto.Compliment;
+            Gender = dto.Gender;
+            HairColor = dto.HairColor;
+            HairStyle = dto.HairStyle;
+            ReputIcon = ReputationIconType.Beginner;
+            Reputation = dto.Reput;
+            Slot = dto.Slot;
+            Dignity = (short)dto.Dignity;
+        }
 
         public short Compliment { get; set; }
 
