@@ -21,7 +21,7 @@ namespace ChickenAPI.Game.Entities.Monster
 
         public override void Dispose()
         {
-            throw new NotImplementedException();
+            GC.SuppressFinalize(this);
         }
     }
 }

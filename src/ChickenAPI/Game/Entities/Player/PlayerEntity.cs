@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Autofac;
+using ChickenAPI.Data.AccessLayer;
 using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
@@ -8,22 +11,18 @@ using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Maps;
 using ChickenAPI.Game.Network;
-using ChickenAPI.Game.Systems.Visibility;
 using ChickenAPI.Packets;
 using ChickenAPI.Packets.Game.Server;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Entities.Player
 {
-    public class CharacterEntity : IPlayerEntity
+    public class PlayerEntity : EntityBase, IPlayerEntity
     {
-        private static readonly Logger Log = Logger.GetLogger<CharacterEntity>();
-        private readonly Dictionary<Type, IComponent> _components;
-
-        public CharacterEntity(ISession session, CharacterDto dto)
+        public PlayerEntity(ISession session, CharacterDto dto) : base(EntityType.Player)
         {
             Session = session;
-            _components = new Dictionary<Type, IComponent>
+            Components = new Dictionary<Type, IComponent>
             {
                 { typeof(VisibilityComponent), new VisibilityComponent(this) },
                 {
@@ -42,23 +41,7 @@ namespace ChickenAPI.Game.Entities.Player
                     }
                 },
                 { typeof(BattleComponent), new BattleComponent(this) },
-                {
-                    typeof(CharacterComponent), new CharacterComponent(this)
-                    {
-                        Id = dto.Id,
-                        Authority = session.Account.Authority,
-                        ArenaWinner = dto.ArenaWinner,
-                        Class = dto.Class,
-                        MapId = dto.MapId,
-                        Compliment = dto.Compliment,
-                        Gender = dto.Gender,
-                        HairColor = dto.HairColor,
-                        HairStyle = dto.HairStyle,
-                        ReputIcon = ReputationIconType.Beginner, // todo GetReputIcon (IAlgorithmService)
-                        Reputation = dto.Reput,
-                        Slot = dto.Slot
-                    }
-                },
+                { typeof(CharacterComponent), new CharacterComponent(this, dto) },
                 {
                     typeof(ExperienceComponent), new ExperienceComponent(this)
                     {
@@ -84,40 +67,9 @@ namespace ChickenAPI.Game.Entities.Player
 
         public ISession Session { get; }
 
-        public long Id { get; set; }
-
-        public IEntityManager EntityManager { get; set; }
-
-        public EntityType Type => EntityType.Player;
-
-        public void AddComponent<T>(T component) where T : IComponent
+        public override void TransferEntity(IEntityManager manager)
         {
-            _components.Add(typeof(T), component);
-        }
-
-        public void RemoveComponent<T>(T component) where T : IComponent
-        {
-            _components.Remove(typeof(T));
-        }
-
-        public bool HasComponent<T>() where T : IComponent
-        {
-            return _components.ContainsKey(typeof(T));
-        }
-
-        public void TransferEntity(IEntityManager manager)
-        {
-            if (EntityManager == null)
-            {
-                EntityManager = manager;
-                Log.Info($"[ENTITY:{Id}] Initializing EntityManager");
-                EntityManager.RegisterEntity(this);
-            }
-            else
-            {
-                EntityManager.NotifySystem<VisibilitySystem>(this, new VisibilitySetInvisibleEventArgs { Broadcast = true, IsChangingMapLayer = true });
-                EntityManager.TransferEntity(this, manager);
-            }
+            base.TransferEntity(manager);
 
             if (!(manager is IMapLayer map))
             {
@@ -149,23 +101,30 @@ namespace ChickenAPI.Game.Entities.Player
             // MapDesignObjectsEffects
             // MapItems()
             // Gp()
-
-            map.NotifySystem<VisibilitySystem>(this, new VisibilitySetVisibleEventArgs
-            {
-                Broadcast = true,
-                IsChangingMapLayer = true
-            });
         }
-
-        public T GetComponent<T>() where T : class, IComponent => !_components.TryGetValue(typeof(T), out IComponent component) ? null : component as T;
 
         public void SendPacket(IPacket packetBase) => Session.SendPacket(packetBase);
 
         public void SendPackets(IEnumerable<IPacket> packets) => Session.SendPackets(packets);
 
-        public void Dispose()
+        private void Save()
         {
-            // TODO Implement a real dispose pattern
+            try
+            {
+                var characterService = Container.Instance.Resolve<ICharacterService>();
+                characterService.Update(new CharacterDto());
+                var itemInstanceService = Container.Instance.Resolve<IItemInstanceService>();
+                itemInstanceService.Update(new List<ItemInstanceDto>());
+            }
+            catch (Exception e)
+            {
+                Log.Error("[SAVE]", e);
+            }
+        }
+
+        public override void Dispose()
+        {
+            //Save();
             GC.SuppressFinalize(this);
         }
     }
