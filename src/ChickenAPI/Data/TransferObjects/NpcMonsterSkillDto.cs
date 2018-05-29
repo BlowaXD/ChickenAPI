@@ -8,6 +8,7 @@ namespace ChickenAPI.Data.TransferObjects
         /// Can be considered as the skill vnum
         /// </summary>
         public long Id { get; set; }
+        public long SkillId { get; set; }
         public short Rate { get; set; }
         public long NpcMonsterId { get; set; }
     }
