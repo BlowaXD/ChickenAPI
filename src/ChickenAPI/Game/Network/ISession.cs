@@ -24,7 +24,9 @@ namespace ChickenAPI.Game.Network
         void InitializeCharacterId(long id);
         void InitializeEntity(IPlayerEntity ett);
 
-        void SendPacket(IPacket packetBase);
+        void SendPacket<T>(T packet) where T : IPacket;
+
+        void SendPackets<T>(IEnumerable<T> packets) where T : IPacket;
         void SendPackets(IEnumerable<IPacket> packets);
         void Disconnect();
     }
