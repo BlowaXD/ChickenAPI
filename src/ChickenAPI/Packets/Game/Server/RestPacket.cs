@@ -10,7 +10,7 @@
         public int EntityId { get; set; }
 
         [PacketIndex(2)]
-        public byte VisualType { get; set; } // always set to 0
+        public bool Entity.IsSitting { get; set; } // always set to 0
     }
 }
 
