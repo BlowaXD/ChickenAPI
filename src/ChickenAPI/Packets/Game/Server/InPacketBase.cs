@@ -65,6 +65,7 @@ namespace ChickenAPI.Packets.Game.Server
                     FillMate(entity);
                     break;
                 case EntityType.Npc:
+                    FillNpc(entity);
                     break;
                 case EntityType.Portal:
                     break;
@@ -73,6 +74,11 @@ namespace ChickenAPI.Packets.Game.Server
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void FillNpc(IEntity entity)
+        {
+            VisualType = VisualType.Npc;
         }
 
         private void FillMate(IEntity entity)
@@ -132,9 +138,31 @@ namespace ChickenAPI.Packets.Game.Server
 
         private void FillMonster(IEntity entity)
         {
-            // in 3 {MonsterVNum} {MapMonsterId} {MapX} {MapY} {Position} {(int)(CurrentHp / (float)Monster.MaxHP * 100)} {(int)(CurrentMp / (float)Monster.MaxMP * 100)} 0 0 0 -1 {(Monster.NoAggresiveIcon ? (byte)InRespawnType.NoEffect : (byte)InRespawnType.TeleportationEffect)} 0 -1 - 0 -1 0 0 0 0 0 0 0 0
             VisualType = VisualType.Monster;
             Name = entity.GetComponent<NpcMonsterComponent>().Vnum.ToString();
+            Unknown = entity.GetComponent<NpcMonsterComponent>().MapNpcMonsterId.ToString();
+            PositionX = entity.GetComponent<MovableComponent>().Actual.X;
+            PositionY = entity.GetComponent<MovableComponent>().Actual.Y;
+            DirectionType = entity.GetComponent<MovableComponent>().DirectionType;
+            // HpPercentage
+            // MpPercentage
+            // 0
+            // 0
+            // -1
+            // NoAggresiveIcon
+            // 0
+            // -1
+            // -
+            // 0
+            // -1
+            // 0
+            // 0
+            // 0
+            // 0
+            // 0
+            // 0
+            // 0
+            // 0
         }
 
         #region Properties
