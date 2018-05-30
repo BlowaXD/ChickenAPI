@@ -1,4 +1,5 @@
 ﻿using System;
+using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums;
 using ChickenAPI.Enums.Game.Character;
 using ChickenAPI.Enums.Game.Entity;
@@ -50,7 +51,36 @@ namespace ChickenAPI.Packets.Game.Server
     [PacketHeader("in")]
     public class InPacketBase : PacketBase
     {
-        public InPacketBase(IPlayerEntity entity)
+        public InPacketBase(IEntity entity)
+        {
+            switch (entity.Type)
+            {
+                case EntityType.Monster:
+                    FillMonster(entity);
+                    break;
+                case EntityType.Player:
+                    FillPlayer((IPlayerEntity)entity);
+                    break;
+                case EntityType.Mate:
+                    FillMate(entity);
+                    break;
+                case EntityType.Npc:
+                    break;
+                case EntityType.Portal:
+                    break;
+                case EntityType.Effect:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void FillMate(IEntity entity)
+        {
+            VisualType = VisualType.Npc;
+        }
+
+        private void FillPlayer(IPlayerEntity entity)
         {
             var character = entity.GetComponent<CharacterComponent>();
             var battle = entity.GetComponent<BattleComponent>();
@@ -98,6 +128,13 @@ namespace ChickenAPI.Packets.Game.Server
                 Size = 10,
                 HeroLevel = entity.GetComponent<ExperienceComponent>().HeroLevel
             };
+        }
+
+        private void FillMonster(IEntity entity)
+        {
+            // in 3 {MonsterVNum} {MapMonsterId} {MapX} {MapY} {Position} {(int)(CurrentHp / (float)Monster.MaxHP * 100)} {(int)(CurrentMp / (float)Monster.MaxMP * 100)} 0 0 0 -1 {(Monster.NoAggresiveIcon ? (byte)InRespawnType.NoEffect : (byte)InRespawnType.TeleportationEffect)} 0 -1 - 0 -1 0 0 0 0 0 0 0 0
+            VisualType = VisualType.Monster;
+            Name = entity.GetComponent<NpcMonsterComponent>().Vnum.ToString();
         }
 
         #region Properties
