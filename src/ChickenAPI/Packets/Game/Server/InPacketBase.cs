@@ -55,14 +55,11 @@ namespace ChickenAPI.Packets.Game.Server
             var character = entity.GetComponent<CharacterComponent>();
             var battle = entity.GetComponent<BattleComponent>();
 
-            string str = "";
-            for (int i = 0; i < 16; i++)
-            {
-                str += "-1.";
-            }
+            string str = "-1.-1.-1.-1.-1.-1.-1.-1.-1";
 
             VisualType = VisualType.Character;
             Name = entity.GetComponent<NameComponent>().Name;
+            Unknown = "-";
             VNum = character.Id;
             PositionX = entity.GetComponent<MovableComponent>().Actual.X;
             PositionY = entity.GetComponent<MovableComponent>().Actual.Y;
@@ -74,25 +71,23 @@ namespace ChickenAPI.Packets.Game.Server
                 HairStyle = character.HairStyle,
                 HairColor = character.HairColor,
                 Class = character.Class,
-                Equipment = str.Substring(0, 0b101111), // str.Length - 1 will call to length and so its much slower KAPPAAAAAAAAAAAA,
-                InAliveSubPacketBase = new InAliveSubPacketBase
-                {
-                    HpPercentage = (byte)Math.Ceiling(battle.Hp / battle.HpMax * 100D),
-                    MpPercentage = (byte)Math.Ceiling(battle.Mp / battle.MpMax * 100D)
-                },
+                Equipment = str,
+                HpPercentage = 60,
+                MpPercentage = 70,
                 IsSitting = false,
                 GroupId = -1,
                 FairyId = 0,
                 FairyElement = 0,
-                Unknown1 = 0,
+                IsBoostedFairy = 0,
                 FairyMorph = 0,
-                Unknown2 = 0,
+                EntryType = 0,
                 Morph = 0,
-                EquipmentRare = "00 00",
+                EquipmentRare = "00",
+                EquipmentRareTwo = "00",
                 FamilyId = -1,
                 FamilyName = "-", // if not put -1
-                ReputationIcon = 0,
-                Invisible = entity.GetComponent<VisibilityComponent>().IsVisible,
+                ReputationIcon = 27,
+                Invisible = !entity.GetComponent<VisibilityComponent>().IsVisible,
                 SpUpgrade = 0,
                 Faction = FactionType.Neutral, // todo faction system
                 SpDesign = 0,
@@ -114,21 +109,24 @@ namespace ChickenAPI.Packets.Game.Server
         public string Name { get; set; }
 
         [PacketIndex(2)]
-        public long VNum { get; set; }
+        public string Unknown { get; set; }
 
         [PacketIndex(3)]
-        public short PositionX { get; set; }
+        public long VNum { get; set; }
 
         [PacketIndex(4)]
+        public short PositionX { get; set; }
+
+        [PacketIndex(5)]
         public short PositionY { get; set; }
 
-        [PacketIndex(5, IsOptional = true)]
-        public DirectionType? DirectionType { get; set; }
-
         [PacketIndex(6, IsOptional = true)]
+        public DirectionType DirectionType { get; set; }
+
+        [PacketIndex(7, IsOptional = true)]
         public short? Amount { get; set; }
 
-        [PacketIndex(7, IsOptional = true, RemoveSeparator = true)]
+        [PacketIndex(8, IsOptional = true, RemoveSeparator = true)]
         public InCharacterSubPacketBase InCharacterSubPacket { get; set; }
 
         [PacketIndex(9, IsOptional = true, RemoveSeparator = true)]

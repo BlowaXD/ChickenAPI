@@ -12,9 +12,12 @@ namespace ChickenAPI.ECS.Entities
         protected bool Update;
         protected long LastEntityId;
         protected Dictionary<long, IEntity> _entities = new Dictionary<long, IEntity>();
-        protected Dictionary<Type, INotifiableSystem> _notifiableSystems = new Dictionary<Type, INotifiableSystem>();
-        protected List<ISystem> _systems = new List<ISystem>();
+
         protected List<IEntityManager> EntityManagers = new List<IEntityManager>();
+
+
+        protected Dictionary<Type, INotifiableSystem> NotifiableSystems = new Dictionary<Type, INotifiableSystem>();
+        protected List<ISystem> _systems = new List<ISystem>();
 
         public void Dispose()
         {
@@ -40,7 +43,7 @@ namespace ChickenAPI.ECS.Entities
 
         public TEntity CreateEntity<TEntity>() where TEntity : class, IEntity, new()
         {
-            var entity = new TEntity { Id = NextEntityId };
+            var entity = new TEntity();
             RegisterEntity(entity);
             return entity;
         }
@@ -57,6 +60,7 @@ namespace ChickenAPI.ECS.Entities
 
         public void RegisterEntity<T>(T entity) where T : IEntity
         {
+            entity.Id = NextEntityId;
             _entities[entity.Id] = entity;
         }
 
@@ -113,7 +117,7 @@ namespace ChickenAPI.ECS.Entities
         {
             try
             {
-                _notifiableSystems[typeof(T)].Execute(entity, e);
+                NotifiableSystems[typeof(T)].Execute(entity, e);
             }
             catch (Exception exception)
             {
