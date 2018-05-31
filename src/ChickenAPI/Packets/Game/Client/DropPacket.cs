@@ -7,7 +7,7 @@
         public long ItemVNum { get; set; }
 
         [PacketIndex(1)]
-        public short DropId { get; set }
+        public long DropId { get; set }
 
         [PacketIndex(2)]
         public short MapX { get; set; }
