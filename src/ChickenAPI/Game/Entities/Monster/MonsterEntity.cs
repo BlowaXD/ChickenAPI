@@ -5,6 +5,7 @@ using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
+using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Entities.Monster
 {
@@ -14,9 +15,26 @@ namespace ChickenAPI.Game.Entities.Monster
         {
             Components = new Dictionary<Type, IComponent>
             {
-                { typeof(VisibilityComponent), new VisibilityComponent(this) },
-                { typeof(BattleComponent), new BattleComponent(this) },
-                { typeof(MovableComponent), new MovableComponent(this) },
+                {
+                    typeof(VisibilityComponent), new VisibilityComponent(this)
+                    {
+                        IsVisible = true
+                    }
+                },
+                { typeof(BattleComponent), new BattleComponent(this)
+                {
+                    Hp = 100,
+                    HpMax =  100,
+                    Mp = 100,
+                    MpMax = 100
+                } },
+                {
+                    typeof(MovableComponent), new MovableComponent(this)
+                    {
+                        Actual = new Position<short>() { X = dto.Position.X, Y = dto.Position.Y },
+                        Destination = new Position<short>() { X = dto.Position.X, Y = dto.Position.Y },
+                    }
+                },
                 { typeof(NpcMonsterComponent), new NpcMonsterComponent(this, dto) }
             };
         }

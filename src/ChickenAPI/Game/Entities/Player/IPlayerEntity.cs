@@ -8,7 +8,7 @@ namespace ChickenAPI.Game.Entities.Player
     public interface IPlayerEntity : IEntity
     {
         ISession Session { get; }
-        void SendPacket(IPacket packetBase);
+        void SendPacket<T>(T packetBase) where T : IPacket;
         void SendPackets(IEnumerable<IPacket> packets);
     }
 }

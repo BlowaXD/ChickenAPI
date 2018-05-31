@@ -183,8 +183,8 @@ namespace ChickenAPI.Packets.Game.Server
         [PacketIndex(2)]
         public string Unknown { get; set; }
 
-        [PacketIndex(3)]
-        public long VNum { get; set; }
+        [PacketIndex(3, IsOptional = true)]
+        public long? VNum { get; set; }
 
         [PacketIndex(4)]
         public short PositionX { get; set; }
@@ -199,19 +199,10 @@ namespace ChickenAPI.Packets.Game.Server
         public short? Amount { get; set; }
 
         [PacketIndex(8, IsOptional = true, RemoveSeparator = true)]
-        public InCharacterSubPacketBase InCharacterSubPacket { get; set; }
-
-        [PacketIndex(9, IsOptional = true, RemoveSeparator = true)]
         public InMonsterSubPacket InMonsterSubPacket { get; set; }
 
-        [PacketIndex(10, IsOptional = true, RemoveSeparator = true)]
-        public InItemSubPacketBase InItemSubPacket { get; set; }
-
-        [PacketIndex(11, IsOptional = true, RemoveSeparator = true)]
-        public InNonPlayerSubPacketBase InNonPlayerSubPacket { get; set; }
-
-        [PacketIndex(12, IsOptional = true, RemoveSeparator = true)]
-        public InOwnableSubPacketBase InOwnableSubPacket { get; set; }
+        [PacketIndex(9, IsOptional = true, RemoveSeparator = true)]
+        public InCharacterSubPacketBase InCharacterSubPacket { get; set; }
 
         #endregion
     }

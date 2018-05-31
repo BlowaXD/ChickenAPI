@@ -11,6 +11,7 @@ using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Maps;
 using ChickenAPI.Game.Network;
+using ChickenAPI.Game.Systems.Visibility;
 using ChickenAPI.Packets;
 using ChickenAPI.Packets.Game.Server;
 using ChickenAPI.Utils;
@@ -69,6 +70,7 @@ namespace ChickenAPI.Game.Entities.Player
 
         public override void TransferEntity(IEntityManager manager)
         {
+            EntityManager?.NotifySystem<VisibilitySystem>(this, new VisibilitySetInvisibleEventArgs { Broadcast = true, IsChangingMapLayer = true });
             base.TransferEntity(manager);
 
             if (!(manager is IMapLayer map))
@@ -77,7 +79,7 @@ namespace ChickenAPI.Game.Entities.Player
             }
 
             SendPacket(new CInfoPacketBase(this));
-            SendPacket(new CModePacketBase(this));
+            SendPacket<CModePacketBase>(new CModePacketBase(this));
             // eq
             // Equipment()
 
@@ -101,9 +103,14 @@ namespace ChickenAPI.Game.Entities.Player
             // MapDesignObjectsEffects
             // MapItems()
             // Gp()
+            EntityManager.NotifySystem<VisibilitySystem>(this, new VisibilitySetVisibleEventArgs
+            {
+                Broadcast = true,
+                IsChangingMapLayer = true
+            });
         }
 
-        public void SendPacket(IPacket packetBase) => Session.SendPacket(packetBase);
+        public void SendPacket<T>(T packetBase) where T : IPacket => Session.SendPacket(packetBase);
 
         public void SendPackets(IEnumerable<IPacket> packets) => Session.SendPackets(packets);
 
