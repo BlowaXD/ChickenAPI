@@ -2,7 +2,8 @@
 
 namespace ChickenAPI.Packets.Game.Client
 {
-    class EffPacket
+    [PacketHeader("eff")]
+    public class EffectPacket : PacketBase
     {
         [PacketIndex(0)]
         public EffectType EffectType { get; set; }
