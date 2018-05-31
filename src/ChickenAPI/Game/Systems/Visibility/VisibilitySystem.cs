@@ -8,12 +8,14 @@ using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Packets.Game.Server;
 using ChickenAPI.Utils;
+using Newtonsoft.Json;
 
 namespace ChickenAPI.Game.Systems.Visibility
 {
     public class VisibilitySystem : NotifiableSystemBase
     {
         private static readonly Logger Log = Logger.GetLogger<VisibilitySystem>();
+
         public VisibilitySystem(IEntityManager entityManager) : base(entityManager)
         {
         }
@@ -27,6 +29,7 @@ namespace ChickenAPI.Game.Systems.Visibility
             {
                 return;
             }
+
             switch (e)
             {
                 case VisibilitySetInvisibleEventArgs invisibleEvent:
@@ -56,23 +59,40 @@ namespace ChickenAPI.Game.Systems.Visibility
                 {
                     continue;
                 }
+
                 if (!(entity is IPlayerEntity session))
                 {
+                    if (entityy is IPlayerEntity player)
+                    {
+                        player.SendPacket(new InPacketBase(entity));
+                    }
                     continue;
                 }
 
-                if (!(entityy is IPlayerEntity player))
+
+                if (!args.IsChangingMapLayer)
                 {
                     continue;
                 }
 
-                if (args.IsChangingMapLayer)
+                if (!entityy.GetComponent<VisibilityComponent>().IsVisible)
                 {
-                    session.SendPacket(new InPacketBase(player));
+                    continue;
                 }
-
-                player.SendPacket(new InPacketBase(session));
-                // todo monster/npc entity
+                switch (entityy.Type)
+                {
+                    case EntityType.Monster:
+                    case EntityType.Mate:
+                    case EntityType.Npc:
+                    case EntityType.Player:
+                        var inpacket = new InPacketBase(entityy);
+                        session.SendPacket(inpacket);
+                        if (entityy is IPlayerEntity player)
+                        {
+                            player.SendPacket(new InPacketBase(session));
+                        }
+                        break;
+                }
             }
         }
 
@@ -91,6 +111,7 @@ namespace ChickenAPI.Game.Systems.Visibility
                 {
                     continue;
                 }
+
                 if (entityy is IPlayerEntity player)
                 {
                     player.SendPacket(new OutPacketBase(player));

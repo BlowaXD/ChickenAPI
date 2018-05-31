@@ -34,19 +34,18 @@ namespace ChickenAPI.Game.Maps
                         RegisterEntity(new NpcEntity(npc));
                         break;
                     case EntityType.Monster:
-                      RegisterEntity(new MonsterEntity(npc));
-                        break;
-                    default:
+                        RegisterEntity(new MonsterEntity(npc));
                         break;
                 }
             }
-
         }
+
         public Guid Id { get; set; }
         public IMap Map { get; }
         public IReadOnlyCollection<IPlayerEntity> Players { get; }
         public IEnumerable<IEntity> GetEntitiesByType(EntityType type) => Entities.Where(s => s.Type == type);
 
-        public IEnumerable<IEntity> GetEntitiesInRange(Position<short> pos, int range) => Entities.Where(e => e.HasComponent<MovableComponent>() && PositionHelper.GetDistance(pos, e.GetComponent<MovableComponent>().Actual) < range);
+        public IEnumerable<IEntity> GetEntitiesInRange(Position<short> pos, int range) =>
+            Entities.Where(e => e.HasComponent<MovableComponent>() && PositionHelper.GetDistance(pos, e.GetComponent<MovableComponent>().Actual) < range);
     }
 }
