@@ -8,11 +8,11 @@ namespace ChickenAPI.Managers
 {
     public class SimpleMapManager : IMapManager
     {
-        public SimpleMapManager(IEnumerable<MapDto> dtos)
+        public SimpleMapManager(IEnumerable<(MapDto, IEnumerable<MapNpcMonsterDto>)> dtos)
         {
-            foreach (MapDto dto in dtos)
+            foreach ((MapDto, IEnumerable<MapNpcMonsterDto>) dto in dtos)
             {
-                _maps[dto.Id] = new SimpleMap(dto);
+                _maps[dto.Item1.Id] = new SimpleMap(dto);
             }
         }
 
