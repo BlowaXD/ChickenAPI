@@ -2,8 +2,8 @@
 
 namespace ChickenAPI.Packets.Game.Client
 {
-    [PacketHeader("inv")]
-    public class InvPacket : PacketBase
+    [PacketHeader("ivn")]
+    public class IvnPacket : PacketBase
     {
         [PacketIndex(0)]
         public InventoryType InventoryType { get; set; }
@@ -21,6 +21,6 @@ namespace ChickenAPI.Packets.Game.Client
         public short Upgrade { get; set; }
 
         [PacketIndex(5)]
-        public byte Unknown2 { get; set; } // looks like always 0
+        public byte Unknown { get; set; } // looks like always 0
     }
 }
