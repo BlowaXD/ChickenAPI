@@ -108,8 +108,8 @@ namespace ChickenAPI.Packets.Game.Server
                 HairColor = character.HairColor,
                 Class = character.Class,
                 Equipment = str,
-                HpPercentage = 60,
-                MpPercentage = 70,
+                HpPercentage = Convert.ToByte(Math.Ceiling(battle.Hp / (battle.HpMax * 100.0))),
+                MpPercentage = Convert.ToByte(Math.Ceiling(battle.Mp / (battle.MpMax * 100.0))),
                 IsSitting = false,
                 GroupId = -1,
                 FairyId = 0,
@@ -138,31 +138,38 @@ namespace ChickenAPI.Packets.Game.Server
 
         private void FillMonster(IEntity entity)
         {
+            var battle = entity.GetComponent<BattleComponent>();
+            var npcMonster = entity.GetComponent<NpcMonsterComponent>();
+            var movable = entity.GetComponent<MovableComponent>();
+
             VisualType = VisualType.Monster;
-            Name = entity.GetComponent<NpcMonsterComponent>().Vnum.ToString();
-            Unknown = entity.GetComponent<NpcMonsterComponent>().MapNpcMonsterId.ToString();
-            PositionX = entity.GetComponent<MovableComponent>().Actual.X;
-            PositionY = entity.GetComponent<MovableComponent>().Actual.Y;
-            DirectionType = entity.GetComponent<MovableComponent>().DirectionType;
-            // HpPercentage
-            // MpPercentage
-            // 0
-            // 0
-            // -1
-            // NoAggresiveIcon
-            // 0
-            // -1
-            // -
-            // 0
-            // -1
-            // 0
-            // 0
-            // 0
-            // 0
-            // 0
-            // 0
-            // 0
-            // 0
+            Name = npcMonster.Vnum.ToString();
+            Unknown = npcMonster.MapNpcMonsterId.ToString();
+            PositionX = movable.Actual.X;
+            PositionY = movable.Actual.Y;
+            DirectionType = movable.DirectionType;
+            InMonsterSubPacket = new InMonsterSubPacket
+            {
+                HpPercentage = Convert.ToByte(Math.Ceiling(battle.Hp / (battle.HpMax * 100.0))),
+                MpPercentage = Convert.ToByte(Math.Ceiling(battle.Mp / (battle.MpMax * 100.0))),
+                Unknown1 = 0,
+                Unknown2 = 0,
+                Unknown3 = -1,
+                NoAggressiveIcon = !npcMonster.IsAggressive,
+                Unknown4 = 0,
+                Unknown5 = -1,
+                Unknown6 = "-",
+                Unknown7 = 0,
+                Unknown8 = -1,
+                Unknown9 = 0,
+                Unknown10 = 0,
+                Unknown11 = 0,
+                Unknown12 = 0,
+                Unknown13 = 0,
+                Unknown14 = 0,
+                Unknown15 = 0,
+                Unknown16 = 0,
+            };
         }
 
         #region Properties
@@ -195,12 +202,15 @@ namespace ChickenAPI.Packets.Game.Server
         public InCharacterSubPacketBase InCharacterSubPacket { get; set; }
 
         [PacketIndex(9, IsOptional = true, RemoveSeparator = true)]
-        public InItemSubPacketBase InItemSubPacket { get; set; }
+        public InMonsterSubPacket InMonsterSubPacket { get; set; }
 
         [PacketIndex(10, IsOptional = true, RemoveSeparator = true)]
-        public InNonPlayerSubPacketBase InNonPlayerSubPacket { get; set; }
+        public InItemSubPacketBase InItemSubPacket { get; set; }
 
         [PacketIndex(11, IsOptional = true, RemoveSeparator = true)]
+        public InNonPlayerSubPacketBase InNonPlayerSubPacket { get; set; }
+
+        [PacketIndex(12, IsOptional = true, RemoveSeparator = true)]
         public InOwnableSubPacketBase InOwnableSubPacket { get; set; }
 
         #endregion
