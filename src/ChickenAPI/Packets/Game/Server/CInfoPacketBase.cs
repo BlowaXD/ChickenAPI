@@ -16,10 +16,10 @@ namespace ChickenAPI.Packets.Game.Server
             Name = entity.GetComponent<NameComponent>().Name;
             Unknown1 = "-"; //TODO: Find signification
             GroupId = -1; //TODO: Find signification 
-            FamilyId = family.FamilyId;
+            FamilyId = family.FamilyId == 0 ? -1 : family.FamilyId;
             FamilyName = family.FamilyName;
             CharacterId = character.Id;
-            Authority = character.Authority;
+            Authority = character.Authority > AuthorityType.GameMaster ? (byte)2 : (byte)0;
             Gender = character.Gender;
             HairStyle = character.HairStyle;
             HairColor = character.HairColor;
@@ -53,7 +53,7 @@ namespace ChickenAPI.Packets.Game.Server
         public long CharacterId { get; set; }
 
         [PacketIndex(6)]
-        public AuthorityType Authority { get; set; }
+        public byte Authority { get; set; }
 
         [PacketIndex(7)]
         public GenderType Gender { get; set; }

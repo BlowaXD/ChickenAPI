@@ -19,7 +19,7 @@ namespace ChickenAPI.Packets.Game.Server
             PositionY = entity.GetComponent<MovableComponent>().Actual.Y;
             Unknown1 = 2; // TODO: Find signification
             Unknown2 = 0; // TODO: Find signification
-            Music = 1; //layer.Map.MusicId;
+            Music = layer.Map.MusicId; //layer.Map.MusicId;
             Unknown3 = -1; // TODO: Find signification
         }
 
