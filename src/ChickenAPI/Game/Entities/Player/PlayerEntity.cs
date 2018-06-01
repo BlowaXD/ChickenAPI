@@ -79,7 +79,7 @@ namespace ChickenAPI.Game.Entities.Player
             }
 
             SendPacket(new CInfoPacketBase(this));
-            SendPacket<CModePacketBase>(new CModePacketBase(this));
+            SendPacket(new CModePacketBase(this));
             // eq
             // Equipment()
 
@@ -92,7 +92,6 @@ namespace ChickenAPI.Game.Entities.Player
             SendPacket(new InPacketBase(this));
             // Pairy()
             // Pst()
-            // mates In()
             // Act6() : Act()
             // PInitPacket
             // ScPacket
