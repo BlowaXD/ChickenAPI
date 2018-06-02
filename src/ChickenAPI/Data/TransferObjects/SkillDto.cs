@@ -1,6 +1,8 @@
-﻿namespace ChickenAPI.Data.TransferObjects
+﻿using ChickenAPI.Data.AccessLayer.Repository;
+
+namespace ChickenAPI.Data.TransferObjects
 {
-    public class SkillDto
+    public class SkillDto : IMappedDto
     {
         public short AttackAnimation { get; set; }
 
@@ -50,8 +52,6 @@
 
         public byte SkillType { get; set; }
 
-        public short SkillVNum { get; set; }
-
         public byte TargetRange { get; set; }
 
         public byte TargetType { get; set; }
@@ -61,5 +61,6 @@
         public short UpgradeSkill { get; set; }
 
         public short UpgradeType { get; set; }
+        public long Id { get; set; }
     }
 }
