@@ -8,6 +8,8 @@ namespace ChickenAPI.Data.AccessLayer
     /// </summary>
     public interface IAlgorithmService
     {
+        #region Xp
+
         /// <summary>
         /// This method will search through algorithm service and return the LevelXp stat based on <see cref="CharacterClassType"/> and level
         /// /!\ Should return the highest value under level if level is out of range
@@ -59,6 +61,11 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="level"></param>
         /// <returns></returns>
         int GetFamilyLevelXp(byte level);
+
+        #endregion
+
+
+        #region Stats
 
         /// <summary>
         /// This method will search through algorithm service and return the Speed stat based on <see cref="CharacterClassType"/> and level
@@ -132,5 +139,72 @@ namespace ChickenAPI.Data.AccessLayer
         /// <param name="level"></param>
         /// <returns></returns>
         int GetMinimumAttackRange(CharacterClassType type, byte level);
+
+        #endregion
+
+
+        #region HpMp
+
+        /// <summary>
+        /// Returns the maximum of Hp of a character, based on class and level
+        /// /!\ Should return the highest value under level if level is out of range
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        int GetHpMax(CharacterClassType type, byte level);
+
+        /// <summary>
+        /// Returns the maximum of Hp of a character, based on class and level
+        /// /!\ Should return the highest value under level if level is out of range
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        int GetMpMax(CharacterClassType type, byte level);
+
+        #region HpMpRegen
+
+        /// <summary>
+        /// Returns the HpRegen when player is standing, based on class and level
+        /// /!\ Should return the highest value under level if level is out of range
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        int GetHpRegen(CharacterClassType type, byte level);
+
+
+        /// <summary>
+        /// Returns the HpRegen when player is sitting, based on class and level
+        /// /!\ Should return the highest value under level if level is out of range
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        int GetHpRegenSitting(CharacterClassType type, byte level);
+
+        /// <summary>
+        /// Returns the MpRegen when player is standing, based on class and level
+        /// /!\ Should return the highest value under level if level is out of range
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        int GetMpRegen(CharacterClassType type, byte level);
+
+
+        /// <summary>
+        /// Returns the HpRegen when player is sitting, based on class and level
+        /// /!\ Should return the highest value under level if level is out of range
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        int GetMpRegenSitting(CharacterClassType type, byte level);
+
+        #endregion
+
+        #endregion
     }
 }
