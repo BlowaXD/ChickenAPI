@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
@@ -13,9 +14,12 @@ namespace ChickenAPI.Game.Components
         public MovableComponent(IEntity entity)
         {
             Entity = entity;
+            Waypoints = new Queue<Position<short>>();
             Destination = new Position<short>();
             Actual = new Position<short>();
         }
+
+        private Position<short> _actual;
 
         /// <summary>
         ///     Entity Walking Speed
@@ -24,13 +28,25 @@ namespace ChickenAPI.Game.Components
 
         public DirectionType DirectionType { get; set; }
 
+        public Queue<Position<short>> Waypoints { get; set; }
+
         public Position<short> Destination { get; set; }
-        public Position<short> Actual { get; set; }
+
+        public Position<short> Actual
+        {
+            get => _actual;
+            set
+            {
+                OnMove(Entity, new MoveEventArgs { Component = this, New = value, Old = _actual });
+                _actual = value;
+            }
+        }
+
         public DateTime LastMove { get; private set; }
+
         public DateTime NextMove { get; set; }
 
         public IEntity Entity { get; set; }
-
 
         public static event TypedSenderEventHandler<IEntity, MoveEventArgs> Move;
 
@@ -41,6 +57,8 @@ namespace ChickenAPI.Game.Components
             e.Component.NextMove = DateTime.Now;
             Move?.Invoke(sender, e);
         }
+
+        public bool CanMove() => (DateTime.Now - LastMove).TotalMilliseconds > 2000 / Speed;
     }
 
     public class MoveEventArgs : EventArgs

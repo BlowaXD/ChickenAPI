@@ -18,7 +18,17 @@ namespace ChickenAPI.Game.Systems.Movable
 
         public override void Execute(IEntity entity)
         {
+            if (!Match(entity))
+            {
+                return;
+            }
             var movable = entity.GetComponent<MovableComponent>();
+
+            if (movable.Waypoints.Count > 0 && movable.CanMove())
+            {
+                movable.Actual = movable.Waypoints.Dequeue();
+                Move(entity);
+            }
         }
 
         public override void Execute(IEntity entity, SystemEventArgs e)
