@@ -1,19 +1,31 @@
-﻿using ChickenAPI.ECS.Components;
+﻿using System;
+using Autofac;
+using ChickenAPI.Data.AccessLayer;
+using ChickenAPI.Data.TransferObjects;
+using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
+using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Components
 {
     public class BattleComponent : IComponent
     {
-
         public BattleComponent(IEntity entity)
         {
-            Hp = 100;
-            HpMax = 200;
-            Mp = 100;
-            MpMax = 200;
             Entity = entity;
         }
+
+        public BattleComponent(IEntity entity, CharacterDto dto) : this(entity)
+        {
+            var algo = Container.Instance.Resolve<IAlgorithmService>();
+            HpMax = algo.GetHpMax(dto.Class, dto.Level);
+            Hp = HpMax;
+            MpMax = algo.GetMpMax(dto.Class, dto.Level);
+            Mp = MpMax;
+        }
+
+        public byte HpPercentage => Convert.ToByte(Math.Ceiling(Hp / (HpMax * 100.0)));
+        public byte MpPercentage => Convert.ToByte(Math.Ceiling(Mp / (MpMax * 100.0)));
 
         public int Hp { get; set; }
 

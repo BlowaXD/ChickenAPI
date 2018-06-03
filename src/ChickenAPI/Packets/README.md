@@ -67,5 +67,7 @@
 - [x] [mv](Game/Server/MvPacket.cs)
 - [x] [out](Game/Server/OutPacketBase.cs)
 - [x] [say](Game/Server/SayPacket.cs)
+- [x] [st](Game/Server/StPacket.cs)
+- [x] [stat](Game/Server/StatPacket.cs)
 - [x] [tit](Game/Server/TitPacket.cs)
 

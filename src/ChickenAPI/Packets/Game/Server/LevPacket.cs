@@ -1,5 +1,8 @@
-﻿using ChickenAPI.Game.Components;
+﻿using Autofac;
+using ChickenAPI.Data.AccessLayer;
+using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
+using ChickenAPI.Utils;
 
 namespace ChickenAPI.Packets.Game.Server
 {
@@ -12,17 +15,19 @@ namespace ChickenAPI.Packets.Game.Server
         public LevPacket(IPlayerEntity player)
         {
             var exp = player.GetComponent<ExperienceComponent>();
+            var playerClass = player.GetComponent<CharacterComponent>();
+            var algo = Container.Instance.Resolve<IAlgorithmService>();
             Level = exp.Level;
             LevelXp = exp.LevelXp;
             JobLevel = exp.JobLevel;
             JobLevelXp = exp.JobLevelXp;
-            LevelXpMax = 50; // algorithm
-            JobLevelXpMax = 100; // algorithm
+            LevelXpMax = algo.GetLevelXp(playerClass.Class, exp.Level); // algorithm
+            JobLevelXpMax = algo.GetLevelXp(playerClass.Class, exp.JobLevel);
             HeroLevel = exp.HeroLevel;
-            Reputation = player.GetComponent<CharacterComponent>().Reputation;
+            Reputation = playerClass.Reputation;
             Cp = 0;
             HeroLevelXp = exp.HeroLevelXp;
-            HeroLevelXpMax = 50; // algorithm
+            HeroLevelXpMax = algo.GetHeroLevelXp(playerClass.Class, exp.HeroLevel); // algorithm
         }
 
 

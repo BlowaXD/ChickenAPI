@@ -41,7 +41,7 @@ namespace ChickenAPI.Game.Entities.Player
                         },
                     }
                 },
-                { typeof(BattleComponent), new BattleComponent(this) },
+                { typeof(BattleComponent), new BattleComponent(this, dto) },
                 { typeof(CharacterComponent), new CharacterComponent(this, dto) },
                 {
                     typeof(ExperienceComponent), new ExperienceComponent(this)
@@ -84,7 +84,8 @@ namespace ChickenAPI.Game.Entities.Player
             // Equipment()
 
             SendPacket(new LevPacket(this));
-            // Stat()
+            SendPacket(new StatPacket(this));
+            SendPacket(new StPacket(this));
             SendPacket(new AtPacketBase(this));
             SendPacket(new CondPacketBase(this));
             SendPacket(new CMapPacketBase(map.Map));
