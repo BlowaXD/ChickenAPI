@@ -78,7 +78,18 @@ namespace ChickenAPI.Packets.Game.Server
 
         private void FillNpc(IEntity entity)
         {
+            var npcMonster = entity.GetComponent<NpcMonsterComponent>();
+            var movable = entity.GetComponent<MovableComponent>();
+
+
             VisualType = VisualType.Npc;
+            Name = npcMonster.Vnum.ToString();
+            Unknown = npcMonster.MapNpcMonsterId.ToString();
+            PositionX = movable.Actual.X;
+            PositionY = movable.Actual.Y;
+            DirectionType = movable.DirectionType;
+            //in 2 {(int)(CurrentHp / (float)Npc.MaxHP * 100)} {(int)(CurrentMp / (float)Npc.MaxMP * 100)} {Dialog} 0 0 -1 1 {(IsSitting ? 1 : 0)} -1 - 0 -1 0 0 0 0 0 0 0 0"
+
         }
 
         private void FillMate(IEntity entity)
@@ -90,6 +101,7 @@ namespace ChickenAPI.Packets.Game.Server
         {
             var character = entity.GetComponent<CharacterComponent>();
             var battle = entity.GetComponent<BattleComponent>();
+            var movable = entity.GetComponent<MovableComponent>();
 
             string str = "-1.-1.-1.-1.-1.-1.-1.-1.-1";
 
@@ -97,9 +109,9 @@ namespace ChickenAPI.Packets.Game.Server
             Name = entity.GetComponent<NameComponent>().Name;
             Unknown = "-";
             VNum = character.Id;
-            PositionX = entity.GetComponent<MovableComponent>().Actual.X;
-            PositionY = entity.GetComponent<MovableComponent>().Actual.Y;
-            DirectionType = entity.GetComponent<MovableComponent>().DirectionType;
+            PositionX = movable.Actual.X;
+            PositionY = movable.Actual.Y;
+            DirectionType = movable.DirectionType;
             InCharacterSubPacket = new InCharacterSubPacketBase
             {
                 Authority = entity.Session.Account.Authority > AuthorityType.GameMaster ? (byte)2 : (byte)0,
