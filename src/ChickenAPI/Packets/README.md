@@ -54,6 +54,7 @@
 - [x] [c_mode](Game/Server/CModePacketBase.cs)
 - [x] [cond](Game/Server/CondPacketBase.cs)
 - [x] [fd](Game/Server/FdPacket.cs)
+- [x] [gp](Game/Server/GpPacket.cs)
 - [x] [in](Game/Server/InPacketBase.cs)
 - [x] [in_alive_subpacket](Game/Server/InAliveSubPacketBase.cs)
 - [x] [in_character_subpacket](Game/Server/InCharacterSubPacketBase.cs)
