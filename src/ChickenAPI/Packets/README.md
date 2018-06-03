@@ -41,6 +41,7 @@
 - [x] [pairy](Game/Client/PairyPacket.cs)
 - [x] [put](Game/Client/PutPacket.cs)
 - [x] [rmvobj](Game/Client/RmvobjPacket.cs)
+- [x] [say](Game/Client/ClientSayPacket.cs)
 - [x] [sc](Game/Client/ScPacket.cs)
 - [x] [walk](Game/Client/WalkPacket.cs)
 - [x] [wear](Game/Client/WearPacket.cs)
