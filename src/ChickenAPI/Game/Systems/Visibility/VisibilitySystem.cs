@@ -53,6 +53,8 @@ namespace ChickenAPI.Game.Systems.Visibility
                 return;
             }
 
+            var inEntity = new InPacketBase(entity);
+
             foreach (IEntity entityy in entity.EntityManager.Entities)
             {
                 if (entityy.Id == entity.Id || !Match(entityy))
@@ -64,7 +66,7 @@ namespace ChickenAPI.Game.Systems.Visibility
                 {
                     if (entityy is IPlayerEntity player)
                     {
-                        player.SendPacket(new InPacketBase(entity));
+                        player.SendPacket(inEntity);
                     }
 
                     continue;
@@ -91,7 +93,7 @@ namespace ChickenAPI.Game.Systems.Visibility
                         session.SendPacket(inpacket);
                         if (entityy is IPlayerEntity player)
                         {
-                            player.SendPacket(new InPacketBase(session));
+                            player.SendPacket(inEntity);
                         }
 
                         break;
@@ -110,7 +112,7 @@ namespace ChickenAPI.Game.Systems.Visibility
             {
                 return;
             }
-
+            
             foreach (IEntity entityy in entity.EntityManager.Entities)
             {
                 if (entityy.Id == entity.Id || !Match(entityy))

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ChickenAPI.ECS.Systems;
+using ChickenAPI.Packets;
 
 namespace ChickenAPI.ECS.Entities
 {
@@ -150,6 +151,12 @@ namespace ChickenAPI.ECS.Entities
         /// <param name="entity">Entity</param>
         /// <param name="e">Arguments</param>
         void NotifySystem<T>(IEntity entity, SystemEventArgs e) where T : class, INotifiableSystem;
+
+        #endregion
+
+        #region Packets
+
+        void Broadcast<T>(T packet) where T : IPacket;
 
         #endregion
     }

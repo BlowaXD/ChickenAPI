@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using ChickenAPI.ECS.Systems;
+using ChickenAPI.Enums.Game.Entity;
+using ChickenAPI.Game.Entities.Player;
+using ChickenAPI.Packets;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.ECS.Entities
@@ -124,6 +127,19 @@ namespace ChickenAPI.ECS.Entities
                 Log.Error("[NOTIFY_SYSTEM]", exception);
                 Console.WriteLine(exception);
                 throw;
+            }
+        }
+
+        public void Broadcast<T>(T packet) where T : IPacket
+        {
+            foreach (IEntity entity in _entities.Values.AsParallel().Where(s => s.Type == EntityType.Player))
+            {
+                if (!(entity is IPlayerEntity session))
+                {
+                    continue;
+                }
+
+                session.SendPacket(packet);
             }
         }
     }
