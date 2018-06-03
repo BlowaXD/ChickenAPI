@@ -32,7 +32,8 @@ namespace ChickenAPI.Packets.Game.Server
             SpUpgrade = entity.GetComponent<SpecialistComponent>().Upgrade;
             ArenaWinner = character.ArenaWinner;
         }
-        #region Properties
+
+        #region Propertiesf
 
         [PacketIndex(0)]
         public string Name { get; set; }
