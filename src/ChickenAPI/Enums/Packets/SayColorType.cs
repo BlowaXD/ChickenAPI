@@ -3,6 +3,7 @@
     public enum SayColorType
     {
         White = 0,
+        PlayerSay = 1,
         LightGreen = 3,
         DarkGrey = 4,
         RedWhisper = 5,

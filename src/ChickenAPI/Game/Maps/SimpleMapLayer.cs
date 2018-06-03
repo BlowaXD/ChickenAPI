@@ -9,6 +9,8 @@ using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Monster;
 using ChickenAPI.Game.Entities.Npc;
+using ChickenAPI.Game.Systems.Chat;
+using ChickenAPI.Game.Systems.Movable;
 using ChickenAPI.Game.Systems.Visibility;
 using ChickenAPI.Utils;
 
@@ -24,7 +26,9 @@ namespace ChickenAPI.Game.Maps
             Players = new List<IPlayerEntity>();
             NotifiableSystems = new Dictionary<Type, INotifiableSystem>
             {
-                { typeof(VisibilitySystem), new VisibilitySystem(this) }
+                { typeof(VisibilitySystem), new VisibilitySystem(this) },
+                {typeof(ChatSystem), new ChatSystem(this) },
+                {typeof(MovableSystem), new MovableSystem(this) }
             };
             foreach (MapNpcMonsterDto npc in npcs)
             {
