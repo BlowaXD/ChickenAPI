@@ -3,6 +3,8 @@ using System.Linq.Expressions;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.ECS.Systems;
 using ChickenAPI.Game.Components;
+using ChickenAPI.Game.Entities.Player;
+using ChickenAPI.Packets.Game.Server;
 
 namespace ChickenAPI.Game.Systems.Movable
 {
@@ -22,6 +24,21 @@ namespace ChickenAPI.Game.Systems.Movable
         public override void Execute(IEntity entity, SystemEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void Move(IEntity entity)
+        {
+            foreach (IEntity entityy in entity.EntityManager.Entities)
+            {
+                if (Match(entityy) && entityy is IPlayerEntity player)
+                {
+                    player.SendPacket(new MvPacket(entityy));
+                }
+            }
+            if (entity is IPlayerEntity playerEntity)
+            {
+                playerEntity.SendPacket(new CondPacketBase(playerEntity));
+            }
         }
     }
 }
