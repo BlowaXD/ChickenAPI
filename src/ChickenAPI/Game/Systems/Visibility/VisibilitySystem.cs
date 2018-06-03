@@ -66,6 +66,7 @@ namespace ChickenAPI.Game.Systems.Visibility
                     {
                         player.SendPacket(new InPacketBase(entity));
                     }
+
                     continue;
                 }
 
@@ -79,6 +80,7 @@ namespace ChickenAPI.Game.Systems.Visibility
                 {
                     continue;
                 }
+
                 switch (entityy.Type)
                 {
                     case EntityType.Monster:
@@ -91,6 +93,10 @@ namespace ChickenAPI.Game.Systems.Visibility
                         {
                             player.SendPacket(new InPacketBase(session));
                         }
+
+                        break;
+                    case EntityType.Portal:
+                        session.SendPacket(new GpPacket(entityy));
                         break;
                 }
             }
