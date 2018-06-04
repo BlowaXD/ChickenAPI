@@ -116,22 +116,12 @@ namespace ChickenAPI.Game.Entities.Player
 
         private void Save()
         {
-            try
-            {
-                var characterService = Container.Instance.Resolve<ICharacterService>();
-                characterService.Update(new CharacterDto());
-                var itemInstanceService = Container.Instance.Resolve<IItemInstanceService>();
-                itemInstanceService.Update(new List<ItemInstanceDto>());
-            }
-            catch (Exception e)
-            {
-                Log.Error("[SAVE]", e);
-            }
+            Log.Info($"[SAVE_START] {Session.Account.Name}");
         }
 
         public override void Dispose()
         {
-            //Save();
+            Save();
             GC.SuppressFinalize(this);
         }
     }

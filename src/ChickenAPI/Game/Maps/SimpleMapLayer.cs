@@ -39,6 +39,8 @@ namespace ChickenAPI.Game.Maps
                     case EntityType.Monster:
                         RegisterEntity(new MonsterEntity(npc));
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }

@@ -15,6 +15,7 @@ namespace ChickenAPI.ECS.Entities
         protected bool Update;
         protected long LastEntityId;
         protected Dictionary<long, IEntity> _entities = new Dictionary<long, IEntity>();
+        protected readonly List<IPlayerEntity> _players = new List<IPlayerEntity>();
 
         protected List<IEntityManager> EntityManagers = new List<IEntityManager>();
 
@@ -72,6 +73,22 @@ namespace ChickenAPI.ECS.Entities
         {
             entity.Id = NextEntityId;
             _entities[entity.Id] = entity;
+            switch (entity.Type)
+            {
+                case EntityType.Player:
+                    _players.Add(entity as IPlayerEntity);
+                    break;
+                case EntityType.Mate:
+                    break;
+                case EntityType.Npc:
+                    break;
+                case EntityType.Monster:
+                    break;
+                case EntityType.Portal:
+                    break;
+                case EntityType.Effect:
+                    break;
+            }
         }
 
         public void UnregisterEntity<T>(T entity) where T : IEntity
@@ -152,7 +169,10 @@ namespace ChickenAPI.ECS.Entities
 
         public void Broadcast<T>(IPlayerEntity sender, T packet) where T : IPacket
         {
-            throw new NotImplementedException();
+            foreach (IPlayerEntity session in _players)
+            {
+                session.SendPacket(packet);
+            }
         }
     }
 }
