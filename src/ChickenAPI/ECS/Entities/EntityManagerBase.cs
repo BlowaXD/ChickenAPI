@@ -43,6 +43,13 @@ namespace ChickenAPI.ECS.Entities
 
         public long NextEntityId => ++LastEntityId;
         public IEnumerable<IEntity> Entities => _entities.Values.AsEnumerable();
+        public IEnumerable<IEntity> Players { get; }
+
+        public IEnumerable<T> GetEntitiesByType<T>(EntityType type) where T : IEntity
+        {
+            // todo implementation
+            return null;
+        }
 
         public TEntity CreateEntity<TEntity>() where TEntity : class, IEntity, new()
         {
@@ -141,6 +148,11 @@ namespace ChickenAPI.ECS.Entities
 
                 session.SendPacket(packet);
             }
+        }
+
+        public void Broadcast<T>(IPlayerEntity sender, T packet) where T : IPacket
+        {
+            throw new NotImplementedException();
         }
     }
 }
