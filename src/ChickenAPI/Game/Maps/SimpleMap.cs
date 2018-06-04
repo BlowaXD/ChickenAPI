@@ -9,6 +9,7 @@ namespace ChickenAPI.Game.Maps
     {
         private IMapLayer _baseMapLayer;
         private readonly IEnumerable<MapNpcMonsterDto> _monsters;
+
         public SimpleMap((MapDto, IEnumerable<MapNpcMonsterDto>) dto)
         {
             MapDto map = dto.Item1;
@@ -17,7 +18,7 @@ namespace ChickenAPI.Game.Maps
             MusicId = map.Music;
             _baseMapLayer = new SimpleMapLayer(this, _monsters);
             Layers = new HashSet<IMapLayer>();
-            Portals = new HashSet<IPortal>();
+            Portals = new HashSet<PortalDto>();
             Width = map.Width;
             Height = map.Height;
             Grid = map.Grid;
@@ -26,12 +27,9 @@ namespace ChickenAPI.Game.Maps
         public long Id { get; }
         public int MusicId { get; }
 
-        public IMapLayer BaseLayer
-        {
-            get => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters));
-        }
+        public IMapLayer BaseLayer => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters));
         public HashSet<IMapLayer> Layers { get; }
-        public HashSet<IPortal> Portals { get; }
+        public HashSet<PortalDto> Portals { get; }
         public short Width { get; }
         public short Height { get; }
         public byte[] Grid { get; }

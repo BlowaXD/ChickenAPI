@@ -26,11 +26,6 @@ namespace ChickenAPI.Game.Maps
         HashSet<IMapLayer> Layers { get; }
 
         /// <summary>
-        ///     All the portals that are in the map by base
-        /// </summary>
-        HashSet<IPortal> Portals { get; }
-
-        /// <summary>
         ///     Map Width
         /// </summary>
         short Width { get; }
