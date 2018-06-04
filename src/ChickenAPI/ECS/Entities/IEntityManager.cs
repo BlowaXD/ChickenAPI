@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using ChickenAPI.ECS.Systems;
+using ChickenAPI.Enums.Game.Entity;
+using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Packets;
 
 namespace ChickenAPI.ECS.Entities
@@ -45,6 +47,15 @@ namespace ChickenAPI.ECS.Entities
         long NextEntityId { get; }
 
         IEnumerable<IEntity> Entities { get; }
+        IEnumerable<IEntity> Players { get; }
+
+        /// <summary>
+        /// Get all entities with the given type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        IEnumerable<T> GetEntitiesByType<T>(EntityType type) where T : IEntity;
 
         /// <summary>
         ///     Creates a new entity.
@@ -156,7 +167,20 @@ namespace ChickenAPI.ECS.Entities
 
         #region Packets
 
+        /// <summary>
+        /// Broadcast a packet to every entities in the context
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="packet"></param>
         void Broadcast<T>(T packet) where T : IPacket;
+
+        /// <summary>
+        /// Broadcast a packet to every entities in the context except
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sender"></param>
+        /// <param name="packet"></param>
+        void Broadcast<T>(IPlayerEntity sender, T packet) where T : IPacket;
 
         #endregion
     }

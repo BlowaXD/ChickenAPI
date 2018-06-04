@@ -15,10 +15,9 @@ namespace ChickenAPI.Data.TransferObjects
 
         public long MapId { get; set; }
 
-        public List<DropDto> Drops { get; set; }
-        public List<BCardDto> BCards { get; set; }
-        public List<NpcMonsterSkillDto> Skills { get; set; }
-
+        public IEnumerable<DropDto> Drops { get; set; }
+        public IEnumerable<BCardDto> BCards { get; set; }
+        public IEnumerable<NpcMonsterSkillDto> Skills { get; set; }
         public NpcMonsterDto Data { get; set; }
     }
 }
