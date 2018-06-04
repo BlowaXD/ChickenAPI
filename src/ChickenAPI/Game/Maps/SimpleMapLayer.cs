@@ -26,8 +26,8 @@ namespace ChickenAPI.Game.Maps
             NotifiableSystems = new Dictionary<Type, INotifiableSystem>
             {
                 { typeof(VisibilitySystem), new VisibilitySystem(this) },
-                {typeof(ChatSystem), new ChatSystem(this) },
-                {typeof(MovableSystem), new MovableSystem(this) }
+                { typeof(ChatSystem), new ChatSystem(this) },
+                { typeof(MovableSystem), new MovableSystem(this) }
             };
             foreach (MapNpcMonsterDto npc in npcs)
             {
