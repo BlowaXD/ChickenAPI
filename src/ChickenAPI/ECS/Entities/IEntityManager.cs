@@ -7,10 +7,12 @@ using ChickenAPI.Packets;
 
 namespace ChickenAPI.ECS.Entities
 {
+    /// <inheritdoc cref="IBroadcastable" />
+    /// <inheritdoc cref="IDisposable" />
     /// <summary>
-    ///     Contains entities and sub <see cref="IEntityManager" />
+    ///     Contains entities and sub <see cref="T:ChickenAPI.ECS.Entities.IEntityManager" />
     /// </summary>
-    public interface IEntityManager : IDisposable
+    public interface IEntityManager : IBroadcastable, IDisposable
     {
         #region EntityManager
 
@@ -162,25 +164,6 @@ namespace ChickenAPI.ECS.Entities
         /// <param name="entity">Entity</param>
         /// <param name="e">Arguments</param>
         void NotifySystem<T>(IEntity entity, SystemEventArgs e) where T : class, INotifiableSystem;
-
-        #endregion
-
-        #region Packets
-
-        /// <summary>
-        /// Broadcast a packet to every entities in the context
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="packet"></param>
-        void Broadcast<T>(T packet) where T : IPacket;
-
-        /// <summary>
-        /// Broadcast a packet to every entities in the context except
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="sender"></param>
-        /// <param name="packet"></param>
-        void Broadcast<T>(IPlayerEntity sender, T packet) where T : IPacket;
 
         #endregion
     }

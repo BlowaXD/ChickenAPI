@@ -24,7 +24,7 @@ namespace ChickenAPI.Game.Systems.Chat
             }
         }
 
-        private void PlayerChat(IEntity entity, PlayerChatEventArg args)
+        private static void PlayerChat(IEntity entity, PlayerChatEventArg args)
         {
             var sayPacket = new SayPacket
             {
@@ -33,16 +33,8 @@ namespace ChickenAPI.Game.Systems.Chat
                 VisualType = VisualType.Character,
                 VisualId = args.SenderId
             };
-            
-            foreach (IEntity entityy in entity.EntityManager.Entities.Where(s => s.Type == EntityType.Player && s.Id != entity.Id))
-            {
-                if (!(entityy is IPlayerEntity session))
-                {
-                    continue;
-                }
 
-                session.SendPacket(sayPacket);
-            }
+            entity.EntityManager.Broadcast((IPlayerEntity)entity, sayPacket);
         }
     }
 }

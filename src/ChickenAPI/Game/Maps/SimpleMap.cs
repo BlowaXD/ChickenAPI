@@ -8,31 +8,27 @@ namespace ChickenAPI.Game.Maps
     public class SimpleMap : EntityManagerBase, IMap
     {
         private IMapLayer _baseMapLayer;
+        private readonly MapDto _map;
         private readonly IEnumerable<MapNpcMonsterDto> _monsters;
 
         public SimpleMap((MapDto, IEnumerable<MapNpcMonsterDto>) dto)
         {
-            MapDto map = dto.Item1;
+            _map = dto.Item1;
             _monsters = dto.Item2;
-            Id = map.Id;
-            MusicId = map.Music;
             _baseMapLayer = new SimpleMapLayer(this, _monsters);
             Layers = new HashSet<IMapLayer>();
             Portals = new HashSet<PortalDto>();
-            Width = map.Width;
-            Height = map.Height;
-            Grid = map.Grid;
         }
 
-        public long Id { get; }
-        public int MusicId { get; }
+        public long Id => _map.Id;
+        public int MusicId => _map.Music;
 
         public IMapLayer BaseLayer => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters));
         public HashSet<IMapLayer> Layers { get; }
         public HashSet<PortalDto> Portals { get; }
-        public short Width { get; }
-        public short Height { get; }
-        public byte[] Grid { get; }
+        public short Width => _map.Width;
+        public short Height => _map.Height;
+        public byte[] Grid => _map.Grid;
 
         public bool IsWalkable(short x, short y)
         {
@@ -43,7 +39,7 @@ namespace ChickenAPI.Game.Maps
             }
             catch (Exception)
             {
-                Log.Warn($"[IS_WALKABLE]");
+                Log.Warn($"[IS_WALKABLE] {Id}: {x} {y}");
                 return false;
             }
         }
