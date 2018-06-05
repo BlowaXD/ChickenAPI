@@ -1,21 +1,31 @@
 ﻿using System.Collections.Generic;
+using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
-using ChickenAPI.Game.Entities.Player;
 
 namespace ChickenAPI.Packets.Game.Server
 {
     [PacketHeader("st")]
     public class StPacket : PacketBase
     {
-        public StPacket(IPlayerEntity entity)
+        public StPacket(IEntity entity)
         {
             var battle = entity.GetComponent<BattleComponent>();
             var xp = entity.GetComponent<ExperienceComponent>();
 
+            switch (entity.Type)
+            {
+                case EntityType.Player:
+                    VisualType = VisualType.Character;
+                    VisualId = entity.GetComponent<CharacterComponent>().Id;
+                    break;
+                case EntityType.Npc:
+                case EntityType.Monster:
+                    VisualType = entity.Type == EntityType.Monster ? VisualType.Monster : VisualType.Npc;
+                    VisualId = entity.GetComponent<NpcMonsterComponent>().MapNpcMonsterId;
+                    break;
+            }
 
-            VisualType = VisualType.Character;
-            VisualId = entity.Session.CharacterId;
             Level = xp.Level;
             HeroLevel = xp.HeroLevel;
             HpPercentage = battle.HpPercentage;

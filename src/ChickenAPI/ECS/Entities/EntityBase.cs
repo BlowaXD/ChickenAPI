@@ -50,7 +50,7 @@ namespace ChickenAPI.ECS.Entities
 
         public virtual void RemoveComponent<T>(T component) where T : IComponent
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public virtual bool HasComponent<T>() where T : IComponent

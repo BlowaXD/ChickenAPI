@@ -12,6 +12,6 @@
         RedW = 8,
         Yellow = 10,
         Purple = 11,
-        Green = 12,
+        Green = 12
     }
 }

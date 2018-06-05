@@ -1,7 +1,5 @@
 ﻿using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
-using ChickenAPI.Enums;
-using ChickenAPI.Enums.Game.Character;
 
 namespace ChickenAPI.Game.Components
 {

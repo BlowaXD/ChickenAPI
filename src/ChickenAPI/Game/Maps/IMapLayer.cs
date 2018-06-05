@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.ECS.Entities;
-using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Maps

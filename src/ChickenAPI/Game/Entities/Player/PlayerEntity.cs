@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Autofac;
-using ChickenAPI.Data.AccessLayer;
 using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
-using ChickenAPI.Enums.Game.Character;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Maps;
@@ -32,13 +28,13 @@ namespace ChickenAPI.Game.Entities.Player
                         Actual = new Position<short>
                         {
                             X = dto.MapX,
-                            Y = dto.MapY,
+                            Y = dto.MapY
                         },
                         Destination = new Position<short>
                         {
                             X = dto.MapX,
-                            Y = dto.MapY,
-                        },
+                            Y = dto.MapY
+                        }
                     }
                 },
                 { typeof(BattleComponent), new BattleComponent(this, dto) },
@@ -51,7 +47,7 @@ namespace ChickenAPI.Game.Entities.Player
                         JobLevel = dto.JobLevel,
                         JobLevelXp = dto.JobLevelXp,
                         HeroLevel = dto.HeroLevel,
-                        HeroLevelXp = dto.HeroXp,
+                        HeroLevelXp = dto.HeroXp
                     }
                 },
                 { typeof(FamilyComponent), new FamilyComponent(this) },

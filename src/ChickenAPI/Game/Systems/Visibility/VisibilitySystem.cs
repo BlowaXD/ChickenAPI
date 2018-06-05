@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.ECS.Systems;
@@ -8,7 +7,6 @@ using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Packets.Game.Server;
 using ChickenAPI.Utils;
-using Newtonsoft.Json;
 
 namespace ChickenAPI.Game.Systems.Visibility
 {

@@ -1,5 +1,4 @@
 ﻿using ChickenAPI.Enums.Game.Character;
-using ChickenAPI.Enums.Game.Items;
 
 namespace ChickenAPI.Data.AccessLayer
 {
