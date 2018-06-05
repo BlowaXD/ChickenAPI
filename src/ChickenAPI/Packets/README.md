@@ -40,6 +40,7 @@
 - [x] [mvi](Game/Client/MviPacket.cs)
 - [x] [pairy](Game/Client/PairyPacket.cs)
 - [x] [put](Game/Client/PutPacket.cs)
+- [x] [ncif](Game/Client/NcifPacket.cs)
 - [x] [rmvobj](Game/Client/RmvobjPacket.cs)
 - [x] [say](Game/Client/ClientSayPacket.cs)
 - [x] [sc](Game/Client/ScPacket.cs)
