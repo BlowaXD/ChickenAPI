@@ -5,7 +5,6 @@ using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Monster;
 using ChickenAPI.Game.Entities.Npc;

@@ -23,16 +23,16 @@ namespace ChickenAPI.Game.Entities.Monster
                 },
                 { typeof(BattleComponent), new BattleComponent(this)
                 {
-                    Hp = 100,
-                    HpMax =  100,
-                    Mp = 100,
-                    MpMax = 100
+                    Hp = dto.Data.MaxHp,
+                    HpMax =  dto.Data.MaxHp,
+                    Mp = dto.Data.MaxMp,
+                    MpMax = dto.Data.MaxMp
                 } },
                 {
                     typeof(MovableComponent), new MovableComponent(this)
                     {
-                        Actual = new Position<short>() { X = dto.Position.X, Y = dto.Position.Y },
-                        Destination = new Position<short>() { X = dto.Position.X, Y = dto.Position.Y },
+                        Actual = new Position<short> { X = dto.Position.X, Y = dto.Position.Y },
+                        Destination = new Position<short> { X = dto.Position.X, Y = dto.Position.Y }
                     }
                 },
                 { typeof(NpcMonsterComponent), new NpcMonsterComponent(this, dto) }

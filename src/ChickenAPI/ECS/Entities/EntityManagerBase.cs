@@ -14,18 +14,23 @@ namespace ChickenAPI.ECS.Entities
         protected static readonly Logger Log = Logger.GetLogger<EntityManagerBase>();
         protected bool Update;
         protected long LastEntityId;
-        protected Dictionary<long, IEntity> _entities = new Dictionary<long, IEntity>();
-        protected readonly List<IPlayerEntity> _players = new List<IPlayerEntity>();
+
+        // entities
+        protected readonly Dictionary<long, IEntity> EntitiesByEntityId = new Dictionary<long, IEntity>();
+
+        // players
+        protected readonly Dictionary<long, IPlayerEntity> PlayersBySessionId = new Dictionary<long, IPlayerEntity>();
+        protected readonly Dictionary<long, IPlayerEntity> PlayersByEntityId = new Dictionary<long, IPlayerEntity>();
 
         protected List<IEntityManager> EntityManagers = new List<IEntityManager>();
 
-
+        // systems
         protected Dictionary<Type, INotifiableSystem> NotifiableSystems = new Dictionary<Type, INotifiableSystem>();
         protected List<ISystem> _systems = new List<ISystem>();
 
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public IEntityManager ParentEntityManager { get; protected set; }
@@ -43,7 +48,7 @@ namespace ChickenAPI.ECS.Entities
         }
 
         public long NextEntityId => ++LastEntityId;
-        public IEnumerable<IEntity> Entities => _entities.Values.AsEnumerable();
+        public IEnumerable<IEntity> Entities => EntitiesByEntityId.Values.AsEnumerable();
         public IEnumerable<IEntity> Players { get; }
 
         public IEnumerable<T> GetEntitiesByType<T>(EntityType type) where T : IEntity
@@ -61,50 +66,60 @@ namespace ChickenAPI.ECS.Entities
 
         public IEntity GetEntity(long id)
         {
-            return !_entities.TryGetValue(id, out IEntity entity) ? null : entity;
+            return !EntitiesByEntityId.TryGetValue(id, out IEntity entity) ? null : entity;
         }
 
         public T GetEntity<T>(long id) where T : class, IEntity
         {
-            return !_entities.TryGetValue(id, out IEntity entity) ? null : entity as T;
+            return !EntitiesByEntityId.TryGetValue(id, out IEntity entity) ? null : entity as T;
         }
 
         public void RegisterEntity<T>(T entity) where T : IEntity
         {
             entity.Id = NextEntityId;
-            _entities[entity.Id] = entity;
+            EntitiesByEntityId[entity.Id] = entity;
             switch (entity.Type)
             {
                 case EntityType.Player:
-                    _players.Add(entity as IPlayerEntity);
+                    if (entity is IPlayerEntity sess)
+                    {
+                        PlayersByEntityId.Add(entity.Id, sess);
+                        PlayersBySessionId.Add(sess.Session.SessionId, sess);
+                    }
+
                     break;
-                case EntityType.Mate:
-                    break;
-                case EntityType.Npc:
-                    break;
-                case EntityType.Monster:
-                    break;
-                case EntityType.Portal:
-                    break;
-                case EntityType.Effect:
+                default:
                     break;
             }
         }
 
         public void UnregisterEntity<T>(T entity) where T : IEntity
         {
-            _entities.Remove(entity.Id);
+            EntitiesByEntityId.Remove(entity.Id);
+
+            switch (entity.Type)
+            {
+                case EntityType.Player:
+                    if (entity is IPlayerEntity sess)
+                    {
+                        PlayersByEntityId.Remove(entity.Id);
+                        PlayersBySessionId.Remove(sess.Session.SessionId);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         public bool HasEntity(IEntity entity) => HasEntity(entity.Id);
 
-        public bool HasEntity(long id) => _entities.ContainsKey(id);
+        public bool HasEntity(long id) => EntitiesByEntityId.ContainsKey(id);
 
-        public bool DeleteEntity(IEntity entity) => _entities.Remove(entity.Id);
+        public bool DeleteEntity(IEntity entity) => EntitiesByEntityId.Remove(entity.Id);
 
         public void TransferEntity(long id, IEntityManager manager)
         {
-            if (!_entities.TryGetValue(id, out IEntity entity))
+            if (!EntitiesByEntityId.TryGetValue(id, out IEntity entity))
             {
                 return;
             }
@@ -156,7 +171,7 @@ namespace ChickenAPI.ECS.Entities
 
         public void Broadcast<T>(T packet) where T : IPacket
         {
-            foreach (IEntity entity in _entities.Values.AsParallel().Where(s => s.Type == EntityType.Player))
+            foreach (IEntity entity in EntitiesByEntityId.Values.AsParallel().Where(s => s.Type == EntityType.Player))
             {
                 if (!(entity is IPlayerEntity session))
                 {
@@ -169,7 +184,7 @@ namespace ChickenAPI.ECS.Entities
 
         public void Broadcast<T>(IPlayerEntity sender, T packet) where T : IPacket
         {
-            foreach (IPlayerEntity session in _players)
+            foreach (IPlayerEntity session in PlayersBySessionId.Values)
             {
                 session.SendPacket(packet);
             }

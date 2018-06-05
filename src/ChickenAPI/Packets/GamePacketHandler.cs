@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums;
 using ChickenAPI.Game.Entities.Player;
 

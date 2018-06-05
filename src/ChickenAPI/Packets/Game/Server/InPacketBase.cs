@@ -180,7 +180,7 @@ namespace ChickenAPI.Packets.Game.Server
                 Unknown13 = 0,
                 Unknown14 = 0,
                 Unknown15 = 0,
-                Unknown16 = 0,
+                Unknown16 = 0
             };
         }
 

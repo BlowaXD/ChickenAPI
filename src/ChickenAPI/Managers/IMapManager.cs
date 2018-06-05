@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Maps;
-using ChickenAPI.Game.Network;
 
 namespace ChickenAPI.Managers
 {

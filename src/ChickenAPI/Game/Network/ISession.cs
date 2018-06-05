@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using ChickenAPI.Data.TransferObjects;
-using ChickenAPI.ECS.Entities;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Packets;
 

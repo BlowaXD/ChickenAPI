@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using ChickenAPI.ECS.Entities;
+﻿using ChickenAPI.ECS.Entities;
 using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Enums.Packets;

@@ -2,7 +2,6 @@
 using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Game.Maps;
 
 namespace ChickenAPI.ECS.Entities
 {

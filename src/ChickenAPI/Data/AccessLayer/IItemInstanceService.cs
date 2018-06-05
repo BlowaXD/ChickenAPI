@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Data.TransferObjects;
 
@@ -11,6 +12,6 @@ namespace ChickenAPI.Data.AccessLayer
         /// </summary>
         /// <param name="characterId"></param>
         /// <returns></returns>
-        IEnumerable<ItemInstanceDto> GetWearByCharacterId(long characterId);
+        Task<IEnumerable<ItemInstanceDto>> GetWearByCharacterIdAsync(long characterId);
     }
 }
