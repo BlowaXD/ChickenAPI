@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Data.TransferObjects;
 
@@ -6,12 +7,12 @@ namespace ChickenAPI.Data.AccessLayer
 {
     public interface IBCardService : IMappedRepository<BCardDto>
     {
-        IEnumerable<BCardDto> GetBySkillId(long skillId);
+        Task<IEnumerable<BCardDto>> GetBySkillIdAsync(long skillId);
 
-        IEnumerable<BCardDto> GetByMapMonsterId(long monsterId);
+        Task<IEnumerable<BCardDto>> GetByMapMonsterIdAsync(long monsterId);
 
-        IEnumerable<BCardDto> GetByCardId(long cardId);
+        Task<IEnumerable<BCardDto>> GetByCardIdAsync(long cardId);
 
-        IEnumerable<BCardDto> GetByItemId(long itemId);
+        Task<IEnumerable<BCardDto>> GetByItemIdAsync(long itemId);
     }
 }

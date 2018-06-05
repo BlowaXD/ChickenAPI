@@ -3,7 +3,7 @@ using ChickenAPI.Data.TransferObjects;
 
 namespace ChickenAPI.Data.AccessLayer
 {
-    public interface IMapNpcMonsterSkillService : IMappedRepository<NpcMonsterSkillDto>
+    public interface INpcMonsterSkillService : IMappedRepository<NpcMonsterSkillDto>
     {
         
     }
