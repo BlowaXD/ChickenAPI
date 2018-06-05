@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Entity;
+using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Packets;
 
 namespace ChickenAPI.ECS.Entities
@@ -48,7 +49,7 @@ namespace ChickenAPI.ECS.Entities
         long NextEntityId { get; }
 
         IEnumerable<IEntity> Entities { get; }
-        IEnumerable<IEntity> Players { get; }
+        IEnumerable<IPlayerEntity> Players { get; }
 
         /// <summary>
         /// Get all entities with the given type

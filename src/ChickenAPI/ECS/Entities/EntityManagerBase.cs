@@ -49,7 +49,7 @@ namespace ChickenAPI.ECS.Entities
 
         public long NextEntityId => ++LastEntityId;
         public IEnumerable<IEntity> Entities => EntitiesByEntityId.Values.AsEnumerable();
-        public IEnumerable<IEntity> Players { get; }
+        public IEnumerable<IPlayerEntity> Players => PlayersBySessionId.Values;
 
         public IEnumerable<T> GetEntitiesByType<T>(EntityType type) where T : IEntity
         {
@@ -105,6 +105,7 @@ namespace ChickenAPI.ECS.Entities
                         PlayersByEntityId.Remove(entity.Id);
                         PlayersBySessionId.Remove(sess.Session.SessionId);
                     }
+
                     break;
                 default:
                     break;
