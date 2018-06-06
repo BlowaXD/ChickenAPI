@@ -1,13 +1,38 @@
 ﻿using ChickenAPI.Data.AccessLayer.Repository;
+using ChickenAPI.Enums.Game.Drop;
 
 namespace ChickenAPI.Data.TransferObjects
 {
     public class DropDto : IMappedDto
     {
+        /// <summary>
+        /// Drop Id
+        /// </summary>
         public long Id { get; set; }
+
+        /// <summary>
+        /// Drop Type
+        /// </summary>
+        public DropType Type { get; set; }
+
+        /// <summary>
+        /// This can be MapTypeId, NpcMonsterId...
+        /// </summary>
+        public long TypedId { get; set; }
+
+        /// <summary>
+        /// Item that will be dropped
+        /// </summary>
         public long ItemId { get; set; }
+
+        /// <summary>
+        /// Amount of Item that have to be dropped
+        /// </summary>
         public int Amount { get; set; }
-        public long MonsterId{ get; set; }
+
+        /// <summary>
+        /// Drop chance
+        /// </summary>
         public int DropChance { get; set; }
     }
 }
