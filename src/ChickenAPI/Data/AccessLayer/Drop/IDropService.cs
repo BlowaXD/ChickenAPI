@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Data.TransferObjects;
 
@@ -6,6 +7,6 @@ namespace ChickenAPI.Data.AccessLayer.Drop
 {
     public interface IDropService : IMappedRepository<DropDto>
     {
-        IEnumerable<DropDto> GetByMapNpcMonsterId(long mapNpcMonsterId);
+        Task<IEnumerable<DropDto>> GetByMapNpcMonsterIdAsync(long mapNpcMonsterId);
     }
 }
