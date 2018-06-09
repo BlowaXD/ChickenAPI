@@ -1,4 +1,5 @@
 ﻿using ChickenAPI.Data.TransferObjects;
+using ChickenAPI.Data.TransferObjects.Item;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
 
