@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using ChickenAPI.Data.AccessLayer;
+using ChickenAPI.Data.AccessLayer.Character;
 using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
