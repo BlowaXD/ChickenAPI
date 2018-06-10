@@ -1,7 +1,7 @@
 ﻿using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Enums.Game.Buffs;
 
-namespace ChickenAPI.Data.TransferObjects
+namespace ChickenAPI.Data.TransferObjects.Skills
 {
     public class CardDto : IMappedDto
     {

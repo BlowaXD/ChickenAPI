@@ -1,7 +1,7 @@
 ﻿using System;
 using ChickenAPI.Enums.Game.Character;
 
-namespace ChickenAPI.Data.TransferObjects
+namespace ChickenAPI.Data.TransferObjects.Server
 {
     public class WorldServerDto
     {
