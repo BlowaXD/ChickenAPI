@@ -1,8 +1,7 @@
 ﻿using System;
-using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.Data.TransferObjects.Server;
 
-namespace ChickenAPI.Data.AccessLayer
+namespace ChickenAPI.Data.AccessLayer.Server
 {
     public interface ISessionService
     {

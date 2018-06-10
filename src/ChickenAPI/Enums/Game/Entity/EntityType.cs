@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ChickenAPI.Enums.Game.Entity
+﻿namespace ChickenAPI.Enums.Game.Entity
 {
     public enum EntityType
     {

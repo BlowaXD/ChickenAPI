@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using ChickenAPI.Data.AccessLayer.Repository;
-using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.Data.TransferObjects.Character;
 
-namespace ChickenAPI.Data.AccessLayer.Character
+namespace ChickenAPI.Data.AccessLayer.Account
 {
     public interface IAccountService : IMappedRepository<AccountDto>
     {
