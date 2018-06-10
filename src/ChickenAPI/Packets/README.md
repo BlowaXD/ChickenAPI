@@ -26,18 +26,24 @@
 ### Sent by Client
 
 - [x] [addobj](Game/Client/AddobjPacket.cs)
+- [x] [b_i](Game/Client/BiPacket.cs)
 - [x] [compl](Game/Client/ComplimentPacket.cs)
 - [x] [dir](Game/Client/DirectionPacket.cs)
 - [x] [drop](Game/Client/DropPacket.cs)
 - [x] [eff](Game/Client/EffPacket.cs)
 - [x] [eqinfo](Game/Client/EquipmentInfoPacket.cs)
+- [x] [get](Game/Client/GetPacket.cs)
 - [x] [glmk](Game/Client/CreateFamilyPacket.cs)
 - [x] [gop](Game/Client/CharacterOptionPacket.cs)
 - [x] [ivn](Game/Client/IvnPacket.cs)
 - [x] [mlobj](Game/Client/MlObjPacket.cs)
 - [x] [mvi](Game/Client/MviPacket.cs)
+- [x] [pairy](Game/Client/PairyPacket.cs)
+- [x] [put](Game/Client/PutPacket.cs)
 - [x] [rmvobj](Game/Client/RmvobjPacket.cs)
+- [x] [sc](Game/Client/ScPacket.cs)
 - [x] [walk](Game/Client/WalkPacket.cs)
+- [x] [wear](Game/Client/WearPacket.cs)
 
 
 ### Sent by Server
