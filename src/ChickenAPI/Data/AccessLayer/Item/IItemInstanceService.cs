@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Data.TransferObjects;
+using ChickenAPI.Data.TransferObjects.Character;
 using ChickenAPI.Data.TransferObjects.Item;
 
 namespace ChickenAPI.Data.AccessLayer.Item

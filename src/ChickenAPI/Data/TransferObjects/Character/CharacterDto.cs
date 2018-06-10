@@ -1,7 +1,7 @@
 ﻿using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Enums.Game.Character;
 
-namespace ChickenAPI.Data.TransferObjects
+namespace ChickenAPI.Data.TransferObjects.Character
 {
     public class CharacterDto : IMappedDto
     {

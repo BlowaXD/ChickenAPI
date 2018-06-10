@@ -1,7 +1,7 @@
 ﻿using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Enums;
 
-namespace ChickenAPI.Data.TransferObjects
+namespace ChickenAPI.Data.TransferObjects.Character
 {
     public class AccountDto : IMappedDto
     {

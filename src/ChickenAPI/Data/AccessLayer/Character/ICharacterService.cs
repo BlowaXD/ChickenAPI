@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Data.TransferObjects;
+using ChickenAPI.Data.TransferObjects.Character;
 using ChickenAPI.Enums.Game.Character;
 
 namespace ChickenAPI.Data.AccessLayer.Character
