@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ChickenAPI.Data.AccessLayer.Repository;
-using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.Data.TransferObjects.Character;
 
-namespace ChickenAPI.Data.AccessLayer
+namespace ChickenAPI.Data.AccessLayer.Character
 {
     public interface ICharacterMateService : IMappedRepository<CharacterMateDto>
     {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ChickenAPI.Data.TransferObjects;
 using ChickenAPI.Data.TransferObjects.Map;
 using ChickenAPI.ECS.Entities;
 

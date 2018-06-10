@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using ChickenAPI.Data.AccessLayer;
 using ChickenAPI.Data.AccessLayer.Character;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;

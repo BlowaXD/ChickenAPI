@@ -1,6 +1,6 @@
 ﻿using ChickenAPI.Enums;
 
-namespace ChickenAPI.Data.AccessLayer
+namespace ChickenAPI.Data.AccessLayer.Server
 {
     public interface ILanguageService
     {
