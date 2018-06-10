@@ -4,10 +4,10 @@
     public class GetPacket : PacketBase
     {
         [PacketIndex(0)]
-        public byte Unknown { get; set; } // seems to be always 1
+        public byte VisualType { get; set; }
 
         [PacketIndex(1)]
-        public short CharacterID { get; set; }
+        public short CharacterId { get; set; }
 
         [PacketIndex(2)]
         public long DropID { get; set; }

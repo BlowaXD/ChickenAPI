@@ -6,7 +6,7 @@ namespace ChickenAPI.Packets.Game.Client
     public class PairyPacket : PacketBase
     {
         [PacketIndex(0)]
-        public byte Unknown { get; set; } // seems to be always 1
+        public byte VisualType { get; set; }
 
         [PacketIndex(1)]
         public short CharacterID { get; set; }
