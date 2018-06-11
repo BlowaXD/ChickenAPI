@@ -7,6 +7,9 @@
         SERVER_START,
         SERVER_STOP,
 
+        LANGUAGE_INIT_START,
+        LANGUAGE_INIT_FINISH,
+
         #endregion
 
         #region Player
