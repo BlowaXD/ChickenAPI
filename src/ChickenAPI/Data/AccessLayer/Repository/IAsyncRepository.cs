@@ -19,51 +19,23 @@ namespace ChickenAPI.Data.AccessLayer.Repository
         /// <returns></returns>
         Task<IEnumerable<TObject>> GetByIdsAsync(IEnumerable<TObjectId> ids);
 
+
         /// <summary>
-        ///     Asynchronously insert object parameter into data storage
+        ///     Asynchronously inserts or updates object parameter into data storage
         ///     Parameter's id will be set in this method
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        Task<TObject> InsertAsync(TObject obj);
+        Task<TObject> SaveAsync(TObject obj);
 
 
         /// <summary>
-        ///     Asynchronously insert objects given in parameter into data storage
+        ///     Asynchronously inserts or updates objects given in parameter into data storage
         ///     Parameter's id will be set in this method
         /// </summary>
         /// <param name="objs"></param>
         /// <returns></returns>
-        Task InsertAsync(IEnumerable<TObject> objs);
-
-
-        /// <summary>
-        ///     Asynchronously update objects given in parameter into data storage
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        Task<TObject> UpdateAsync(TObject obj);
-
-        /// <summary>
-        ///     Asynchronously update all objects given in parameter into data storage
-        /// </summary>
-        /// <param name="objs"></param>
-        /// <returns></returns>
-        Task UpdateAsync(IEnumerable<TObject> objs);
-
-        /// <summary>
-        ///     Delete all objects given in parameter from data storage
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        Task DeleteAsync(TObject obj);
-
-        /// <summary>
-        ///     Asynchronously delete all objects given in parameter from data storage
-        /// </summary>
-        /// <param name="objs"></param>
-        /// <returns></returns>
-        Task DeleteAsync(IEnumerable<TObject> objs);
+        Task SaveAsync(IEnumerable<TObject> objs);
 
         /// <summary>
         ///     Asynchronously delete the object from the data storage with the given id
