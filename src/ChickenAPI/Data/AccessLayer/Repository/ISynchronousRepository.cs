@@ -5,6 +5,12 @@ namespace ChickenAPI.Data.AccessLayer.Repository
     public interface ISynchronousRepository<TObject, in TObjectId> where TObject : class
     {
         /// <summary>
+        /// Returns every objects of type TObject from data storage
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<TObject> Get();
+
+        /// <summary>
         ///     Returns the object from data storage by its id
         /// </summary>
         /// <param name="id"></param>
@@ -19,7 +25,7 @@ namespace ChickenAPI.Data.AccessLayer.Repository
         /// <returns></returns>
         IEnumerable<TObject> GetByIds(IEnumerable<TObjectId> ids);
 
-        
+
         /// <summary>
         ///     Inserts or updates object given in parameter into data storage
         /// </summary>
