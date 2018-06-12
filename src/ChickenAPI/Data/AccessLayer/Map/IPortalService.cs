@@ -8,6 +8,8 @@ namespace ChickenAPI.Data.AccessLayer.Map
     /// <inheritdoc />
     public interface IPortalService : IMappedRepository<PortalDto>
     {
+        IEnumerable<PortalDto> GetByMapId(short mapId);
+
         Task<IEnumerable<PortalDto>> GetByMapIdAsync(short mapId);
     }
 }
