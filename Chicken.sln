@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI", "src\ChickenAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Test", "test\ChickenAPI.Test\ChickenAPI.Test.csproj", "{693CED9C-C47E-49BC-9635-C3AED941DE24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenAPI.PacketGeneratorCLI", "src\ChickenAPI.PacketGeneratorCLI\ChickenAPI.PacketGeneratorCLI.csproj", "{C286CAFA-6B47-4ED9-9531-29F47090F17C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.PacketGeneratorCLI", "src\ChickenAPI.PacketGeneratorCLI\ChickenAPI.PacketGeneratorCLI.csproj", "{C286CAFA-6B47-4ED9-9531-29F47090F17C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

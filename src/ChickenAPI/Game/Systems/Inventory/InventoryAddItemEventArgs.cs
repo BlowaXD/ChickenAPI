@@ -1,8 +1,5 @@
-﻿using ChickenAPI.ECS.Systems;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using ChickenAPI.Data.TransferObjects;
+﻿using ChickenAPI.Data.TransferObjects.Item;
+using ChickenAPI.ECS.Systems;
 
 namespace ChickenAPI.Game.Systems.Inventory
 {

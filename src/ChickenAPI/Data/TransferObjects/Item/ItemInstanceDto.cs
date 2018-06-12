@@ -5,7 +5,6 @@ namespace ChickenAPI.Data.TransferObjects.Item
 {
     public class ItemInstanceDto : ISynchronizedDto
     {
-        public long Vnum { get; set; }
         public ItemDto Item { get; set; }
 
         public byte Design { get; set; }
@@ -14,6 +13,6 @@ namespace ChickenAPI.Data.TransferObjects.Item
 
         public short Amount { get; set; }
 
-        public byte Slot { get; set; }
+        public short Slot { get; set; }
     }
 }
