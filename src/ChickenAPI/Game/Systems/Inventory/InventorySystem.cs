@@ -39,25 +39,7 @@ namespace ChickenAPI.Game.Systems.Inventory
 
         private void AddItem(InventoryComponent inv, InventoryAddItemEventArgs args)
         {
-            ItemInstanceDto[] subinv;
-
-            switch (args.Item.Type)
-            {
-                case InventoryType.Wear:
-                    subinv = inv.Wear;
-                    break;
-                case InventoryType.Equipment:
-                    subinv = inv.Equipment;
-                    break;
-                case InventoryType.Main:
-                    subinv = inv.Main;
-                    break;
-                case InventoryType.Etc:
-                    subinv = inv.Etc;
-                    break;
-                default:
-                    return;
-            }
+            var subinv = GetSubInvFromItemInstance(inv, args.Item);
 
             var slot = GetFirstFreeSlot(subinv);
 
@@ -66,7 +48,8 @@ namespace ChickenAPI.Game.Systems.Inventory
                 //Not enough space
                 return;
             }
-            subinv.Append(new ItemInstanceDto() { Item = args.Item, Amount = args.Amount, Slot = slot});
+
+            subinv.Append(new ItemInstanceDto { Item = args.Item, Amount = args.Amount, Slot = slot});
         }
 
         private void DropItem(InventoryComponent inv, InventoryDropItemEventArgs args)
@@ -77,25 +60,7 @@ namespace ChickenAPI.Game.Systems.Inventory
                 return;
             }
 
-            ItemInstanceDto[] subinv;
-
-            switch (args.ItemInstance.Item.Type)
-            {
-                case InventoryType.Wear:
-                    subinv = inv.Wear;
-                    break;
-                case InventoryType.Equipment:
-                    subinv = inv.Equipment;
-                    break;
-                case InventoryType.Main:
-                    subinv = inv.Main;
-                    break;
-                case InventoryType.Etc:
-                    subinv = inv.Etc;
-                    break;
-                default:
-                    return;
-            }
+            var subinv = GetSubInvFromItemInstance(inv, args.ItemInstance.Item);
 
             var itemIndex = Array.FindIndex(subinv, x => x.Slot == args.ItemInstance.Slot);
 
@@ -104,25 +69,7 @@ namespace ChickenAPI.Game.Systems.Inventory
 
         private void DestroyItem(InventoryComponent inv, InventoryDestroyItemEventArgs args)
         {
-            ItemInstanceDto[] subinv;
-
-            switch (args.ItemInstance.Item.Type)
-            {
-                case InventoryType.Wear:
-                    subinv = inv.Wear;
-                    break;
-                case InventoryType.Equipment:
-                    subinv = inv.Equipment;
-                    break;
-                case InventoryType.Main:
-                    subinv = inv.Main;
-                    break;
-                case InventoryType.Etc:
-                    subinv = inv.Etc;
-                    break;
-                default:
-                    return;
-            }
+            var subinv = GetSubInvFromItemInstance(inv, args.ItemInstance.Item);
 
             var itemIndex = Array.FindIndex(subinv, x => x.Slot == args.ItemInstance.Slot);
 
@@ -141,6 +88,23 @@ namespace ChickenAPI.Game.Systems.Inventory
                 }
             }
             return -1;
+        }
+
+        private ItemInstanceDto[] GetSubInvFromItemInstance(InventoryComponent inv, ItemDto item)
+        {
+            switch (item.Type)
+            {
+                case InventoryType.Wear:
+                    return inv.Wear;
+                case InventoryType.Equipment:
+                    return inv.Equipment;
+                case InventoryType.Main:
+                    return inv.Main;
+                case InventoryType.Etc:
+                    return inv.Etc;
+                default:
+                    return null;
+            }
         }
     }
 }
