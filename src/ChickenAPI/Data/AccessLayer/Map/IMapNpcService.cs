@@ -7,6 +7,7 @@ namespace ChickenAPI.Data.AccessLayer.Map
 {
     public interface IMapNpcService : IMappedRepository<MapNpcDto>
     {
+        IEnumerable<MapNpcDto> GetByMapId(long mapId);
         Task<IEnumerable<MapNpcDto>> GetByMapIdAsync(long mapId);
     }
 }
