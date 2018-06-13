@@ -17,7 +17,7 @@ namespace ChickenAPI.Game.Maps
 {
     public class SimpleMapLayer : EntityManagerBase, IMapLayer
     {
-        public SimpleMapLayer(IMap map, IEnumerable<MapNpcMonsterDto> npcs)
+        public SimpleMapLayer(IMap map, IEnumerable<MapMonsterDto> monsters, IEnumerable<MapNpcDto> npcs = null)
         {
             Id = Guid.NewGuid();
             Map = map;
@@ -28,19 +28,19 @@ namespace ChickenAPI.Game.Maps
                 { typeof(ChatSystem), new ChatSystem(this) },
                 { typeof(MovableSystem), new MovableSystem(this) }
             };
-            foreach (MapNpcMonsterDto npc in npcs)
+            foreach (MapMonsterDto monster in monsters)
             {
-                switch (npc.Type)
-                {
-                    case EntityType.Npc:
-                        RegisterEntity(new NpcEntity(npc));
-                        break;
-                    case EntityType.Monster:
-                        RegisterEntity(new MonsterEntity(npc));
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                RegisterEntity(new MonsterEntity(monster));
+            }
+
+            if (npcs == null)
+            {
+                return;
+            }
+
+            foreach (MapNpcDto npc in npcs)
+            {
+                RegisterEntity(new NpcEntity(npc));
             }
         }
 

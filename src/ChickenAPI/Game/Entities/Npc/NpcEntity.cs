@@ -10,7 +10,7 @@ namespace ChickenAPI.Game.Entities.Npc
 {
     public class NpcEntity : EntityBase
     {
-        public NpcEntity(MapNpcMonsterDto npc) : base(EntityType.Npc)
+        public NpcEntity(MapNpcDto npc) : base(EntityType.Npc)
         {
             Components = new Dictionary<Type, IComponent>
             {

@@ -6,13 +6,21 @@ namespace ChickenAPI.Game.Components
 {
     public class NpcMonsterComponent : IComponent
     {
-        public NpcMonsterComponent(IEntity entity, MapNpcMonsterDto dto)
+        public NpcMonsterComponent(IEntity entity, MapMonsterDto dto)
         {
             Entity = entity;
-            Vnum = dto.Data.Id;
+            Vnum = dto.NpcMonsterId;
             MapNpcMonsterId = dto.Id;
             MapId = dto.MapId;
-            IsAggressive = !dto.Data.NoAggresiveIcon;
+            IsAggressive = !dto.NpcMonster.NoAggresiveIcon;
+        }
+        public NpcMonsterComponent(IEntity entity, MapNpcDto dto)
+        {
+            Entity = entity;
+            Vnum = dto.NpcMonsterId;
+            MapNpcMonsterId = dto.Id;
+            MapId = dto.MapId;
+            IsAggressive = !dto.NpcMonster.NoAggresiveIcon;
         }
 
         public IEntity Entity { get; }

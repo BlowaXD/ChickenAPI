@@ -9,9 +9,9 @@ namespace ChickenAPI.Game.Maps
     {
         private IMapLayer _baseMapLayer;
         private readonly MapDto _map;
-        private readonly IEnumerable<MapNpcMonsterDto> _monsters;
+        private readonly IEnumerable<MapMonsterDto> _monsters;
 
-        public SimpleMap((MapDto, IEnumerable<MapNpcMonsterDto>) dto)
+        public SimpleMap((MapDto, IEnumerable<MapMonsterDto>) dto)
         {
             _map = dto.Item1;
             _monsters = dto.Item2;
