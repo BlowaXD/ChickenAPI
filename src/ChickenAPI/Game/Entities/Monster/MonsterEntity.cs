@@ -11,7 +11,7 @@ namespace ChickenAPI.Game.Entities.Monster
 {
     public class MonsterEntity : EntityBase
     {
-        public MonsterEntity(MapNpcMonsterDto dto) : base(EntityType.Monster)
+        public MonsterEntity(MapMonsterDto dto) : base(EntityType.Monster)
         {
             Components = new Dictionary<Type, IComponent>
             {
@@ -23,16 +23,16 @@ namespace ChickenAPI.Game.Entities.Monster
                 },
                 { typeof(BattleComponent), new BattleComponent(this)
                 {
-                    Hp = dto.Data.MaxHp,
-                    HpMax =  dto.Data.MaxHp,
-                    Mp = dto.Data.MaxMp,
-                    MpMax = dto.Data.MaxMp
+                    Hp = dto.NpcMonster.MaxHp,
+                    HpMax =  dto.NpcMonster.MaxHp,
+                    Mp = dto.NpcMonster.MaxMp,
+                    MpMax = dto.NpcMonster.MaxMp
                 } },
                 {
                     typeof(MovableComponent), new MovableComponent(this)
                     {
-                        Actual = new Position<short> { X = dto.Position.X, Y = dto.Position.Y },
-                        Destination = new Position<short> { X = dto.Position.X, Y = dto.Position.Y }
+                        Actual = new Position<short> { X = dto.MapX, Y = dto.MapY },
+                        Destination = new Position<short> { X = dto.MapX, Y = dto.MapY }
                     }
                 },
                 { typeof(NpcMonsterComponent), new NpcMonsterComponent(this, dto) }

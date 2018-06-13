@@ -8,9 +8,9 @@ namespace ChickenAPI.Managers
 {
     public class SimpleMapManager : IMapManager
     {
-        public SimpleMapManager(IEnumerable<(MapDto, IEnumerable<MapNpcMonsterDto>)> dtos)
+        public SimpleMapManager(IEnumerable<(MapDto, IEnumerable<MapMonsterDto>)> dtos)
         {
-            foreach ((MapDto, IEnumerable<MapNpcMonsterDto>) dto in dtos)
+            foreach ((MapDto, IEnumerable<MapMonsterDto>) dto in dtos)
             {
                 _maps[dto.Item1.Id] = new SimpleMap(dto);
             }
