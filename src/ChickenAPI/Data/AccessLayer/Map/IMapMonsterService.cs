@@ -5,7 +5,7 @@ using ChickenAPI.Data.TransferObjects.Map;
 
 namespace ChickenAPI.Data.AccessLayer.NpcMonster
 {
-    public interface IMapNpcMonsterService : IMappedRepository<MapMonsterDto>
+    public interface IMapMonsterService : IMappedRepository<MapMonsterDto>
     {
         Task<IEnumerable<MapMonsterDto>> GetByMapIdAsync(long mapId);
     }
