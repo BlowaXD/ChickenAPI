@@ -24,9 +24,8 @@ namespace ChickenAPI.Data.TransferObjects.Item
 
         /// <summary>
         /// Remaining ammo for archers primary weapon or swordsmen secondary weapon
-        /// Ammo is a reference to an inventory item
         /// </summary>
-        public ItemInstanceDto Ammo { get; set; }
+        public byte Ammo { get; set; }
 
         public short CloseDefense { get; set; }
 
