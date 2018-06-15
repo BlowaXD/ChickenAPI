@@ -1,5 +1,6 @@
 ﻿using ChickenAPI.Data.AccessLayer.Repository;
 using ChickenAPI.Data.TransferObjects.NpcMonster;
+using ChickenAPI.Enums.Game.Entity;
 
 namespace ChickenAPI.Data.TransferObjects.Map
 {
@@ -29,6 +30,6 @@ namespace ChickenAPI.Data.TransferObjects.Map
 
         public long NpcMonsterId { get; set; }
 
-        public byte Position { get; set; }
+        public DirectionType Position { get; set; }
     }
 }

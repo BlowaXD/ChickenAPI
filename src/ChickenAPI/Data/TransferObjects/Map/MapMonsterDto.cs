@@ -26,6 +26,6 @@ namespace ChickenAPI.Data.TransferObjects.Map
 
         public long NpcMonsterId { get; set; }
 
-        public byte Position { get; set; }
+        public DirectionType Position { get; set; }
     }
 }
