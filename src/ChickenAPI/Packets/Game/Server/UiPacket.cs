@@ -1,4 +1,5 @@
 ﻿using ChickenAPI.Enums.Game.Items;
+using ChickenAPI.Enums.Game.Entity;
 
 namespace ChickenAPI.Packets.Game.Server
 {
@@ -6,7 +7,7 @@ namespace ChickenAPI.Packets.Game.Server
     public class UiPacket : PacketBase
     {
         [PacketIndex(0)]
-        public byte VisualType { get; set; }
+        public VisualType VisualType { get; set; }
 
         [PacketIndex(1)]
         public long CharacterId { get; set; }
