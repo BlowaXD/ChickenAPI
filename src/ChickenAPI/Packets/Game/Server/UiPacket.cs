@@ -6,10 +6,10 @@ namespace ChickenAPI.Packets.Game.Server
     public class UiPacket : PacketBase
     {
         [PacketIndex(0)]
-        public byte Unknown { get; set; } //Seems to be always 1
+        public byte VisualType { get; set; }
 
         [PacketIndex(1)]
-        public short CharacterId { get; set; }
+        public long CharacterId { get; set; }
 
         [PacketIndex(2)]
         public InventoryType InventoryType { get; set; }

@@ -1,25 +1,28 @@
-﻿namespace ChickenAPI.Packets.Game.Client
+﻿using ChickenAPI.Enums.Game.Entity;
+using ChickenAPI.Enums.Game.Character;
+
+namespace ChickenAPI.Packets.Game.Client
 {
     [PacketHeader("eq")]
     public class EqPacket : PacketBase
     {
         [PacketIndex(0)]
-        public short CharacterId { get; set; }
+        public long CharacterId { get; set; }
 
         [PacketIndex(1)]
-        public byte VisualType { get; set; }
+        public VisualType VisualType { get; set; }
 
         [PacketIndex(2)]
-        public byte Gender { get; set; }
+        public GenderType GenderType { get; set; }
 
         [PacketIndex(3)]
-        public byte HairStyle { get; set; }
+        public HairStyleType HairStyleType { get; set; }
 
         [PacketIndex(3)]
-        public byte HairColor { get; set; }
+        public HairColorType HairColorType { get; set; }
 
         [PacketIndex(4)]
-        public byte Class { get; set; }
+        public CharacterClassType CharacterClassType { get; set; }
 
         [PacketIndex(5)]
         public short Hat { get; set; }
