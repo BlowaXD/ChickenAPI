@@ -1,10 +1,12 @@
-﻿namespace ChickenAPI.Packets.Game.Client
+﻿using ChickenAPI.Enums.Game.Entity;
+
+namespace ChickenAPI.Packets.Game.Client
 {
     [PacketHeader("get")]
     public class GetPacket : PacketBase
     {
         [PacketIndex(0)]
-        public byte VisualType { get; set; }
+        public VisualType VisualType { get; set; }
 
         [PacketIndex(1)]
         public short CharacterId { get; set; }

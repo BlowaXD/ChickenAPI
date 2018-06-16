@@ -1,6 +1,4 @@
-﻿using ChickenAPI.Enums.Game.Items;
-
-namespace ChickenAPI.Packets.Game.Server
+﻿namespace ChickenAPI.Packets.Game.Server
 {
     [PacketHeader("remove")]
     public class RemovePacket : PacketBase
