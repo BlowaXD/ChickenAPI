@@ -11,9 +11,9 @@ namespace ChickenAPI.Data.TransferObjects.Drop
         public long Id { get; set; }
 
         /// <summary>
-        /// Drop Type
+        /// Drop RelationType
         /// </summary>
-        public DropType Type { get; set; }
+        public DropType RelationType { get; set; }
 
         /// <summary>
         /// This can be MapTypeId, NpcMonsterId...
