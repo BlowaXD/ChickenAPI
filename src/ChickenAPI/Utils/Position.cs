@@ -5,6 +5,16 @@ namespace ChickenAPI.Utils
 {
     public class Position<T> : IEquatable<Position<T>>
     {
+        public Position(T x, T y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public Position()
+        {
+        }
+
         public T X { get; set; }
         public T Y { get; set; }
 
