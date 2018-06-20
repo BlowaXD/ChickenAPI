@@ -80,6 +80,7 @@ namespace ChickenAPI.Packets.Game.Server
         {
             var npcMonster = entity.GetComponent<NpcMonsterComponent>();
             var movable = entity.GetComponent<MovableComponent>();
+            var battle = entity.GetComponent<BattleComponent>();
 
 
             VisualType = VisualType.Npc;
@@ -88,6 +89,29 @@ namespace ChickenAPI.Packets.Game.Server
             PositionX = movable.Actual.X;
             PositionY = movable.Actual.Y;
             DirectionType = movable.DirectionType;
+            InNpcSubPacket = new InNpcSubPacket
+            {
+                HpPercentage = 100,
+                MpPercentage = 100,
+                Dialog = 0,
+                Unknown1 = 0,
+                Unknown2 = 0,
+                Unknown3 = -1,
+                Unknown4 = 1,
+                IsSitting = false,
+                Unknown5 = -1,
+                Unknown6 = "-",
+                Unknown7 = 0,
+                Unknown8 = -1,
+                Unknown9 = 0,
+                Unknown10 = 0,
+                Unknown11 = 0,
+                Unknown12 = 0,
+                Unknown13 = 0,
+                Unknown14 = 0,
+                Unknown15 = 0,
+                Unknown16 = 0,
+            };
             //in 2 {(int)(CurrentHp / (float)Npc.MaxHP * 100)} {(int)(CurrentMp / (float)Npc.MaxMP * 100)} {Dialog} 0 0 -1 1 {(IsSitting ? 1 : 0)} -1 - 0 -1 0 0 0 0 0 0 0 0"
 
         }
@@ -215,6 +239,9 @@ namespace ChickenAPI.Packets.Game.Server
 
         [PacketIndex(9, IsOptional = true, RemoveSeparator = true)]
         public InCharacterSubPacketBase InCharacterSubPacket { get; set; }
+
+        [PacketIndex(10, IsOptional = true, RemoveSeparator = true)]
+        public InNpcSubPacket InNpcSubPacket { get; set; }
 
         #endregion
     }
