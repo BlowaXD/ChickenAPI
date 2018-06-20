@@ -64,6 +64,7 @@
 - [x] [in_item_subpacket](Game/Server/InItemSubPacketBase.cs)
 - [x] [in_monster_subpacket](Game/Server/InMonsterSubPacket.cs)
 - [x] [in_non_player_subpacket](Game/Server/InNonPlayerSubPacketBase.cs)
+- [x] [in_npc_subpacket](Game/Server/InNpcSubPacket.cs)
 - [x] [in_ownable_subpacket](Game/Server/InOwnableSubPacket.cs)
 - [x] [lev](Game/Server/LevPacket.cs)
 - [x] [levelup](Game/Server/LevelUpPacket.cs)
