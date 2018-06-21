@@ -9,6 +9,8 @@ namespace ChickenAPI.Data.TransferObjects.Item
         public Guid Id { get; set; }
 
         public ItemDto Item { get; set; }
+
+        public long ItemId { get; set; }
         
         public short Amount { get; set; }
 
