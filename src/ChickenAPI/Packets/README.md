@@ -36,7 +36,6 @@
 - [x] [get](Game/Client/GetPacket.cs)
 - [x] [glmk](Game/Client/CreateFamilyPacket.cs)
 - [x] [gop](Game/Client/CharacterOptionPacket.cs)
-- [x] [ivn](Game/Client/IvnPacket.cs)
 - [x] [mlobj](Game/Client/MlObjPacket.cs)
 - [x] [mvi](Game/Client/MviPacket.cs)
 - [x] [ncif](Game/Client/NcifPacket.cs)
@@ -52,6 +51,7 @@
 ### Sent by Server
 
 - [x] [at](Game/Server/AtPacketBase.cs)
+- [x] [bn](Game/Server/BnPacket.cs)
 - [x] [c_info](Game/Server/CInfoPacketBase.cs)
 - [x] [c_map](Game/Server/CMapPacketBase.cs)
 - [x] [c_mode](Game/Server/CModePacketBase.cs)
@@ -66,6 +66,9 @@
 - [x] [in_non_player_subpacket](Game/Server/InNonPlayerSubPacketBase.cs)
 - [x] [in_npc_subpacket](Game/Server/InNpcSubPacket.cs)
 - [x] [in_ownable_subpacket](Game/Server/InOwnableSubPacket.cs)
+- [x] [inv](Game/Server/InvPacket.cs)
+- [x] [inv_main_subpacket](Game/Server/InPacketMainItem.cs)
+- [x] [inv_wear_subpacket](Game/Server/InvPacketWearItem.cs)
 - [x] [lev](Game/Server/LevPacket.cs)
 - [x] [levelup](Game/Server/LevelUpPacket.cs)
 - [x] [mv](Game/Server/MvPacket.cs)

@@ -8,6 +8,7 @@ using ChickenAPI.Enums.Game.Items;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Packets.Game.Client;
+using ChickenAPI.Packets.Game.Server;
 
 namespace ChickenAPI.Game.Systems.Inventory
 {
@@ -71,7 +72,7 @@ namespace ChickenAPI.Game.Systems.Inventory
                     });
                     break;
                 case InventoryType.Main:
-                    packet.Main = items.Select(s => new InvPacketMain()
+                    packet.Main = items.Select(s => new InvPacketMainItem
                     {
                         InventorySlot = s.Slot,
                         ItemVNum = s.ItemId,
