@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ChickenAPI.Data.TransferObjects.Item;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Items;
 using ChickenAPI.Game.Components;
+using ChickenAPI.Game.Entities.Player;
+using ChickenAPI.Packets.Game.Client;
 
 namespace ChickenAPI.Game.Systems.Inventory
 {
@@ -14,12 +17,15 @@ namespace ChickenAPI.Game.Systems.Inventory
 
         public InventorySystem(IEntityManager em) : base(em)
         {
-
         }
 
         public override void Execute(IEntity entity, SystemEventArgs e)
         {
             var inventory = entity.GetComponent<InventoryComponent>();
+            if (inventory == null)
+            {
+                return;
+            }
 
             switch (e)
             {
@@ -34,14 +40,62 @@ namespace ChickenAPI.Game.Systems.Inventory
                 case InventoryDestroyItemEventArgs destroyItemEventArgs:
                     DestroyItem(inventory, destroyItemEventArgs);
                     break;
+
+                case InventoryGeneratePacketDetailsEventArgs detailsEventArgs:
+                    if (!(entity is IPlayerEntity player))
+                    {
+                        return;
+                    }
+
+                    GenerateInventoryPackets(inventory, detailsEventArgs, player);
+                    break;
             }
         }
 
-        private void AddItem(InventoryComponent inv, InventoryAddItemEventArgs args)
+        private static InvPacket GenerateInventoryPacket(InventoryType type, IEnumerable<ItemInstanceDto> items)
         {
-            var subinv = GetSubInvFromItemInstance(inv, args.Item);
+            var packet = new InvPacket
+            {
+                InventoryType = type,
+            };
+            switch (type)
+            {
+                case InventoryType.Equipment:
+                    packet.Wearables = items.Select(s => new InvPacketItem
+                    {
+                        InventorySlot = s.Slot,
+                        ItemVNum = s.ItemId,
+                        Rare = s.Rarity,
+                        Upgrade = s.Upgrade,
+                        Unknown = 0,
+                    });
+                    break;
+                case InventoryType.Main:
+                    packet.Main = items.Select(s => new InvPacketMain()
+                    {
+                        InventorySlot = s.Slot,
+                        ItemVNum = s.ItemId,
+                        Amount = s.Amount,
+                        Unknown = 0
+                    });
+                    break;
+            }
 
-            var slot = GetFirstFreeSlot(subinv);
+            return packet;
+        }
+
+        private static void GenerateInventoryPackets(InventoryComponent inv, InventoryGeneratePacketDetailsEventArgs args, IPlayerEntity player)
+        {
+            player.SendPacket(GenerateInventoryPacket(InventoryType.Equipment, inv.Equipment));
+            player.SendPacket(GenerateInventoryPacket(InventoryType.Main, inv.Main));
+            player.SendPacket(GenerateInventoryPacket(InventoryType.Etc, inv.Etc));
+        }
+
+        private static void AddItem(InventoryComponent inv, InventoryAddItemEventArgs args)
+        {
+            ItemInstanceDto[] subinv = GetSubInvFromItemInstance(inv, args.Item);
+
+            short slot = GetFirstFreeSlot(subinv);
 
             if (slot == -1)
             {
@@ -49,10 +103,10 @@ namespace ChickenAPI.Game.Systems.Inventory
                 return;
             }
 
-            subinv.Append(new ItemInstanceDto { Item = args.Item, Amount = args.Amount, Slot = slot});
+            subinv.Append(new ItemInstanceDto { Item = args.Item, Amount = args.Amount, Slot = slot });
         }
 
-        private void DropItem(InventoryComponent inv, InventoryDropItemEventArgs args)
+        private static void DropItem(InventoryComponent inv, InventoryDropItemEventArgs args)
         {
             if (!args.ItemInstance.Item.IsDroppable)
             {
@@ -60,37 +114,38 @@ namespace ChickenAPI.Game.Systems.Inventory
                 return;
             }
 
-            var subinv = GetSubInvFromItemInstance(inv, args.ItemInstance.Item);
+            ItemInstanceDto[] subinv = GetSubInvFromItemInstance(inv, args.ItemInstance.Item);
 
-            var itemIndex = Array.FindIndex(subinv, x => x.Slot == args.ItemInstance.Slot);
-
-            subinv[itemIndex] = null;
-        }
-
-        private void DestroyItem(InventoryComponent inv, InventoryDestroyItemEventArgs args)
-        {
-            var subinv = GetSubInvFromItemInstance(inv, args.ItemInstance.Item);
-
-            var itemIndex = Array.FindIndex(subinv, x => x.Slot == args.ItemInstance.Slot);
+            int itemIndex = Array.FindIndex(subinv, x => x.Slot == args.ItemInstance.Slot);
 
             subinv[itemIndex] = null;
         }
 
-        private short GetFirstFreeSlot(ItemInstanceDto[] subinventory)
+        private static void DestroyItem(InventoryComponent inv, InventoryDestroyItemEventArgs args)
         {
-            for (var i = 0; i < subinventory.Length; i++)
+            ItemInstanceDto[] subinv = GetSubInvFromItemInstance(inv, args.ItemInstance.Item);
+
+            int itemIndex = Array.FindIndex(subinv, x => x.Slot == args.ItemInstance.Slot);
+
+            subinv[itemIndex] = null;
+        }
+
+        private static short GetFirstFreeSlot(IReadOnlyCollection<ItemInstanceDto> subinventory)
+        {
+            for (int i = 0; i < subinventory.Count; i++)
             {
-                var item = subinventory.First(x => x.Slot == i);
+                ItemInstanceDto item = subinventory.First(x => x.Slot == i);
 
                 if (item == null)
                 {
                     return (short)i;
                 }
             }
+
             return -1;
         }
 
-        private ItemInstanceDto[] GetSubInvFromItemInstance(InventoryComponent inv, ItemDto item)
+        private static ItemInstanceDto[] GetSubInvFromItemInstance(InventoryComponent inv, ItemDto item)
         {
             switch (item.Type)
             {
