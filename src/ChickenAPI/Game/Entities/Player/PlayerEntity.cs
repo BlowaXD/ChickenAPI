@@ -16,52 +16,63 @@ namespace ChickenAPI.Game.Entities.Player
 {
     public class PlayerEntity : EntityBase, IPlayerEntity
     {
+        public MovableComponent Movable { get; }
+        public BattleComponent Battle { get; }
+        public InventoryComponent Inventory { get; }
+        public ExperienceComponent Experience { get; }
+        public NameComponent Name { get; set; }
+
         public PlayerEntity(ISession session, CharacterDto dto) : base(EntityType.Player)
         {
             Session = session;
+            Movable = new MovableComponent(this)
+            {
+                Actual = new Position<short>
+                {
+                    X = dto.MapX,
+                    Y = dto.MapY
+                },
+                Destination = new Position<short>
+                {
+                    X = dto.MapX,
+                    Y = dto.MapY
+                }
+            };
+            Character = new CharacterComponent(this, dto);
+            Battle = new BattleComponent(this, dto);
+            Inventory = new InventoryComponent(this);
+            Experience = new ExperienceComponent(this)
+            {
+                Level = dto.Level,
+                LevelXp = dto.LevelXp,
+                JobLevel = dto.JobLevel,
+                JobLevelXp = dto.JobLevelXp,
+                HeroLevel = dto.HeroLevel,
+                HeroLevelXp = dto.HeroXp
+            };
+            Name = new NameComponent(this)
+            {
+                Name = dto.Name
+            };
             Components = new Dictionary<Type, IComponent>
             {
                 { typeof(VisibilityComponent), new VisibilityComponent(this) },
+                { typeof(MovableComponent), Movable },
+                { typeof(BattleComponent), Battle },
+                { typeof(CharacterComponent), Character },
                 {
-                    typeof(MovableComponent), new MovableComponent(this)
-                    {
-                        Actual = new Position<short>
-                        {
-                            X = dto.MapX,
-                            Y = dto.MapY
-                        },
-                        Destination = new Position<short>
-                        {
-                            X = dto.MapX,
-                            Y = dto.MapY
-                        }
-                    }
-                },
-                { typeof(BattleComponent), new BattleComponent(this, dto) },
-                { typeof(CharacterComponent), new CharacterComponent(this, dto) },
-                {
-                    typeof(ExperienceComponent), new ExperienceComponent(this)
-                    {
-                        Level = dto.Level,
-                        LevelXp = dto.LevelXp,
-                        JobLevel = dto.JobLevel,
-                        JobLevelXp = dto.JobLevelXp,
-                        HeroLevel = dto.HeroLevel,
-                        HeroLevelXp = dto.HeroXp
-                    }
+                    typeof(ExperienceComponent), Experience
                 },
                 { typeof(FamilyComponent), new FamilyComponent(this) },
-                { typeof(InventoryComponent), new InventoryComponent(this) },
+                { typeof(InventoryComponent), Inventory },
                 {
-                    typeof(NameComponent), new NameComponent(this)
-                    {
-                        Name = dto.Name
-                    }
+                    typeof(NameComponent), Name
                 },
                 { typeof(SpecialistComponent), new SpecialistComponent(this) }
             };
         }
 
+        public CharacterComponent Character { get; }
         public ISession Session { get; }
 
         public override void TransferEntity(IEntityManager manager)

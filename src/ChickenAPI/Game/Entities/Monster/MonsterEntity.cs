@@ -9,10 +9,22 @@ using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Entities.Monster
 {
-    public class MonsterEntity : EntityBase
+    public class MonsterEntity : EntityBase, IMonsterEntity
     {
         public MonsterEntity(MapMonsterDto dto) : base(EntityType.Monster)
         {
+            Movable = new MovableComponent(this)
+            {
+                Actual = new Position<short> { X = dto.MapX, Y = dto.MapY },
+                Destination = new Position<short> { X = dto.MapX, Y = dto.MapY }
+            };
+            Battle = new BattleComponent(this)
+            {
+                Hp = dto.NpcMonster.MaxHp,
+                HpMax = dto.NpcMonster.MaxHp,
+                Mp = dto.NpcMonster.MaxMp,
+                MpMax = dto.NpcMonster.MaxMp
+            };
             Components = new Dictionary<Type, IComponent>
             {
                 {
@@ -21,20 +33,8 @@ namespace ChickenAPI.Game.Entities.Monster
                         IsVisible = true
                     }
                 },
-                { typeof(BattleComponent), new BattleComponent(this)
-                {
-                    Hp = dto.NpcMonster.MaxHp,
-                    HpMax =  dto.NpcMonster.MaxHp,
-                    Mp = dto.NpcMonster.MaxMp,
-                    MpMax = dto.NpcMonster.MaxMp
-                } },
-                {
-                    typeof(MovableComponent), new MovableComponent(this)
-                    {
-                        Actual = new Position<short> { X = dto.MapX, Y = dto.MapY },
-                        Destination = new Position<short> { X = dto.MapX, Y = dto.MapY }
-                    }
-                },
+                { typeof(BattleComponent), Battle },
+                { typeof(MovableComponent), Movable },
                 { typeof(NpcMonsterComponent), new NpcMonsterComponent(this, dto) }
             };
         }
@@ -43,5 +43,8 @@ namespace ChickenAPI.Game.Entities.Monster
         {
             GC.SuppressFinalize(this);
         }
+
+        public MovableComponent Movable { get; }
+        public BattleComponent Battle { get; set; }
     }
 }
