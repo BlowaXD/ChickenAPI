@@ -53,16 +53,16 @@ namespace ChickenAPI.Game.Systems.Inventory
             }
         }
 
-        private static InvPacket GenerateInventoryPacket(InventoryType type, IEnumerable<ItemInstanceDto> items)
+        private static IvnPacket GenerateInventoryPacket(InventoryType type, IEnumerable<ItemInstanceDto> items)
         {
-            var packet = new InvPacket
+            var packet = new IvnPacket
             {
                 InventoryType = type,
             };
             switch (type)
             {
                 case InventoryType.Equipment:
-                    packet.Wearables = items.Select(s => new InvPacketItem
+                    packet.Wearables = items.Select(s => new IvnPacketItem
                     {
                         InventorySlot = s.Slot,
                         ItemVNum = s.ItemId,
@@ -71,6 +71,7 @@ namespace ChickenAPI.Game.Systems.Inventory
                         Unknown = 0,
                     });
                     break;
+                case InventoryType.Etc:
                 case InventoryType.Main:
                     packet.Main = items.Select(s => new InvPacketMainItem
                     {
@@ -90,6 +91,7 @@ namespace ChickenAPI.Game.Systems.Inventory
             player.SendPacket(GenerateInventoryPacket(InventoryType.Equipment, inv.Equipment));
             player.SendPacket(GenerateInventoryPacket(InventoryType.Main, inv.Main));
             player.SendPacket(GenerateInventoryPacket(InventoryType.Etc, inv.Etc));
+            player.SendPacket(GenerateInventoryPacket(InventoryType.Wear, inv.Wear));
         }
 
         private static void AddItem(InventoryComponent inv, InventoryAddItemEventArgs args)

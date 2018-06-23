@@ -1,7 +1,7 @@
 ﻿namespace ChickenAPI.Packets.Game.Server
 {
-    [PacketHeader("inv_wear_subpacket")]
-    public class InvPacketItem : PacketBase
+    [PacketHeader("ivn_wear_subpacket")]
+    public class IvnPacketItem : PacketBase
     {
         [PacketIndex(0, SpecialSeparator = ".")]
         public short InventorySlot { get; set; }
