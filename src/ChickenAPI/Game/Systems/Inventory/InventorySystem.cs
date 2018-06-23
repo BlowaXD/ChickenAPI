@@ -7,7 +7,7 @@ using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Items;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Player;
-using ChickenAPI.Packets.Game.Client;
+using ChickenAPI.Game.Systems.Inventory.Args;
 using ChickenAPI.Packets.Game.Server;
 
 namespace ChickenAPI.Game.Systems.Inventory
@@ -94,7 +94,7 @@ namespace ChickenAPI.Game.Systems.Inventory
 
         private static void AddItem(InventoryComponent inv, InventoryAddItemEventArgs args)
         {
-            ItemInstanceDto[] subinv = GetSubInvFromItemInstance(inv, args.Item);
+            ItemInstanceDto[] subinv = GetSubInvFromItemInstance(inv, args.ItemInstance.Item);
 
             short slot = GetFirstFreeSlot(subinv);
 
@@ -104,7 +104,7 @@ namespace ChickenAPI.Game.Systems.Inventory
                 return;
             }
 
-            subinv.Append(new ItemInstanceDto { Item = args.Item, Amount = args.Amount, Slot = slot });
+            subinv.Append(args.ItemInstance);
         }
 
         private static void DropItem(InventoryComponent inv, InventoryDropItemEventArgs args)
