@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ChickenAPI.Packets
 {
@@ -6,13 +7,12 @@ namespace ChickenAPI.Packets
     {
         #region Instantiation
 
+        /// <inheritdoc />
         /// <summary> Specify the Index of the packetBase to parse this property to. </summary>
-        /// <param
-        ///     name="index">
+        /// <param name="index">
         ///     The zero based index starting from header (exclusive).
         /// </param>
-        /// <param
-        ///     name="isReturnPacket">
+        /// <param name="isReturnPacket">
         ///     Adds an # to the Header and replaces Spaces with ^ if set to
         ///     true.
         /// </param>
@@ -22,15 +22,17 @@ namespace ChickenAPI.Packets
         /// </param>
         /// <param name="removeSeparator">
         ///     Removes
-        ///     the separator (.) for List<PacketDefinition> packets.
+        ///     the separator (.) for <see cref="T:System.Collections.Generic.List`1" /> packets.
         /// </param>
-        public PacketIndexAttribute(int index, bool isReturnPacket = false, bool serializeToEnd = false, bool removeSeparator = false, string specialSeparator = " ")
+        /// <param name="separatorBeforeProperty"></param>
+        /// <param name="separatorNestedElements"></param>
+        public PacketIndexAttribute(int index, bool isReturnPacket = false, bool serializeToEnd = false, bool removeSeparator = false, string separatorBeforeProperty = " ", string separatorNestedElements = ".")
         {
             Index = index;
             IsReturnPacket = isReturnPacket;
             SerializeToEnd = serializeToEnd;
             RemoveSeparator = removeSeparator;
-            SpecialSeparator = specialSeparator;
+            SeparatorBeforeProperty = separatorBeforeProperty;
         }
 
         #endregion
@@ -47,7 +49,7 @@ namespace ChickenAPI.Packets
         /// </summary>
         public bool IsReturnPacket { get; set; }
 
-        /// <summary> Removes the separator (.) for List<PacketDefinition> packets. </summary>
+        /// <summary> Removes the separator (.) for <see cref="List{T}"/> packets. </summary>
         public bool RemoveSeparator { get; set; }
 
         /// <summary>
@@ -56,11 +58,19 @@ namespace ChickenAPI.Packets
         public bool SerializeToEnd { get; set; }
 
         /// <summary>
-        ///     Defines if everything from this index should be serialized into the underlying property.
+        ///     Defines if this property will be added to the packet or not depending if there is a value
         /// </summary>
         public bool IsOptional { get; set; }
 
-        public string SpecialSeparator { get; set; }
+        /// <summary>
+        /// Defines the separator that will be used before property (by default : " ")
+        /// </summary>
+        public string SeparatorBeforeProperty { get; set; }
+
+        /// <summary>
+        /// Defines the separator between every elements of an <see cref="IEnumerable{T}"/>
+        /// </summary>
+        public string SeparatorNestedElements { get; set; }
 
         #endregion
     }

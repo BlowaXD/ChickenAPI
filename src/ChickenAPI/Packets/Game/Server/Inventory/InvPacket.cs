@@ -9,7 +9,7 @@ namespace ChickenAPI.Packets.Game.Server.Inventory
         [PacketIndex(0)]
         public InventoryType InventoryType { get; set; }
 
-        [PacketIndex(1, RemoveSeparator = true, SpecialSeparator = " ", IsOptional = true)]
+        [PacketIndex(1, RemoveSeparator = true, SeparatorBeforeProperty = " ", IsOptional = true)]
         public List<string> Items { get; set; }
     }
 }

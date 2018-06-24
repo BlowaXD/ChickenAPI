@@ -12,16 +12,16 @@ namespace ChickenAPI.Packets.Game.Server
         [PacketIndex(1)]
         public short Slot { get; set; }
 
-        [PacketIndex(2, SpecialSeparator = ".")]
+        [PacketIndex(2, SeparatorBeforeProperty = ".")]
         public long ItemId { get; set; }
 
-        [PacketIndex(3, SpecialSeparator = ".")]
+        [PacketIndex(3, SeparatorBeforeProperty = ".")]
         public short Rare { get; set; }
 
-        [PacketIndex(4, SpecialSeparator = ".", IsOptional = true)]
+        [PacketIndex(4, SeparatorBeforeProperty = ".", IsOptional = true)]
         public short? Upgrade { get; set; }
 
-        [PacketIndex(5, SpecialSeparator = ".", IsOptional = true)]
+        [PacketIndex(5, SeparatorBeforeProperty = ".", IsOptional = true)]
         public short SpStoneUpgrade { get; set; } = 0; // seems to always be 0 
     }
 }
