@@ -127,8 +127,6 @@ namespace ChickenAPI.Packets.Game.Server
             var battle = entity.GetComponent<BattleComponent>();
             var movable = entity.GetComponent<MovableComponent>();
 
-            string str = "-1.-1.-1.-1.-1.-1.-1.-1.-1";
-
             VisualType = VisualType.Character;
             Name = entity.GetComponent<NameComponent>().Name;
             Unknown = "-";
@@ -143,7 +141,7 @@ namespace ChickenAPI.Packets.Game.Server
                 HairStyle = character.HairStyle,
                 HairColor = character.HairColor,
                 Class = character.Class,
-                Equipment = str,
+                Equipment = new InventoryWearSubPacket(entity.Inventory),
                 HpPercentage = battle.HpPercentage,
                 MpPercentage = battle.MpPercentage,
                 IsSitting = false,

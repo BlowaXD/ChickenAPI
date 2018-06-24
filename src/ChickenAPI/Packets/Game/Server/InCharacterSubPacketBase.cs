@@ -22,7 +22,7 @@ namespace ChickenAPI.Packets.Game.Server
         public CharacterClassType Class { get; set; }
 
         [PacketIndex(5)]
-        public string Equipment { get; set; }
+        public InventoryWearSubPacket Equipment { get; set; }
 
         [PacketIndex(6)]
         public byte HpPercentage { get; set; }

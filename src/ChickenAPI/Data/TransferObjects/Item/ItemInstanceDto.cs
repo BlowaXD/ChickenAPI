@@ -11,6 +11,10 @@ namespace ChickenAPI.Data.TransferObjects.Item
         public ItemDto Item { get; set; }
 
         public long ItemId { get; set; }
+
+        public long CharacterId { get; set; }
+
+        public long? BoundCharacterId { get; set; }
         
         public short Amount { get; set; }
 
@@ -21,6 +25,8 @@ namespace ChickenAPI.Data.TransferObjects.Item
         #region WeaponsAndArmors
 
         public byte Rarity { get; set; }
+
+        public byte Type { get; set; }
 
         public byte Upgrade { get; set; }
 
