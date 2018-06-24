@@ -47,3 +47,15 @@ test Packet List Markdown:
    - chmod +x scripts/packet_list.sh
    - ./scripts/packet_list.sh > $file # generate the packet list markdown file
    - diff $file src/ChickenAPI/Packets/README.md # compare the repository one and the previously generated one
+   
+deploy Nuget Package:
+  stage: deploy
+  tags:
+    - dotnet
+  only:
+    - tags
+  variables:
+    package_path: "src/ChickenAPI"
+  script:
+   - "dotnet pack $package_path --output nupkgs /p:PackageVersion=$CI_COMMIT_TAG"
+   - "dotnet nuget push $package_path/nupkgs/ChickenAPI.CI_COMMIT_TAG.nupkg -k NUGET_API_KEY -s https://api.nuget.org/v3/index.json"
