@@ -1,7 +1,5 @@
 ﻿namespace ChickenAPI.Packets.Game.Server
 {
-
-
     [PacketHeader("inv_main_subpacket")]
     public class InvPacketMainItem : PacketBase
     {

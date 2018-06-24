@@ -3,6 +3,7 @@ using ChickenAPI.Game.Components;
 
 namespace ChickenAPI.Packets.Game.Server
 {
+    [PacketHeader("eq_subpacket")]
     public class InventoryWearSubPacket : PacketBase
     {
         public InventoryWearSubPacket(InventoryComponent inventory)

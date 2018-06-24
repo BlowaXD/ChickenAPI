@@ -9,10 +9,10 @@ namespace ChickenAPI.Packets.Game.Server
         [PacketIndex(0)]
         public InventoryType InventoryType { get; set; }
 
-        [PacketIndex(1, SpecialSeparator = " ")]
-        public IEnumerable<IvnPacketItem> Wearables { get; set; }
+        [PacketIndex(1, SpecialSeparator = " ", IsOptional = true, RemoveSeparator = true)]
+        public List<IvnPacketItem> Wearables { get; set; }
 
-        [PacketIndex(2, SpecialSeparator = " ")]
-        public IEnumerable<InvPacketMainItem> Main { get; set; }
+        [PacketIndex(2, SpecialSeparator = " ", IsOptional = true, RemoveSeparator = true)]
+        public List<InvPacketMainItem> Main { get; set; }
     }
 }

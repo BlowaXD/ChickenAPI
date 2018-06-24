@@ -9,6 +9,7 @@ using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Monster;
 using ChickenAPI.Game.Entities.Npc;
 using ChickenAPI.Game.Systems.Chat;
+using ChickenAPI.Game.Systems.Inventory;
 using ChickenAPI.Game.Systems.Movable;
 using ChickenAPI.Game.Systems.Visibility;
 using ChickenAPI.Utils;
@@ -26,7 +27,8 @@ namespace ChickenAPI.Game.Maps
             {
                 { typeof(VisibilitySystem), new VisibilitySystem(this) },
                 { typeof(ChatSystem), new ChatSystem(this) },
-                { typeof(MovableSystem), new MovableSystem(this) }
+                { typeof(MovableSystem), new MovableSystem(this) },
+                { typeof(InventorySystem), new InventorySystem(this) }
             };
             foreach (MapMonsterDto monster in monsters)
             {

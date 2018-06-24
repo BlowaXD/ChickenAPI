@@ -29,6 +29,9 @@ namespace ChickenAPI.Data.AccessLayer.Item
         /// <returns></returns>
         Task<IEnumerable<ItemInstanceDto>> GetWearByCharacterIdAsync(long characterId);
 
+
+        IEnumerable<ItemInstanceDto> GetByCharacterId(long characterId);
+
         Task<IEnumerable<ItemInstanceDto>> GetByCharacterIdAsync(long characterId);
     }
 }

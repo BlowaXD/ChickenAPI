@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Autofac;
+using ChickenAPI.Data.AccessLayer.Item;
 using ChickenAPI.Data.TransferObjects.Item;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Items;
 using ChickenAPI.Game.Components;
+using ChickenAPI.Game.Entities;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Systems.Inventory.Args;
 using ChickenAPI.Packets.Game.Server;
+using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Systems.Inventory
 {
@@ -50,6 +54,38 @@ namespace ChickenAPI.Game.Systems.Inventory
 
                     GenerateInventoryPackets(inventory, detailsEventArgs, player);
                     break;
+
+                case InventoryInitializeEventArgs initEvent:
+                    InitializeInventory(inventory, entity as IPlayerEntity);
+                    break;
+            }
+        }
+
+        private void InitializeInventory(InventoryComponent inventory, IPlayerEntity player)
+        {
+            var characterItemService = Container.Instance.Resolve<IItemInstanceService>();
+            IEnumerable<ItemInstanceDto> items = characterItemService.GetByCharacterId(player.Character.Id);
+            if (items == null || !items.Any())
+            {
+
+            }
+            foreach (ItemInstanceDto item in items)
+            {
+                switch (item.Type)
+                {
+                    case InventoryType.Equipment:
+                        inventory.Equipment[item.Slot] = item;
+                        break;
+                    case InventoryType.Etc:
+                        inventory.Etc[item.Slot] = item;
+                        break;
+                    case InventoryType.Wear:
+                        inventory.Wear[item.Slot] = item;
+                        break;
+                    case InventoryType.Main:
+                        inventory.Main[item.Slot] = item;
+                        break;
+                }
             }
         }
 
@@ -69,7 +105,7 @@ namespace ChickenAPI.Game.Systems.Inventory
                         Rare = s.Rarity,
                         Upgrade = s.Upgrade,
                         Unknown = 0,
-                    });
+                    }).ToList();
                     break;
                 case InventoryType.Etc:
                 case InventoryType.Main:
@@ -79,7 +115,7 @@ namespace ChickenAPI.Game.Systems.Inventory
                         ItemVNum = s.ItemId,
                         Amount = s.Amount,
                         Unknown = 0
-                    });
+                    }).ToList();
                     break;
             }
 

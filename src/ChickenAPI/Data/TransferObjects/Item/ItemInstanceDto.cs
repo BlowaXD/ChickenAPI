@@ -1,6 +1,7 @@
 ﻿using System;
 using ChickenAPI.Data.AccessLayer.Repository;
-using ChickenAPI.Enums.Game.Entity;
+using ChickenAPI.Enums.Game.Items;
+using ElementType = ChickenAPI.Enums.Game.Entity.ElementType;
 
 namespace ChickenAPI.Data.TransferObjects.Item
 {
@@ -26,7 +27,7 @@ namespace ChickenAPI.Data.TransferObjects.Item
 
         public byte Rarity { get; set; }
 
-        public byte Type { get; set; }
+        public InventoryType Type { get; set; }
 
         public byte Upgrade { get; set; }
 
