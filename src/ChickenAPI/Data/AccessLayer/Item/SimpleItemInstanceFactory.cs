@@ -20,7 +20,8 @@ namespace ChickenAPI.Data.AccessLayer.Item
             Id = Guid.NewGuid(),
             Item = item,
             ItemId = item.Id,
-            Amount = quantity
+            Amount = quantity,
+            Type = item.Type
         };
 
         public ItemInstanceDto CreateItem(long itemId, short quantity) => CreateItem(_itemService.GetById(itemId), quantity);

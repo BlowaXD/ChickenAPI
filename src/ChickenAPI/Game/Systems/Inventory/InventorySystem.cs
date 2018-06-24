@@ -10,8 +10,11 @@ using ChickenAPI.Enums.Game.Items;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities;
 using ChickenAPI.Game.Entities.Player;
+using ChickenAPI.Game.Network;
 using ChickenAPI.Game.Systems.Inventory.Args;
+using ChickenAPI.Packets;
 using ChickenAPI.Packets.Game.Server;
+using ChickenAPI.Packets.Game.Server.Inventory;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Systems.Inventory
@@ -52,23 +55,28 @@ namespace ChickenAPI.Game.Systems.Inventory
                         return;
                     }
 
+                    detailsEventArgs.System = this;
                     GenerateInventoryPackets(inventory, detailsEventArgs, player);
                     break;
 
                 case InventoryInitializeEventArgs initEvent:
                     InitializeInventory(inventory, entity as IPlayerEntity);
                     break;
+
+                case InventoryMoveEventArgs moveEvent:
+                    MoveItem(inventory, moveEvent);
+                    break;
             }
         }
 
-        private void InitializeInventory(InventoryComponent inventory, IPlayerEntity player)
+        private static void InitializeInventory(InventoryComponent inventory, IPlayerEntity player)
         {
             var characterItemService = Container.Instance.Resolve<IItemInstanceService>();
             IEnumerable<ItemInstanceDto> items = characterItemService.GetByCharacterId(player.Character.Id);
             if (items == null || !items.Any())
             {
-
             }
+
             foreach (ItemInstanceDto item in items)
             {
                 switch (item.Type)
@@ -89,33 +97,31 @@ namespace ChickenAPI.Game.Systems.Inventory
             }
         }
 
-        private static IvnPacket GenerateInventoryPacket(InventoryType type, IEnumerable<ItemInstanceDto> items)
+        private static InvPacket GenerateInventoryPacket(InventoryType type, ItemInstanceDto[] items)
         {
-            var packet = new IvnPacket
+            var packet = new InvPacket
             {
-                InventoryType = type,
+                InventoryType = type
             };
+            if (items.All(s => s == null))
+            {
+                return packet;
+            }
+
             switch (type)
             {
                 case InventoryType.Equipment:
-                    packet.Wearables = items.Select(s => new IvnPacketItem
-                    {
-                        InventorySlot = s.Slot,
-                        ItemVNum = s.ItemId,
-                        Rare = s.Rarity,
-                        Upgrade = s.Upgrade,
-                        Unknown = 0,
-                    }).ToList();
+                    packet.Items.AddRange(items.Select(s =>
+                        $"{s.Slot}.{s.ItemId}.{s.Rarity}.{(s.Item.IsColored && s.Item.EquipmentSlot == EquipmentType.Sp ? s.Design : s.Upgrade)}.{s.SpecialistUpgrade2}"));
                     break;
                 case InventoryType.Etc:
                 case InventoryType.Main:
-                    packet.Main = items.Select(s => new InvPacketMainItem
-                    {
-                        InventorySlot = s.Slot,
-                        ItemVNum = s.ItemId,
-                        Amount = s.Amount,
-                        Unknown = 0
-                    }).ToList();
+                    packet.Items.AddRange(items.Select(s =>
+                        $"{s.Slot}.{s.ItemId}.{s.Amount}.0"));
+                    break;
+                case InventoryType.Miniland:
+                    packet.Items.AddRange(items.Select(s =>
+                        $"{s.Slot}.{s.ItemId}.{s.Amount}"));
                     break;
             }
 
@@ -142,7 +148,77 @@ namespace ChickenAPI.Game.Systems.Inventory
                 return;
             }
 
-            subinv.Append(args.ItemInstance);
+            args.ItemInstance.Slot = slot;
+            subinv[slot] = args.ItemInstance;
+            if (!(inv.Entity is IPlayerEntity player))
+            {
+                return;
+            }
+
+            player.SendPacket(GenerateIvnPacket(args.ItemInstance));
+        }
+
+        private static void MoveItem(InventoryComponent inv, InventoryMoveEventArgs args)
+        {
+            ItemInstanceDto source = GetSubInvFromInventoryType(inv, args.InventoryType)[args.SourceSlot];
+            ItemInstanceDto dest = GetSubInvFromInventoryType(inv, args.InventoryType)[args.DestinationSlot];
+
+            if (source == null)
+            {
+                return;
+            }
+
+            if (dest != null && (args.InventoryType == InventoryType.Main || args.InventoryType == InventoryType.Etc) && dest.ItemId == source.ItemId &&
+                dest.Amount + source.Amount > MAX_AMOUNT_PER_SLOT)
+            {
+                // if both source & dest are stackable && slots combined are > max slots
+                // should provide a "fill" possibility
+                return;
+            }
+
+            if (dest == null)
+            {
+                MoveItem(inv, source, args);
+            }
+            else
+            {
+                MoveItems(inv, source, dest);
+            }
+        }
+
+        private static void MoveItem(InventoryComponent inv, ItemInstanceDto source, InventoryMoveEventArgs args)
+        {
+            ItemInstanceDto[] subInv = GetSubInvFromItemInstance(inv, source);
+            subInv[args.DestinationSlot] = source;
+            subInv[args.SourceSlot] = null;
+
+            source.Slot = args.DestinationSlot;
+            if (!(inv.Entity is IPlayerEntity player))
+            {
+                return;
+            }
+
+            player.SendPacket(GenerateEmptyIvnPacket(args.InventoryType, args.SourceSlot));
+            player.SendPacket(GenerateIvnPacket(source));
+        }
+
+        private static void MoveItems(InventoryComponent inv, ItemInstanceDto source, ItemInstanceDto dest)
+        {
+            ItemInstanceDto[] subInv = GetSubInvFromItemInstance(inv, source);
+            subInv[dest.Slot] = source;
+            subInv[source.Slot] = dest;
+
+            short tmp = dest.Slot;
+            dest.Slot = source.Slot;
+            source.Slot = tmp;
+
+            if (!(inv.Entity is IPlayerEntity player))
+            {
+                return;
+            }
+
+            player.SendPacket(GenerateIvnPacket(source));
+            player.SendPacket(GenerateIvnPacket(dest));
         }
 
         private static void DropItem(InventoryComponent inv, InventoryDropItemEventArgs args)
@@ -173,7 +249,7 @@ namespace ChickenAPI.Game.Systems.Inventory
         {
             for (int i = 0; i < subinventory.Count; i++)
             {
-                ItemInstanceDto item = subinventory.First(x => x.Slot == i);
+                ItemInstanceDto item = subinventory.FirstOrDefault(x => x == null || x.Slot == i);
 
                 if (item == null)
                 {
@@ -184,9 +260,11 @@ namespace ChickenAPI.Game.Systems.Inventory
             return -1;
         }
 
-        private static ItemInstanceDto[] GetSubInvFromItemInstance(InventoryComponent inv, ItemDto item)
+        #region Utils
+
+        private static ItemInstanceDto[] GetSubInvFromInventoryType(InventoryComponent inv, InventoryType type)
         {
-            switch (item.Type)
+            switch (type)
             {
                 case InventoryType.Wear:
                     return inv.Wear;
@@ -200,5 +278,37 @@ namespace ChickenAPI.Game.Systems.Inventory
                     return null;
             }
         }
+
+        private static ItemInstanceDto[] GetSubInvFromItemInstance(InventoryComponent inv, ItemDto item)
+        {
+            return GetSubInvFromInventoryType(inv, item.Type);
+        }
+
+        private static ItemInstanceDto[] GetSubInvFromItemInstance(InventoryComponent inv, ItemInstanceDto item)
+        {
+            return GetSubInvFromInventoryType(inv, item.Type);
+        }
+
+        private static IvnPacket GenerateEmptyIvnPacket(InventoryType type, short slot) => new IvnPacket
+        {
+            InventoryType = type,
+            Slot = slot,
+            ItemId = -1,
+            Upgrade = 0,
+            Rare = 0,
+            SpStoneUpgrade = 0
+        };
+
+        private static IvnPacket GenerateIvnPacket(ItemInstanceDto itemInstance) => new IvnPacket
+        {
+            InventoryType = itemInstance.Type,
+            ItemId = itemInstance.ItemId,
+            Slot = itemInstance.Slot,
+            Rare = itemInstance.Rarity,
+            Upgrade = itemInstance.Upgrade,
+            SpStoneUpgrade = itemInstance.SpecialistUpgrade2
+        };
+
+        #endregion
     }
 }

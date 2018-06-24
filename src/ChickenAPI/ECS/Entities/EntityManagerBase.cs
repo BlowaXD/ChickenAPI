@@ -166,7 +166,6 @@ namespace ChickenAPI.ECS.Entities
             {
                 Log.Error("[NOTIFY_SYSTEM]", exception);
                 Console.WriteLine(exception);
-                throw;
             }
         }
 

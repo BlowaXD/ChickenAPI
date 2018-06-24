@@ -24,7 +24,7 @@ namespace ChickenAPI.Packets
         ///     Removes
         ///     the separator (.) for List<PacketDefinition> packets.
         /// </param>
-        public PacketIndexAttribute(int index, bool isReturnPacket = false, bool serializeToEnd = false, bool removeSeparator = false, string specialSeparator = ".")
+        public PacketIndexAttribute(int index, bool isReturnPacket = false, bool serializeToEnd = false, bool removeSeparator = false, string specialSeparator = " ")
         {
             Index = index;
             IsReturnPacket = isReturnPacket;
