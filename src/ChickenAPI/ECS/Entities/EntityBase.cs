@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ChickenAPI.ECS.Components;
+using ChickenAPI.ECS.Systems;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Utils;
 
@@ -17,10 +18,7 @@ namespace ChickenAPI.ECS.Entities
             Components = components;
         }
 
-        protected EntityBase(EntityType type)
-        {
-            Type = type;
-        }
+        protected EntityBase(EntityType type) => Type = type;
 
 
         public long Id { get; set; }
@@ -28,6 +26,12 @@ namespace ChickenAPI.ECS.Entities
         public abstract void Dispose();
 
         public IEntityManager EntityManager { get; protected set; }
+
+        public void NotifySystem<T>(SystemEventArgs e) where T : class, INotifiableSystem
+        {
+            EntityManager.NotifySystem<T>(this, e);
+        }
+
         public EntityType Type { get; }
 
         public virtual void TransferEntity(IEntityManager manager)
