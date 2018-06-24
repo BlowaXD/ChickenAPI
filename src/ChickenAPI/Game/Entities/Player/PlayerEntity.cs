@@ -74,6 +74,7 @@ namespace ChickenAPI.Game.Entities.Player
 
         public CharacterComponent Character { get; }
         public ISession Session { get; }
+        public long LastPulse { get; }
 
         public override void TransferEntity(IEntityManager manager)
         {

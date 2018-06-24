@@ -50,13 +50,7 @@ namespace ChickenAPI.Game.Systems.Inventory
                     break;
 
                 case InventoryGeneratePacketDetailsEventArgs detailsEventArgs:
-                    if (!(entity is IPlayerEntity player))
-                    {
-                        return;
-                    }
-
-                    detailsEventArgs.System = this;
-                    GenerateInventoryPackets(inventory, detailsEventArgs, player);
+                    GenerateInventoryPackets(inventory, entity as IPlayerEntity);
                     break;
 
                 case InventoryInitializeEventArgs initEvent:
@@ -65,6 +59,9 @@ namespace ChickenAPI.Game.Systems.Inventory
 
                 case InventoryMoveEventArgs moveEvent:
                     MoveItem(inventory, moveEvent);
+                    break;
+                case InventoryEqInfoEventArgs eqInfo:
+                    GetItemInfo(inventory, eqInfo, entity as IPlayerEntity);
                     break;
             }
         }
@@ -128,7 +125,7 @@ namespace ChickenAPI.Game.Systems.Inventory
             return packet;
         }
 
-        private static void GenerateInventoryPackets(InventoryComponent inv, InventoryGeneratePacketDetailsEventArgs args, IPlayerEntity player)
+        private static void GenerateInventoryPackets(InventoryComponent inv, IPlayerEntity player)
         {
             player.SendPacket(GenerateInventoryPacket(InventoryType.Equipment, inv.Equipment));
             player.SendPacket(GenerateInventoryPacket(InventoryType.Main, inv.Main));
@@ -157,6 +154,8 @@ namespace ChickenAPI.Game.Systems.Inventory
 
             player.SendPacket(GenerateIvnPacket(args.ItemInstance));
         }
+
+        #region MoveItems
 
         private static void MoveItem(InventoryComponent inv, InventoryMoveEventArgs args)
         {
@@ -221,6 +220,8 @@ namespace ChickenAPI.Game.Systems.Inventory
             player.SendPacket(GenerateIvnPacket(dest));
         }
 
+        #endregion
+
         private static void DropItem(InventoryComponent inv, InventoryDropItemEventArgs args)
         {
             if (!args.ItemInstance.Item.IsDroppable)
@@ -245,6 +246,58 @@ namespace ChickenAPI.Game.Systems.Inventory
             subinv[itemIndex] = null;
         }
 
+        #region ItemInfos
+
+        private static void GetItemInfo(InventoryComponent inventory, InventoryEqInfoEventArgs eqInfo, IPlayerEntity playerEntity)
+        {
+            if (playerEntity == null)
+            {
+                return;
+            }
+
+            ItemInstanceDto[] subInv;
+            ItemInstanceDto itemInstance = null;
+
+            switch (eqInfo.Type)
+            {
+                case 0:
+                    subInv = GetSubInvFromInventoryType(inventory, InventoryType.Wear);
+                    if (eqInfo.Slot > subInv.Length)
+                    {
+                        return;
+                    }
+
+                    itemInstance = subInv[eqInfo.Slot];
+                    break;
+                case 1:
+                    subInv = GetSubInvFromInventoryType(inventory, InventoryType.Equipment);
+                    if (eqInfo.Slot > subInv.Length)
+                    {
+                        return;
+                    }
+
+                    itemInstance = subInv[eqInfo.Slot];
+                    break;
+            }
+
+            if (itemInstance == null)
+            {
+                return;
+            }
+
+            playerEntity.SendPacket(GenerateEInfoPacket(itemInstance));
+        }
+
+        private static EInfoPacket GenerateEInfoPacket(ItemInstanceDto itemInstance)
+        {
+            return new EInfoPacket();
+        }
+
+        #endregion
+
+
+        #region Utils
+
         private static short GetFirstFreeSlot(IReadOnlyCollection<ItemInstanceDto> subinventory)
         {
             for (int i = 0; i < subinventory.Count; i++)
@@ -259,8 +312,6 @@ namespace ChickenAPI.Game.Systems.Inventory
 
             return -1;
         }
-
-        #region Utils
 
         private static ItemInstanceDto[] GetSubInvFromInventoryType(InventoryComponent inv, InventoryType type)
         {

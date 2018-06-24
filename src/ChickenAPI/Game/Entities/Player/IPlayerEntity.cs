@@ -11,6 +11,8 @@ namespace ChickenAPI.Game.Entities.Player
         CharacterComponent Character { get; }
         ISession Session { get; }
 
+        long LastPulse { get; }
+
         void SendPacket<T>(T packetBase) where T : IPacket;
         void SendPackets(IEnumerable<IPacket> packets);
     }
