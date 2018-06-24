@@ -59,4 +59,4 @@ deploy Nuget Package:
   script:
    - "dotnet build $package_path"
    - "dotnet pack $package_path --output nupkgs /p:PackageVersion=$CI_COMMIT_TAG"
-   - "dotnet nuget push $package_path/nupkgs/ChickenAPI.CI_COMMIT_TAG.nupkg -k NUGET_API_KEY -s https://api.nuget.org/v3/index.json"
+   - "dotnet nuget push $package_path/nupkgs/ChickenAPI.$CI_COMMIT_TAG.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json"
