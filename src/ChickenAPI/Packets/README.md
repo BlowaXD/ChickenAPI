@@ -45,6 +45,8 @@
 - [x] [rmvobj](Game/Client/RmvobjPacket.cs)
 - [x] [say](Game/Client/ClientSayPacket.cs)
 - [x] [sc](Game/Client/ScPacket.cs)
+- [x] [u_as](Game/Client/UseAoeSkillPacket.cs)
+- [x] [u_s](Game/Client/UseSkillPacket.cs)
 - [x] [walk](Game/Client/WalkPacket.cs)
 - [x] [wear](Game/Client/WearPacket.cs)
 
