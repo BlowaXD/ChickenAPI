@@ -4,7 +4,7 @@ namespace ChickenAPI.Packets.Game.Client
     public class UseAoeSkillPacket : PacketBase
     {
         [PacketIndex(0)]
-        public int CastId { get; set; }
+        public long CastId { get; set; }
 
         [PacketIndex(1)]
         public short MapX { get; set; }
