@@ -6,7 +6,7 @@ namespace ChickenAPI.Packets.Game.Client
     public class UseSkillPacket : PacketBase
     {
         [PacketIndex(0)]
-        public int CastId { get; set; }
+        public long CastId { get; set; }
 
         [PacketIndex(1)]
         public VisualType VisualType { get; set; }
@@ -14,10 +14,10 @@ namespace ChickenAPI.Packets.Game.Client
         [PacketIndex(2)]
         public int MapMonsterId { get; set; }
 
-        [PacketIndex(3)]
-        public short? MapX { get; set; }
+        [PacketIndex(3, IsOptional = true)]
+        public short MapX { get; set; }
 
-        [PacketIndex(4)]
-        public short? MapY { get; set; }
+        [PacketIndex(4, IsOptional = true)]
+        public short MapY { get; set; }
     }
 }
