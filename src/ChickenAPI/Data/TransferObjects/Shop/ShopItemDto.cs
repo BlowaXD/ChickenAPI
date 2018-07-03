@@ -8,7 +8,7 @@ namespace ChickenAPI.Data.TransferObjects.Shop
 
         public byte Color { get; set; }
 
-        public short ItemVNum { get; set; }
+        public long ItemId { get; set; }
 
         public sbyte Rare { get; set; }
 
