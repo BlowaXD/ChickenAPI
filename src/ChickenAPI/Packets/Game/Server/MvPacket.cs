@@ -2,12 +2,23 @@
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
+using ChickenAPI.Game.Entities;
+using ChickenAPI.Game.Entities.Player;
 
 namespace ChickenAPI.Packets.Game.Server
 {
     [PacketHeader("mv")]
     public class MvPacket : PacketBase
     {
+        public MvPacket(IPlayerEntity entity)
+        {
+            VisualType = VisualType.Character;
+            VisualId = entity.Character.Id;
+            Speed = entity.Movable.Speed;
+            MapX = entity.Movable.Actual.X;
+            MapY = entity.Movable.Actual.Y;
+        }
+
         public MvPacket(IEntity entity)
         {
             switch (entity.Type)
@@ -34,6 +45,11 @@ namespace ChickenAPI.Packets.Game.Server
             MapX = movable.Actual.X;
             MapY = movable.Actual.Y;
             Speed = movable.Speed;
+        }
+
+        public MvPacket()
+        {
+            throw new NotImplementedException();
         }
 
         [PacketIndex(0)]

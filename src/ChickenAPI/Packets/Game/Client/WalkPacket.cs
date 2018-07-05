@@ -15,7 +15,7 @@
         public short Unknown { get; set; }
 
         [PacketIndex(3)]
-        public short Speed { get; set; }
+        public byte Speed { get; set; }
 
         #endregion
     }
