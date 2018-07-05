@@ -14,7 +14,7 @@ namespace ChickenAPI.Packets.Game.Server.Inventory
         [PacketIndex(1)]
         public short Slot { get; set; }
 
-        [PacketIndex(3)]
+        [PacketIndex(2)]
         public long? ShopOwnerId { get; set; }
 
         #endregion

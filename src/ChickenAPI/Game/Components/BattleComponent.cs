@@ -37,9 +37,9 @@ namespace ChickenAPI.Game.Components
 
         public short Morph { get; set; }
 
-        public bool CanAttack { get; set; }
+        public bool CanAttack { get; set; } = false;
 
-        public bool CanMove { get; set; }
+        public bool CanMove { get; set; } = false;
 
         public IEntity Entity { get; }
     }

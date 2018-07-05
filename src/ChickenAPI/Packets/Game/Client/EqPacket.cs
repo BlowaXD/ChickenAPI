@@ -1,16 +1,31 @@
 ﻿using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Enums.Game.Character;
+using ChickenAPI.Enums.Game.Items;
+using ChickenAPI.Game.Entities.Player;
+using ChickenAPI.Packets.Game.Server.Inventory;
 
 namespace ChickenAPI.Packets.Game.Client
 {
     [PacketHeader("eq")]
     public class EqPacket : PacketBase
     {
+        public EqPacket(IPlayerEntity entity)
+        {
+            CharacterId = entity.Character.Id;
+            VisualType = 0;
+            GenderType = entity.Character.Gender;
+            HairStyleType = entity.Character.HairStyle;
+            HairColorType = entity.Character.HairColor;
+            CharacterClassType = entity.Character.Class;
+            EqList = new EqListInfo(entity.Inventory);
+            EqInfo = new EqRareInfo(entity.Inventory);
+        }
+
         [PacketIndex(0)]
         public long CharacterId { get; set; }
 
         [PacketIndex(1)]
-        public VisualType VisualType { get; set; }
+        public byte VisualType { get; set; }
 
         [PacketIndex(2)]
         public GenderType GenderType { get; set; }
@@ -18,50 +33,16 @@ namespace ChickenAPI.Packets.Game.Client
         [PacketIndex(3)]
         public HairStyleType HairStyleType { get; set; }
 
-        [PacketIndex(3)]
+        [PacketIndex(4)]
         public HairColorType HairColorType { get; set; }
 
-        [PacketIndex(4)]
+        [PacketIndex(5)]
         public CharacterClassType CharacterClassType { get; set; }
 
-        [PacketIndex(5)]
-        public short Hat { get; set; }
-
         [PacketIndex(6)]
-        public short Armor { get; set; }
+        public EqListInfo EqList { get; set; }
 
         [PacketIndex(7)]
-        public short MainWeapon { get; set; }
-
-        [PacketIndex(8)]
-        public short SecondaryWeapon { get; set; }
-
-        [PacketIndex(9)]
-        public short Mask { get; set; }
-
-        [PacketIndex(10)]
-        public short Fairy { get; set; }
-
-        [PacketIndex(11)]
-        public short CostumeSuit { get; set; }
-
-        [PacketIndex(12)]
-        public short CostumeHat { get; set; }
-
-        [PacketIndex(13)]
-        public short WeaponSkin { get; set; }
-
-        [PacketIndex(14)]
-        public byte WeaponUpgrade { get; set; }
-
-        [PacketIndex(15)]
-        public byte WeaponRare { get; set; }
-
-        [PacketIndex(16)]
-        public byte ArmorUpgrade { get; set; }
-
-        [PacketIndex(17)]
-        public byte ArmorRare { get; set; }
-
+        public EqRareInfo EqInfo { get; set; }
     }
 }

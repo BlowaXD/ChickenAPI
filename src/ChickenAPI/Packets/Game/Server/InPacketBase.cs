@@ -161,12 +161,12 @@ namespace ChickenAPI.Packets.Game.Server
                 SpUpgrade = 0,
                 Faction = FactionType.Neutral, // todo faction system
                 SpDesign = 0,
-                Level = entity.GetComponent<ExperienceComponent>().Level,
+                Level = entity.Experience.Level,
                 FamilyLevel = 0,
                 ArenaWinner = character.ArenaWinner,
                 Compliment = character.Compliment,
                 Size = 10,
-                HeroLevel = entity.GetComponent<ExperienceComponent>().HeroLevel
+                HeroLevel = entity.Experience.HeroLevel
             };
         }
 
