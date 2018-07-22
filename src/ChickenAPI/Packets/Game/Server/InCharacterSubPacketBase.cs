@@ -21,7 +21,7 @@ namespace ChickenAPI.Packets.Game.Server
         [PacketIndex(4)]
         public CharacterClassType Class { get; set; }
 
-        [PacketIndex(5)]
+        [PacketIndex(5, IsOptional = true)]
         public InventoryWearSubPacket Equipment { get; set; }
 
         [PacketIndex(6)]

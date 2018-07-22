@@ -38,7 +38,7 @@ namespace ChickenAPI.Packets.CharacterScreen.Server
         [PacketIndex(9)]
         public ushort HeroLevel { get; set; }
 
-        [PacketIndex(10)]
+        [PacketIndex(10, SeparatorBeforeProperty = " ")]
         public List<short?> Equipments { get; set; }
 
         [PacketIndex(11)]

@@ -24,11 +24,9 @@ namespace ChickenAPI.Game.Maps
 
         public long Id => _map.Id;
         public int MusicId => _map.Music;
-
         public IMapLayer BaseLayer => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs));
         public HashSet<IMapLayer> Layers { get; }
         public HashSet<PortalDto> Portals { get; }
-
         public short Width => _map.Width;
         public short Height => _map.Height;
         public byte[] Grid => _map.Grid;
