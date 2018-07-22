@@ -18,13 +18,13 @@ namespace ChickenAPI.Game.Maps
             _monsters = monsters;
             _npcs = npcs;
             Portals = new HashSet<PortalDto>(portals);
-            _baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs);
+            _baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs, Portals);
             Layers = new HashSet<IMapLayer>();
         }
 
         public long Id => _map.Id;
         public int MusicId => _map.Music;
-        public IMapLayer BaseLayer => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs));
+        public IMapLayer BaseLayer => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs, Portals));
         public HashSet<IMapLayer> Layers { get; }
         public HashSet<PortalDto> Portals { get; }
         public short Width => _map.Width;

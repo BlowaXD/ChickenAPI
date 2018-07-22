@@ -8,6 +8,7 @@ using ChickenAPI.Enums.Game.Entity;
 using ChickenAPI.Game.Components;
 using ChickenAPI.Game.Entities.Monster;
 using ChickenAPI.Game.Entities.Npc;
+using ChickenAPI.Game.Entities.Portal;
 using ChickenAPI.Game.Systems.Chat;
 using ChickenAPI.Game.Systems.Inventory;
 using ChickenAPI.Game.Systems.Movable;
@@ -18,7 +19,7 @@ namespace ChickenAPI.Game.Maps
 {
     public class SimpleMapLayer : EntityManagerBase, IMapLayer
     {
-        public SimpleMapLayer(IMap map, IEnumerable<MapMonsterDto> monsters, IEnumerable<MapNpcDto> npcs = null)
+        public SimpleMapLayer(IMap map, IEnumerable<MapMonsterDto> monsters, IEnumerable<MapNpcDto> npcs = null, IEnumerable<PortalDto> portals = null)
         {
             Id = Guid.NewGuid();
             Map = map;
@@ -43,6 +44,15 @@ namespace ChickenAPI.Game.Maps
             foreach (MapNpcDto npc in npcs)
             {
                 RegisterEntity(new NpcEntity(npc));
+            }
+
+            if (portals == null)
+            {
+                return;
+            }
+            foreach (PortalDto portal in portals)
+            {
+                RegisterEntity(new PortalEntity(portal));
             }
         }
 
