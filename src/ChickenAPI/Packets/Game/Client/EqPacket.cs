@@ -42,7 +42,7 @@ namespace ChickenAPI.Packets.Game.Client
         [PacketIndex(6)]
         public EqListInfo EqList { get; set; }
 
-        [PacketIndex(7)]
+        [PacketIndex(7, RemoveSeparator = true)]
         public EqRareInfo EqInfo { get; set; }
     }
 }

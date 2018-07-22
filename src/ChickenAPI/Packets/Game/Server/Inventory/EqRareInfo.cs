@@ -16,17 +16,15 @@ namespace ChickenAPI.Packets.Game.Server.Inventory
         }
 
         [PacketIndex(0)]
-        public byte WeaponUpgrade { get; set; } = 0;
+        public byte WeaponUpgrade { get; set; }
 
         [PacketIndex(1, SeparatorBeforeProperty = "")]
-        public sbyte WeaponRarity { get; set; } = 0;
+        public sbyte WeaponRarity { get; set; }
 
-        [PacketIndex(2)]
-        public byte ArmorUpgrade { get; set; } = 0;
+        [PacketIndex(2, SeparatorBeforeProperty = " ")]
+        public byte ArmorUpgrade { get; set; }
 
         [PacketIndex(3, SeparatorBeforeProperty = "")]
-        public sbyte ArmorRarity { get; set; } = 0;
-
-
+        public sbyte ArmorRarity { get; set; }
     }
 }

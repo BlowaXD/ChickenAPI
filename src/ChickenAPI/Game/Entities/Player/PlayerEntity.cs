@@ -13,7 +13,6 @@ using ChickenAPI.Packets.Game.Client;
 using ChickenAPI.Packets.Game.Server;
 using ChickenAPI.Packets.Game.Server.Group;
 using ChickenAPI.Packets.Game.Server.Inventory;
-using ChickenAPI.Packets.Game.Server.MiniMap;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Entities.Player
@@ -29,19 +28,6 @@ namespace ChickenAPI.Game.Entities.Player
         public PlayerEntity(ISession session, CharacterDto dto) : base(EntityType.Player)
         {
             Session = session;
-            Movable = new MovableComponent(this)
-            {
-                Actual = new Position<short>
-                {
-                    X = dto.MapX,
-                    Y = dto.MapY
-                },
-                Destination = new Position<short>
-                {
-                    X = dto.MapX,
-                    Y = dto.MapY
-                }
-            };
             Character = new CharacterComponent(this, dto);
             Battle = new BattleComponent(this, dto);
             Inventory = new InventoryComponent(this);
@@ -57,6 +43,19 @@ namespace ChickenAPI.Game.Entities.Player
             Name = new NameComponent(this)
             {
                 Name = dto.Name
+            };
+            Movable = new MovableComponent(this)
+            {
+                Actual = new Position<short>
+                {
+                    X = dto.MapX,
+                    Y = dto.MapY
+                },
+                Destination = new Position<short>
+                {
+                    X = dto.MapX,
+                    Y = dto.MapY
+                }
             };
             Components = new Dictionary<Type, IComponent>
             {
@@ -95,13 +94,12 @@ namespace ChickenAPI.Game.Entities.Player
             SendPacket(new EqPacket(this));
             SendPacket(new EquipmentPacket(this));
             SendPacket(new LevPacket(this));
-            SendPacket(new StatPacket(this));
             SendPacket(new StPacket(this));
             SendPacket(new AtPacketBase(this));
             SendPacket(new CondPacketBase(this));
             SendPacket(new CMapPacketBase(map.Map));
             // StatChar()
-            SendPacket(new InPacketBase(this));
+            //SendPacket(new InPacketBase(this));
             // Pairy()
             // Pst()
             // Act6() : Act()
@@ -115,13 +113,14 @@ namespace ChickenAPI.Game.Entities.Player
             // MapDesignObjectsEffects
             // MapItems()
             // Gp()
-            SendPacket(new RsfpPacket()); // Minimap Position
-            SendPacket(new CondPacketBase(this));
+            //SendPacket(new RsfpPacket()); // Minimap Position
+            //SendPacket(new CondPacketBase(this));
             EntityManager.NotifySystem<VisibilitySystem>(this, new VisibilitySetVisibleEventArgs
             {
                 Broadcast = true,
                 IsChangingMapLayer = true
             });
+            SendPacket(new StatPacket(this));
         }
 
         public void SendPacket<T>(T packetBase) where T : IPacket => Session.SendPacket(packetBase);

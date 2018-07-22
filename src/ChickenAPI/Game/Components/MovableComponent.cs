@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Autofac;
+using ChickenAPI.Data.AccessLayer.Character;
 using ChickenAPI.ECS.Components;
 using ChickenAPI.ECS.Entities;
 using ChickenAPI.Enums.Game.Entity;
+using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Utils;
 
 namespace ChickenAPI.Game.Components
@@ -17,6 +20,16 @@ namespace ChickenAPI.Game.Components
             Waypoints = new Queue<Position<short>>();
             Destination = new Position<short>();
             Actual = new Position<short>();
+            Speed = 11;
+        }
+
+        public MovableComponent(IPlayerEntity entity)
+        {
+            Entity = entity;
+            Waypoints = new Queue<Position<short>>();
+            Destination = new Position<short>();
+            Actual = new Position<short>();
+            Speed = (byte)Container.Instance.Resolve<IAlgorithmService>().GetSpeed(entity.Character.Class, entity.Experience.Level);
         }
 
         private Position<short> _actual;
