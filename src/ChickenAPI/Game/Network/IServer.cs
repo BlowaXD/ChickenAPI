@@ -2,7 +2,7 @@
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Packets;
 
-namespace ChickenAPI.Game
+namespace ChickenAPI.Game.Network
 {
     public interface IServer : IBroadcastable
     {
