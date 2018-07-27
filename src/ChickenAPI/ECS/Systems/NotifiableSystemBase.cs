@@ -9,10 +9,6 @@ namespace ChickenAPI.ECS.Systems
         {
         }
 
-        public virtual void Execute(IEntity entity, SystemEventArgs e)
-        {
-            // no base implementation yet
-            throw new NotImplementedException();
-        }
+        public abstract void Execute(IEntity entity, SystemEventArgs e);
     }
 }
