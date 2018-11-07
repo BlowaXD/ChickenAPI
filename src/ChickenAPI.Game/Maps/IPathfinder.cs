@@ -1,4 +1,5 @@
 ﻿using ChickenAPI.Core.Utils;
+using ChickenAPI.Game.ECS.Entities;
 
 namespace ChickenAPI.Game.Maps
 {

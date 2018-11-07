@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Autofac;
-using ChickenAPI.Core.ECS.Entities;
 using ChickenAPI.Core.IoC;
 using ChickenAPI.Core.Maths;
 using ChickenAPI.Core.Utils;
-using ChickenAPI.Game.Data.TransferObjects.Map;
-using ChickenAPI.Game.Data.TransferObjects.Shop;
+using ChickenAPI.Data.Map;
+using ChickenAPI.Data.Shop;
+using ChickenAPI.Game.ECS.Entities;
 
 namespace ChickenAPI.Game.Maps
 {
@@ -18,27 +18,28 @@ namespace ChickenAPI.Game.Maps
         private readonly IEnumerable<MapMonsterDto> _monsters;
         private readonly IEnumerable<MapNpcDto> _npcs;
         private readonly IEnumerable<PortalDto> _portals;
+        private readonly bool _initSystems;
 
         private readonly IRandomGenerator _random;
         private readonly IEnumerable<ShopDto> _shops;
 
-        private readonly Position<short>[] WalkableGrid;
+        private readonly Position<short>[] _walkableGrid;
         private IMapLayer _baseMapLayer;
 
-        public SimpleMap(MapDto map, IEnumerable<MapMonsterDto> monsters, IEnumerable<MapNpcDto> npcs, IEnumerable<PortalDto> portals, IEnumerable<ShopDto> shops)
+        public SimpleMap(MapDto map, IEnumerable<MapMonsterDto> monsters, IEnumerable<MapNpcDto> npcs, IEnumerable<PortalDto> portals, IEnumerable<ShopDto> shops, bool initSystems = true)
         {
             _map = map;
             _monsters = monsters;
             _npcs = npcs;
             _portals = portals;
             _shops = shops;
-            _baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs, _portals, _shops);
+            _initSystems = initSystems;
             Layers = new HashSet<IMapLayer>();
 
             _random = ChickenContainer.Instance.Resolve<IRandomGenerator>();
 
 
-            WalkableGrid = new Lazy<Position<short>[]>(() =>
+            _walkableGrid = new Lazy<Position<short>[]>(() =>
             {
                 List<Position<short>> cells = new List<Position<short>>();
                 for (short y = 0; y <= map.Height; y++)
@@ -55,7 +56,7 @@ namespace ChickenAPI.Game.Maps
 
         public long Id => _map.Id;
         public int MusicId => _map.Music;
-        public IMapLayer BaseLayer => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs, _portals, _shops));
+        public IMapLayer BaseLayer => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs, _portals, _shops, _initSystems));
         public HashSet<IMapLayer> Layers { get; }
 
         public short Width => _map.Width;
@@ -71,7 +72,7 @@ namespace ChickenAPI.Game.Maps
             }
             catch (Exception)
             {
-                Log.Warn($"[IS_WALKABLE] {Id}: {x} {y}");
+                Log.Warn($"[IS_WALKABLE] {Id}: ({x},{y})");
                 return false;
             }
         }
@@ -83,7 +84,7 @@ namespace ChickenAPI.Game.Maps
 
             short minY = (short)(-rangeY + minimumY);
             short maxY = (short)(rangeY + minimumY);
-            return WalkableGrid.Where(s => s.Y >= minY && s.Y <= maxY && s.X >= minX && s.X <= maxX).OrderBy(s => _random.Next(int.MaxValue)).FirstOrDefault(cell => IsWalkable(cell.X, cell.Y));
+            return _walkableGrid.Where(s => s.Y >= minY && s.Y <= maxY && s.X >= minX && s.X <= maxX).OrderBy(s => _random.Next(int.MaxValue)).FirstOrDefault(cell => IsWalkable(cell.X, cell.Y));
         }
 
         private static bool IsWalkable(byte cell) => cell == 0 || cell == 2 || cell >= 16 && cell <= 19;

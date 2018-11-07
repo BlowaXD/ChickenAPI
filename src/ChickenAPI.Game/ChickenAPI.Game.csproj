@@ -26,17 +26,18 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="NLog" Version="4.5.9" />
-    <PackageReference Include="NLog.Config" Version="4.5.9" />
+    <PackageReference Include="NLog" Version="4.5.11" />
+    <PackageReference Include="NLog.Config" Version="4.5.11" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ChickenAPI.Core\ChickenAPI.Core.csproj" />
+    <ProjectReference Include="..\ChickenAPI.Data\ChickenAPI.Data.csproj" />
     <ProjectReference Include="..\ChickenAPI.Enums\ChickenAPI.Enums.csproj" />
     <ProjectReference Include="..\ChickenAPI.Packets\ChickenAPI.Packets.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Specialists\Extensions\" />
+    <Folder Include="Specialists\Extensions\" />
   </ItemGroup>
 </Project>

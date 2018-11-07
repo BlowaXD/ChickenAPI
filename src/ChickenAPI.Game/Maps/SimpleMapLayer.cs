@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ChickenAPI.Core.ECS.Entities;
 using ChickenAPI.Core.Utils;
-using ChickenAPI.Game.Data.TransferObjects.Map;
-using ChickenAPI.Game.Data.TransferObjects.Shop;
+using ChickenAPI.Data.Map;
+using ChickenAPI.Data.Shop;
+using ChickenAPI.Enums.Game.Entity;
+using ChickenAPI.Game.ECS.Entities;
 using ChickenAPI.Game.Entities.Monster;
 using ChickenAPI.Game.Entities.Npc;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Entities.Portal;
 using ChickenAPI.Game.Features.Effects;
 using ChickenAPI.Game.Features.IAs;
-using ChickenAPI.Game.Features.Movement;
+using ChickenAPI.Game.Movements;
+using ChickenAPI.Game.Movements.DataObjects;
+using ChickenAPI.Game.Network;
 using ChickenAPI.Packets;
 
 namespace ChickenAPI.Game.Maps
 {
     public class SimpleMapLayer : EntityManagerBase, IMapLayer
     {
-        public SimpleMapLayer(IMap map, IEnumerable<MapMonsterDto> monsters, IEnumerable<MapNpcDto> npcs = null, IEnumerable<PortalDto> portals = null, IEnumerable<ShopDto> shops = null)
+        public SimpleMapLayer(IMap map, IEnumerable<MapMonsterDto> monsters,
+            IEnumerable<MapNpcDto> npcs = null,
+            IEnumerable<PortalDto> portals = null,
+            IEnumerable<ShopDto> shops = null,
+            bool initSystems = true)
         {
             Id = Guid.NewGuid();
             Map = map;
@@ -26,62 +33,10 @@ namespace ChickenAPI.Game.Maps
             InitializeMonsters(monsters);
             InitializeNpcs(npcs, shops);
             InitializePortals(portals);
-            InitializeSystems();
-        }
 
-        public Guid Id { get; set; }
-        public IMap Map { get; }
-
-        public IEnumerable<IEntity> GetEntitiesInRange(Position<short> pos, int range) =>
-            Entities.Where(e => e.HasComponent<MovableComponent>() && PositionHelper.GetDistance(pos, e.GetComponent<MovableComponent>().Actual) < range);
-
-        public void Broadcast<T>(T packet) where T : IPacket
-        {
-            foreach (IPlayerEntity i in GetEntitiesByType<IPlayerEntity>(EntityType.Player))
+            if (initSystems)
             {
-                i.SendPacket(packet);
-            }
-        }
-
-        public void Broadcast<T>(IEnumerable<T> packets) where T : IPacket
-        {
-            foreach (IPlayerEntity i in GetEntitiesByType<IPlayerEntity>(EntityType.Player))
-            {
-                i.SendPackets(packets);
-            }
-        }
-
-        public void Broadcast(IEnumerable<IPacket> packets)
-        {
-            foreach (IPlayerEntity i in GetEntitiesByType<IPlayerEntity>(EntityType.Player))
-            {
-                i.SendPackets(packets);
-            }
-        }
-
-        public void Broadcast<T>(IPlayerEntity sender, T packet) where T : IPacket
-        {
-            foreach (IPlayerEntity i in GetEntitiesByType<IPlayerEntity>(EntityType.Player))
-            {
-                if (i == sender)
-                {
-                    continue;
-                }
-
-                i.SendPacket(packet);
-            }
-        }
-
-        public void Broadcast<T>(IPlayerEntity sender, IEnumerable<T> packets) where T : IPacket
-        {
-            foreach (IPlayerEntity i in GetEntitiesByType<IPlayerEntity>(EntityType.Player))
-            {
-                if (i == sender)
-                {
-                    continue;
-                }
-
-                i.SendPackets(packets);
+                InitializeSystems();
             }
         }
 
@@ -89,6 +44,7 @@ namespace ChickenAPI.Game.Maps
         {
             if (portals == null)
             {
+                return;
             }
 
             foreach (PortalDto portal in portals)
@@ -113,7 +69,7 @@ namespace ChickenAPI.Game.Maps
 
             foreach (MapNpcDto npc in npcs)
             {
-                ShopDto shop = shops.FirstOrDefault(s => s.MapNpcId == npc.Id);
+                ShopDto shop = shops?.FirstOrDefault(s => s.MapNpcId == npc.Id);
                 TransferEntity(new NpcEntity(npc, shop), this);
             }
         }
@@ -128,6 +84,58 @@ namespace ChickenAPI.Game.Maps
             foreach (MapMonsterDto monster in monsters)
             {
                 TransferEntity(new MonsterEntity(monster), this);
+            }
+        }
+
+        public Guid Id { get; set; }
+        public IMap Map { get; }
+        public IEnumerable<IPlayerEntity> Players => _players;
+
+        public IEnumerable<IPlayerEntity> GetPlayersInRange(Position<short> pos, int range) =>
+            _players.Where(e => PositionHelper.GetDistance(pos, e.Movable.Actual) < range);
+
+        public IEnumerable<IEntity> GetEntitiesInRange(Position<short> pos, int range) =>
+            Entities.Where(e => e.HasComponent<MovableComponent>() && PositionHelper.GetDistance(pos, e.GetComponent<MovableComponent>().Actual) < range);
+
+        public IEnumerable<T> GetEntitiesInRange<T>(Position<short> pos, int range) where T : IEntity =>
+            Entities.Where(e => e is T && e.HasComponent<MovableComponent>() && PositionHelper.GetDistance(pos, e.GetComponent<MovableComponent>().Actual) < range) as IEnumerable<T>;
+        public void Broadcast<T>(T packet) where T : IPacket => Broadcast(packet, null);
+
+
+        public void Broadcast<T>(IEnumerable<T> packets) where T : IPacket => Broadcast(packets, null);
+
+        public void Broadcast(IEnumerable<IPacket> packets) => Broadcast(packets, null);
+
+        public void Broadcast<T>(T packet, IBroadcastRule rule) where T : IPacket
+        {
+            foreach (IPlayerEntity i in Players)
+            {
+                if (rule == null || rule.Match(i))
+                {
+                    i.SendPacket(packet);
+                }
+            }
+        }
+
+        public void Broadcast<T>(IEnumerable<T> packets, IBroadcastRule rule) where T : IPacket
+        {
+            foreach (IPlayerEntity i in Players)
+            {
+                if (rule == null || rule.Match(i))
+                {
+                    i.SendPackets(packets);
+                }
+            }
+        }
+
+        public void Broadcast(IEnumerable<IPacket> packets, IBroadcastRule rule)
+        {
+            foreach (IPlayerEntity i in Players)
+            {
+                if (rule == null || rule.Match(i))
+                {
+                    i.SendPackets(packets);
+                }
             }
         }
     }

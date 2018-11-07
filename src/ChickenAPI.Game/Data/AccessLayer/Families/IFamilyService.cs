@@ -1,10 +1,25 @@
-﻿using ChickenAPI.Core.Data.AccessLayer;
-using ChickenAPI.Game.Data.TransferObjects.Families;
+﻿using System.Threading.Tasks;
+using ChickenAPI.Data;
+using ChickenAPI.Data.Families;
 
 namespace ChickenAPI.Game.Data.AccessLayer.Families
 {
     public interface IFamilyService : IMappedRepository<FamilyDto>
     {
+        /// <summary>
+        /// Gets the family by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        FamilyDto GetByName(string name);
+
+        /// <summary>
+        /// Asynchronously gets the family object by its name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        Task<FamilyDto> GetByNameAsync(string name);
+
         /// <summary>
         /// Broadcast an UpdateFamily event that will force sync on clients
         /// Will use ISC
