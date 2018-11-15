@@ -8,8 +8,8 @@
 [![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/for-you.svg)](https://forthebadge.com)
 
- 
-[![discord](https://discordapp.com/api/guilds/442778256035414037/widget.png?style=banner2)](https://discord.gg/HnTx5wN)
+
+[![Discord](https://discordapp.com/api/guilds/512650034257592336/widget.png?style=banner2)](https://discord.gg/8qAd9px)
 
 ## Description
 
