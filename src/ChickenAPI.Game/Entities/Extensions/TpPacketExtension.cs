@@ -1,9 +1,9 @@
 ﻿using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Game.ECS.Entities;
 using ChickenAPI.Game.Entities.Monster;
 using ChickenAPI.Game.Entities.Npc;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Movements;
+using ChickenAPI.Game._ECS.Entities;
 using ChickenAPI.Packets.Game.Server.Entities;
 
 namespace ChickenAPI.Game.Entities.Extensions
@@ -17,7 +17,7 @@ namespace ChickenAPI.Game.Entities.Extensions
                 return null;
             }
 
-            return entity.GenerateTpPacket(movable.Movable.Actual.X, movable.Movable.Actual.Y);
+            return entity.GenerateTpPacket(movable.Position.X, movable.Position.Y);
         }
 
         public static TpPacket GenerateTpPacket(this IEntity entity, short x, short y)

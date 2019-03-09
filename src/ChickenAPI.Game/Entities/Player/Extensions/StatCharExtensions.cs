@@ -1,16 +1,20 @@
-﻿using ChickenAPI.Enums.Game.Character;
-using ChickenAPI.Enums.Game.Items;
+﻿using System.Threading.Tasks;
+using ChickenAPI.Enums.Game.Character;
 using ChickenAPI.Packets.Game.Server.Player;
 
 namespace ChickenAPI.Game.Entities.Player.Extensions
 {
     public static class StatCharExtensions
     {
+        public static Task ActualizeUiStatChar(this IPlayerEntity player)
+        {
+            return player.SendPacketAsync(player.GenerateStatCharPacket());
+        }
+
         public static ScPacket GenerateStatCharPacket(this IPlayerEntity player)
         {
             byte type = 0;
             byte subType = 0;
-
 
             switch (player.Character.Class)
             {
@@ -38,29 +42,29 @@ namespace ChickenAPI.Game.Entities.Player.Extensions
             return new ScPacket
             {
                 Type = type,
-                MainWeaponUpgrade = player.Inventory.Wear[(int)EquipmentType.MainWeapon]?.Upgrade ?? 0,
-                MinHit = 0,
-                MaxHit = 0,
-                HitRate = 0,
-                CriticalHitRate = 0,
-                CriticalHitMultiplier = 0,
                 Type2 = subType,
-                SecondaryWeaponUpgrade = player.Inventory.Wear[(int)EquipmentType.MainWeapon]?.Upgrade ?? 0,
-                SecondaryMinHit = 0,
-                SecondaryMaxHit = 0,
-                SecondaryHitRate = 0,
-                SecondaryCriticalHitRate = 0,
-                SecondaryCriticalHitMultiplier = 0,
-                ArmorUpgrade = player.Inventory.Wear[(int)EquipmentType.Armor]?.Upgrade ?? 0,
-                Defence = 0,
-                DefenceRate = 0,
-                DistanceDefence = 0,
-                DistanceDefenceRate = 0,
-                MagicalDefence = 0,
-                FireResistance = 0,
-                WaterResistance = 0,
-                LightResistance = 0,
-                DarkResistance = 0
+                MainWeaponUpgrade = player.Weapon?.Upgrade ?? 0,
+                MinHit = player.MinHit,
+                MaxHit = player.MaxHit,
+                HitRate = player.HitRate,
+                CriticalHitRate = player.CriticalRate,
+                CriticalHitMultiplier = player.CriticalChance,
+                SecondaryWeaponUpgrade = player.SecondaryWeapon?.Upgrade ?? 0,
+                SecondaryMinHit = player.SecondaryWeapon?.DamageMinimum ?? 0,
+                SecondaryMaxHit = player.SecondaryWeapon?.DamageMaximum ?? 0,
+                SecondaryHitRate = player.SecondaryWeapon?.HitRate ?? 0,
+                SecondaryCriticalHitRate = player.SecondaryWeapon?.CriticalRate ?? 0,
+                SecondaryCriticalHitMultiplier = player.SecondaryWeapon?.CriticalDamageRate ?? 0,
+                ArmorUpgrade = player.Armor?.Upgrade ?? 0,
+                Defence = player.Defence,
+                DefenceRate = player.DefenceDodge,
+                DistanceDefence = player.DistanceDefence,
+                DistanceDefenceRate = player.DistanceDefenceDodge,
+                MagicalDefence = player.MagicalDefence,
+                FireResistance = player.FireResistance,
+                WaterResistance = player.WaterResistance,
+                LightResistance = player.LightResistance,
+                DarkResistance = player.DarkResistance
             };
         }
     }

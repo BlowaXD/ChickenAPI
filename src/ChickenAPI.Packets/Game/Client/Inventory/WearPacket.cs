@@ -1,5 +1,4 @@
-﻿using ChickenAPI.Enums.Game.Items;
-using ChickenAPI.Packets.Attributes;
+﻿using ChickenAPI.Packets.Attributes;
 
 namespace ChickenAPI.Packets.Game.Client.Inventory
 {
@@ -7,9 +6,9 @@ namespace ChickenAPI.Packets.Game.Client.Inventory
     public class WearPacket : PacketBase
     {
         [PacketIndex(0)]
-        public InventoryType InventoryType { get; set; }
+        public short ItemSlot { get; set; }
 
         [PacketIndex(1)]
-        public short ItemSlot { get; set; }
+        public byte WearPacketType { get; set; }
     }
 }

@@ -1,15 +1,15 @@
 ﻿using ChickenAPI.Game.Battle.Hitting;
-using ChickenAPI.Game.Events;
+using ChickenAPI.Game._Events;
 
 namespace ChickenAPI.Game.Battle.Events
 {
     /// <summary>
-    /// Fills the hit request in the event pipeline
-    /// Buffs
-    /// Damages
-    /// HitType...
+    ///     Fills the hit request in the event pipeline
+    ///     Buffs
+    ///     Damages
+    ///     HitType...
     /// </summary>
-    public class FillHitRequestEvent : ChickenEventArgs
+    public class FillHitRequestEvent : GameEntityEvent
     {
         public HitRequest HitRequest { get; set; }
     }

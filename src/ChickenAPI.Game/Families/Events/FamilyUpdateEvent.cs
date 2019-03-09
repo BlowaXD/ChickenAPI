@@ -1,9 +1,8 @@
-﻿using ChickenAPI.Game.Events;
+﻿using ChickenAPI.Game._Events;
 
 namespace ChickenAPI.Game.Families.Events
 {
-    public class FamilyUpdateEvent : ChickenEventArgs
+    public class FamilyUpdateEvent : GameEntityEvent
     {
-        
     }
 }

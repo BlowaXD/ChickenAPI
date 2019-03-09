@@ -1,8 +1,8 @@
 ﻿using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Game.ECS.Entities;
 using ChickenAPI.Game.Entities.Monster;
 using ChickenAPI.Game.Entities.Npc;
 using ChickenAPI.Game.Entities.Player;
+using ChickenAPI.Game._ECS.Entities;
 using ChickenAPI.Packets.Game.Server.Entities;
 
 namespace ChickenAPI.Game.Movements.Extensions
@@ -18,7 +18,7 @@ namespace ChickenAPI.Game.Movements.Extensions
                     {
                         VisualType = VisualType.Monster,
                         VisualId = monster.MapMonster.Id,
-                        IsSitting = monster.Movable.IsSitting
+                        IsSitting = monster.IsSitting
                     };
 
                 case INpcEntity npc:
@@ -26,14 +26,14 @@ namespace ChickenAPI.Game.Movements.Extensions
                     {
                         VisualType = VisualType.Npc,
                         VisualId = npc.MapNpc.Id,
-                        IsSitting = npc.Movable.IsSitting
+                        IsSitting = npc.IsSitting
                     };
                 case IPlayerEntity player:
                     return new RestPacket
                     {
                         VisualType = VisualType.Character,
                         VisualId = player.Character.Id,
-                        IsSitting = player.Movable.IsSitting
+                        IsSitting = player.IsSitting
                     };
                 default:
                     return null;

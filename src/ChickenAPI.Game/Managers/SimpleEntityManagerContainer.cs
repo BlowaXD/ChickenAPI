@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using ChickenAPI.Game.ECS;
-using ChickenAPI.Game.ECS.Entities;
+using ChickenAPI.Game._ECS;
+using ChickenAPI.Game._ECS.Entities;
 
 namespace ChickenAPI.Game.Managers
 {
     public class SimpleEntityManagerContainer : IEntityManagerContainer
     {
-        public HashSet<IEntityManager> _managers = new HashSet<IEntityManager>();
+        private readonly HashSet<IEntityManager> _managers = new HashSet<IEntityManager>();
 
         public void Register(IEntityManager manager)
         {

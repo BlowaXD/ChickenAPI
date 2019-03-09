@@ -1,8 +1,9 @@
-﻿using ChickenAPI.Game.Events;
+﻿using ChickenAPI.Game._Events;
 
-namespace ChickenAPI.Game.Features.Specialists.Args
+namespace ChickenAPI.Game.Specialists.Args
 {
-    public class SpTransformEvent : ChickenEventArgs
+    public class SpTransformEvent : GameEntityEvent
     {
+        public bool Wait { get; set; }
     }
 }

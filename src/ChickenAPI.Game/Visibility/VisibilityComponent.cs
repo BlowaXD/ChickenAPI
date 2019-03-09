@@ -1,8 +1,8 @@
 ﻿using System;
 using ChickenAPI.Core.Utils;
 using ChickenAPI.Enums.Game.Visibility;
-using ChickenAPI.Game.ECS.Components;
-using ChickenAPI.Game.ECS.Entities;
+using ChickenAPI.Game._ECS.Components;
+using ChickenAPI.Game._ECS.Entities;
 
 namespace ChickenAPI.Game.Visibility
 {
@@ -10,16 +10,16 @@ namespace ChickenAPI.Game.Visibility
     {
         private VisibilityType _visibility;
 
+        #region Ctors
+
+        public VisibilityComponent(IEntity entity) : base(entity) => Visibility = VisibilityType.Visible;
+
+        #endregion
+
         #region Events
 
         public event EventHandlerWithoutArgs<IVisibleEntity> Invisible;
         public event EventHandlerWithoutArgs<IVisibleEntity> Visible;
-
-        #endregion
-
-        #region Ctors
-
-        public VisibilityComponent(IEntity entity) : base(entity) => Visibility = VisibilityType.Visible;
 
         #endregion
 
@@ -49,11 +49,8 @@ namespace ChickenAPI.Game.Visibility
             }
         }
 
-        #endregion
-    }
+        public byte Size { get; set; }
 
-    public class VisibilityChangeEventArgs : EventArgs
-    {
-        public VisibilityType Visibility { get; set; }
+        #endregion
     }
 }

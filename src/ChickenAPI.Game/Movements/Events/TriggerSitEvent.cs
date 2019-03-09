@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using ChickenAPI.Game.Events;
+using ChickenAPI.Game._Events;
 
 namespace ChickenAPI.Game.Movements.Events
 {
-    public class TriggerSitEvent : ChickenEventArgs
+    public class TriggerSitEvent : GameEntityEvent
     {
         public IEnumerable<long> ChildsId { get; set; }
     }

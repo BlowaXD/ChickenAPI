@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using ChickenAPI.Game.ECS.Entities;
-using ChickenAPI.Game.ECS.Systems;
-using ChickenAPI.Game.Maps;
-using ChickenAPI.Packets.Game.Client._NotYetSorted;
+using ChickenAPI.Game._ECS.Entities;
+using ChickenAPI.Game._ECS.Systems;
+using ChickenAPI.Packets.Game.Client.Player;
 
-namespace ChickenAPI.Game.Features.Effects
+namespace ChickenAPI.Game.Effects
 {
     public class EffectSystem : SystemBase
     {
@@ -37,11 +36,7 @@ namespace ChickenAPI.Game.Features.Effects
                 packets.Add(entity.GenerateEffectPacket(effect.Id));
             }
 
-
-            if (entity.CurrentMap is IMapLayer mapLayer)
-            {
-                mapLayer.Broadcast((IEnumerable<EffectPacket>)packets);
-            }
+            entity.CurrentMap.BroadcastAsync(packets).ConfigureAwait(false).GetAwaiter().GetResult();
         }
     }
 }

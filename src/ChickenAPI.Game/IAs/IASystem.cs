@@ -1,16 +1,26 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Autofac;
 using ChickenAPI.Core.IoC;
 using ChickenAPI.Core.Maths;
 using ChickenAPI.Core.Utils;
+using ChickenAPI.Data.Skills;
 using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Game.ECS.Entities;
-using ChickenAPI.Game.ECS.Systems;
+using ChickenAPI.Enums.Game.Skill;
+using ChickenAPI.Game.Battle.Interfaces;
+using ChickenAPI.Game.Entities;
+using ChickenAPI.Game.Entities.Monster;
+using ChickenAPI.Game.Entities.Npc;
 using ChickenAPI.Game.Maps;
-using ChickenAPI.Game.Movements.DataObjects;
+using ChickenAPI.Game.Movements;
+using ChickenAPI.Game.Movements.Extensions;
+using ChickenAPI.Game.Skills.Args;
+using ChickenAPI.Game._ECS.Entities;
+using ChickenAPI.Game._ECS.Systems;
 
-namespace ChickenAPI.Game.Features.IAs
+namespace ChickenAPI.Game.IAs
 {
     public class IASystem : SystemBase
     {
@@ -36,20 +46,83 @@ namespace ChickenAPI.Game.Features.IAs
                 return false;
             }
 
-            var movable = entity.GetComponent<MovableComponent>();
-            if (movable == null)
-            {
-                return false;
-            }
 
-            return movable.Speed != 0;
+            return entity is IAiEntity;
         }
 
+        private Task FollowTheTarget(IAiEntity aiEntity, IBattleEntity target)
+        {
+            return Task.CompletedTask;
+        }
+
+        private Task ProcessAiWithTarget(IAiEntity aiEntity, IBattleEntity target)
+        {
+            // if range is enough to attack, attack 
+            int distance = aiEntity.GetDistance(target);
+
+            // get a random skill
+            SkillDto skill = aiEntity.Skills.Values.OrderBy(s => _random.Next()).FirstOrDefault(s => s.Range >= distance);
+
+            // no skill has range to hit target
+            if (skill == null)
+            {
+                byte range = aiEntity.NpcMonster.BasicRange;
+
+                // basic skill range
+                if (distance > range)
+                {
+                    // follow the target
+                    return FollowTheTarget(aiEntity, target);
+                }
+
+                skill = new SkillDto
+                {
+                    HitType = (byte)SkillTargetType.SingleHit,
+                    Range = range,
+                    MpCost = 0, // basic skill costs nothing
+                    Cooldown = (short)(aiEntity.NpcMonster.BasicCooldown * 250),
+                    TargetType = (byte)SkillTargetType.SingleHit,
+                    Effect = aiEntity.NpcMonster.BasicSkill,
+                    AttackAnimation = 11, // default value for SingleTargetHit
+                    SkillType = 0 // default value for BasicSkill
+                };
+            }
+
+            // hit the target with the given skill
+            return aiEntity.EmitEventAsync(new UseSkillEvent { Skill = skill, Target = target });
+        }
+
+        //todo async systems
         protected override void Execute(IEntity entity)
         {
-            int i = 0;
-            var movableComponent = entity.GetComponent<MovableComponent>();
-            if (movableComponent.Waypoints != null && movableComponent.Waypoints.Length != 0 || entity.Type == VisualType.Character)
+            if (!(entity is IAiEntity mov))
+            {
+                return;
+            }
+
+            if (!mov.IsAlive)
+            {
+                return;
+            }
+
+            if (mov.HasTarget)
+            {
+                ProcessAiWithTarget(mov, mov.Target).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+            else
+            {
+                ProcessAiWithoutTarget(mov);
+            }
+        }
+
+        private void ProcessAiWithoutTarget(IAiEntity mov)
+        {
+            if (mov.Waypoints != null && mov.Waypoints.Length != 0)
+            {
+                return;
+            }
+            // supposedly should never enter here
+            if (mov.Type == VisualType.Character || mov.Speed == 0)
             {
                 return;
             }
@@ -57,17 +130,18 @@ namespace ChickenAPI.Game.Features.IAs
             if (_random.Next(0, 100) < 35)
             {
                 // wait max 2500 millisecs before having a new movement
-                movableComponent.LastMove = DateTime.UtcNow.AddMilliseconds(_random.Next(2500));
+                mov.LastMove = DateTime.UtcNow.AddMilliseconds(_random.Next(2500));
                 return;
             }
 
+            int i = 0;
             Position<short> dest = null;
             while (dest == null && i < 25)
             {
                 short xpoint = (short)_random.Next(0, 4);
                 short ypoint = (short)_random.Next(0, 4);
-                short firstX = movableComponent.Actual.X;
-                short firstY = movableComponent.Actual.Y;
+                short firstX = mov.Position.X;
+                short firstY = mov.Position.Y;
                 dest = _map.GetFreePosition(firstX, firstY, xpoint, ypoint);
 
                 i++;
@@ -78,7 +152,7 @@ namespace ChickenAPI.Game.Features.IAs
                 return;
             }
 
-            movableComponent.Waypoints = _pathfinder.FindPath(movableComponent.Actual, dest, _map);
+            mov.Waypoints = _pathfinder.FindPath(mov.Position, dest, _map);
         }
     }
 }

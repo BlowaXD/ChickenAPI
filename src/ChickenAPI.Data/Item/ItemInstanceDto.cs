@@ -4,7 +4,7 @@ using ChickenAPI.Enums.Game.Items;
 
 namespace ChickenAPI.Data.Item
 {
-    public class ItemInstanceDto : ISynchronizedDto, ICloneable
+    public class ItemInstanceDto : ISynchronizedDto
     {
         public ItemDto Item { get; set; }
 
@@ -27,35 +27,26 @@ namespace ChickenAPI.Data.Item
         /// </summary>
         public byte Cellon { get; set; }
 
-        #endregion
+        #endregion Jewels
 
         #region GlovesAndBoots
 
         public byte Sum { get; set; }
 
-        #endregion
-
-        public object Clone()
-        {
-            object tmp = MemberwiseClone();
-            if (!(tmp is ItemInstanceDto newObject))
-            {
-                return null;
-            }
-
-            newObject.Id = Guid.NewGuid();
-            return newObject;
-        }
+        #endregion GlovesAndBoots
 
         public Guid Id { get; set; }
 
+
         #region WeaponsAndArmors
 
-        public byte Rarity { get; set; }
+        public sbyte Rarity { get; set; }
 
         public InventoryType Type { get; set; }
 
         public byte Upgrade { get; set; }
+
+        public bool IsFixed { get; set; }
 
         /// <summary>
         ///     Remaining ammo for archers primary weapon or swordsmen secondary weapon
@@ -88,7 +79,7 @@ namespace ChickenAPI.Data.Item
 
         public short CriticalDamageRate { get; set; }
 
-        #endregion
+        #endregion WeaponsAndArmors
 
         #region SpecialistCards
 
@@ -98,17 +89,26 @@ namespace ChickenAPI.Data.Item
 
         public byte SpecialistUpgrade { get; set; }
 
-        public byte SpecialistUpgrade2 { get; set; }
+        public byte SpStoneUpgrade { get; set; }
 
-        public byte AttackPoints { get; set; }
+        public short AttackPoints { get; set; }
 
-        public byte DefensePoints { get; set; }
+        public short DefensePoints { get; set; }
 
-        public byte ElementPoints { get; set; }
+        public short ElementPoints { get; set; }
 
-        public byte HpMpPoints { get; set; }
+        public short HpMpPoints { get; set; }
 
-        #endregion
+        public short SpDamage { get; set; }
+        public short SpDark { get; set; }
+        public short SpDefence { get; set; }
+        public short SpElement { get; set; }
+        public short SpFire { get; set; }
+        public short SpHP { get; set; }
+        public short SpLight { get; set; }
+        public short SpWater { get; set; }
+
+        #endregion SpecialistCards
 
         #region Fairy
 
@@ -140,6 +140,6 @@ namespace ChickenAPI.Data.Item
 
         public short DarkPower { get; set; }
 
-        #endregion
+        #endregion CommonToAllWearables
     }
 }

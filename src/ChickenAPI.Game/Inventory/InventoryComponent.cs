@@ -1,16 +1,20 @@
-﻿using ChickenAPI.Data.Item;
-using ChickenAPI.Game.ECS.Components;
-using ChickenAPI.Game.ECS.Entities;
+﻿using System;
+using Autofac;
+using ChickenAPI.Core.IoC;
+using ChickenAPI.Data.Item;
+using ChickenAPI.Game.Configuration;
+using ChickenAPI.Game._ECS.Components;
+using ChickenAPI.Game._ECS.Entities;
 
 namespace ChickenAPI.Game.Inventory
 {
     public class InventoryComponent : IComponent
     {
-        public const short MAX_ITEM_PER_SLOT = short.MaxValue;
         public const byte WEAR_SIZE = 16;
         public const byte EQUIPMENT_SIZE = 48;
         public const byte MAIN_SIZE = 48;
         public const byte ETC_SIZE = 48;
+        private static readonly IGameConfiguration gameConfiguration = new Lazy<IGameConfiguration>(ChickenContainer.Instance.Resolve<IGameConfiguration>).Value;
 
         public InventoryComponent(IEntity entity)
         {

@@ -1,14 +1,13 @@
 ﻿using System;
 using Autofac;
 using ChickenAPI.Core.IoC;
-using ChickenAPI.Core.Logging;
 using ChickenAPI.Core.Utils;
+using ChickenAPI.Data.Character;
 using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Game.Data.AccessLayer.Character;
-using ChickenAPI.Game.ECS.Components;
-using ChickenAPI.Game.ECS.Entities;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Movements.Extensions;
+using ChickenAPI.Game._ECS.Components;
+using ChickenAPI.Game._ECS.Entities;
 
 namespace ChickenAPI.Game.Movements.DataObjects
 {
@@ -51,10 +50,7 @@ namespace ChickenAPI.Game.Movements.DataObjects
             set
             {
                 _isSitting = value;
-                if (Entity.CurrentMap is IMapLayer mapLayer)
-                {
-                    mapLayer.Broadcast(Entity.GenerateRestPacket());
-                }
+                Entity.CurrentMap.BroadcastAsync(Entity.GenerateRestPacket()).ConfigureAwait(false).GetAwaiter().GetResult();
             }
         }
 
@@ -86,12 +82,5 @@ namespace ChickenAPI.Game.Movements.DataObjects
             e.Component.LastMove = DateTime.UtcNow;
             Move?.Invoke(sender, e);
         }
-    }
-
-    public class MoveEventArgs : EventArgs
-    {
-        public MovableComponent Component { get; set; }
-        public Position<short> Old { get; set; }
-        public Position<short> New { get; set; }
     }
 }

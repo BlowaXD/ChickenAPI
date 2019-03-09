@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
 using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Game.ECS.Entities;
-using ChickenAPI.Game.ECS.Systems;
 using ChickenAPI.Game.Entities.Player;
 using ChickenAPI.Game.Entities.Player.Extensions;
+using ChickenAPI.Game._ECS.Entities;
+using ChickenAPI.Game._ECS.Systems;
 
-namespace ChickenAPI.Game.Features.Specialists
+namespace ChickenAPI.Game.Specialists
 {
     public class SpecialistSystem : SystemBase
     {
@@ -25,13 +25,13 @@ namespace ChickenAPI.Game.Features.Specialists
                 return;
             }
 
-            if (player.Sp == null)
+            if (!player.HasSpWeared)
             {
                 return;
             }
 
             // remove points
-            player.SendPacket(player.GenerateSpPacket());
+            player.ActualiseUiSpPoints();
         }
     }
 }

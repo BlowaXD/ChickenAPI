@@ -7,32 +7,36 @@ using ChickenAPI.Core.IoC;
 using ChickenAPI.Core.Maths;
 using ChickenAPI.Core.Utils;
 using ChickenAPI.Data.Map;
+using ChickenAPI.Data.NpcMonster;
 using ChickenAPI.Data.Shop;
-using ChickenAPI.Game.ECS.Entities;
+using ChickenAPI.Game._ECS.Entities;
 
 namespace ChickenAPI.Game.Maps
 {
     public class SimpleMap : EntityManagerBase, IMap
     {
+        private readonly bool _initSystems;
         private readonly MapDto _map;
         private readonly IEnumerable<MapMonsterDto> _monsters;
+        private readonly IEnumerable<ShopDto> _shops;
         private readonly IEnumerable<MapNpcDto> _npcs;
         private readonly IEnumerable<PortalDto> _portals;
-        private readonly bool _initSystems;
+        private readonly IEnumerable<NpcMonsterSkillDto> _skills;
 
         private readonly IRandomGenerator _random;
-        private readonly IEnumerable<ShopDto> _shops;
 
         private readonly Position<short>[] _walkableGrid;
         private IMapLayer _baseMapLayer;
 
-        public SimpleMap(MapDto map, IEnumerable<MapMonsterDto> monsters, IEnumerable<MapNpcDto> npcs, IEnumerable<PortalDto> portals, IEnumerable<ShopDto> shops, bool initSystems = true)
+        public SimpleMap(MapDto map, IEnumerable<MapMonsterDto> monsters, IEnumerable<MapNpcDto> npcs, IEnumerable<PortalDto> portals, IEnumerable<ShopDto> shops,
+            IEnumerable<NpcMonsterSkillDto> skills, bool initSystems = true)
         {
             _map = map;
             _monsters = monsters;
             _npcs = npcs;
             _portals = portals;
             _shops = shops;
+            _skills = skills;
             _initSystems = initSystems;
             Layers = new HashSet<IMapLayer>();
 
@@ -56,7 +60,7 @@ namespace ChickenAPI.Game.Maps
 
         public long Id => _map.Id;
         public int MusicId => _map.Music;
-        public IMapLayer BaseLayer => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs, _portals, _shops, _initSystems));
+        public IMapLayer BaseLayer => _baseMapLayer ?? (_baseMapLayer = new SimpleMapLayer(this, _monsters, _npcs, _portals, _shops, _skills, _initSystems));
         public HashSet<IMapLayer> Layers { get; }
 
         public short Width => _map.Width;
@@ -87,13 +91,12 @@ namespace ChickenAPI.Game.Maps
             return _walkableGrid.Where(s => s.Y >= minY && s.Y <= maxY && s.X >= minX && s.X <= maxX).OrderBy(s => _random.Next(int.MaxValue)).FirstOrDefault(cell => IsWalkable(cell.X, cell.Y));
         }
 
-        private static bool IsWalkable(byte cell) => cell == 0 || cell == 2 || cell >= 16 && cell <= 19;
-
         public PortalDto GetPortalFromPosition(short x, short y, short range = 2)
         {
             return _portals.FirstOrDefault(portal =>
-                (x <= portal.SourceX + range && x >= portal.SourceX - range) &&
-                (y <= portal.SourceY + range && y >= portal.SourceY - range));
+                x <= portal.SourceX + range && x >= portal.SourceX - range && y <= portal.SourceY + range && y >= portal.SourceY - range);
         }
+
+        private static bool IsWalkable(byte cell) => cell == 0 || cell == 2 || cell >= 16 && cell <= 19;
     }
 }

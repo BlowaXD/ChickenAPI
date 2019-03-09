@@ -1,10 +1,10 @@
-﻿using ChickenAPI.Game.ECS.Entities;
-using ChickenAPI.Game.Features.Portals;
+﻿using ChickenAPI.Game.Portals;
+using ChickenAPI.Game._ECS.Entities;
 
 namespace ChickenAPI.Game.Entities.Portal
 {
     /// <summary>
-    /// Portals
+    ///     Portals
     /// </summary>
     public interface IPortalEntity : IEntity
     {

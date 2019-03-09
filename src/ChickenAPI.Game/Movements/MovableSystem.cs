@@ -3,13 +3,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using ChickenAPI.Core.Utils;
 using ChickenAPI.Enums.Game.Entity;
-using ChickenAPI.Game.ECS.Entities;
-using ChickenAPI.Game.ECS.Systems;
 using ChickenAPI.Game.Entities.Player;
-using ChickenAPI.Game.Maps;
-using ChickenAPI.Game.Movements.DataObjects;
+using ChickenAPI.Game.IAs;
+using ChickenAPI.Game.Inventory.Extensions;
 using ChickenAPI.Game.Movements.Extensions;
-using ChickenAPI.Game.Packets.Extensions;
+using ChickenAPI.Game._ECS.Entities;
+using ChickenAPI.Game._ECS.Systems;
 using ChickenAPI.Packets.Game.Server.Entities;
 
 namespace ChickenAPI.Game.Movements
@@ -31,19 +30,17 @@ namespace ChickenAPI.Game.Movements
                 return false;
             }
 
-            var movable = entity.GetComponent<MovableComponent>();
-            if (movable == null)
+            if (!(entity is IMovableEntity mov))
             {
                 return false;
             }
 
-            return movable.Speed != 0;
+            return mov.Speed != 0;
         }
 
         protected override void Execute(IEntity entity)
         {
-            var movableComponent = entity.GetComponent<MovableComponent>();
-            ProcessMovement(entity, movableComponent);
+            ProcessMovement((IMovableEntity)entity);
         }
 
         private void Move(IEntity entity)
@@ -51,14 +48,11 @@ namespace ChickenAPI.Game.Movements
             try
             {
                 MvPacket packet = entity.GenerateMvPacket();
-                if (EntityManager is IMapLayer mapLayer) // wtf ?
-                {
-                    mapLayer.Broadcast(packet);
-                }
+                entity.CurrentMap.BroadcastAsync(packet).ConfigureAwait(false).GetAwaiter().GetResult();
 
                 if (entity is IPlayerEntity playerEntity)
                 {
-                    playerEntity.SendPacket(playerEntity.GenerateCondPacket());
+                    playerEntity.SendPacketAsync(playerEntity.GenerateCondPacket()).ConfigureAwait(false).GetAwaiter().GetResult();
                 }
             }
             catch (Exception e)
@@ -67,24 +61,29 @@ namespace ChickenAPI.Game.Movements
             }
         }
 
-        private void ProcessMovement(IEntity entity, MovableComponent movableComponent)
+        private void ProcessMovement(IMovableEntity entity)
         {
-            if (movableComponent.Waypoints == null || movableComponent.Waypoints.Length <= 0)
+            if (!(entity is IAiEntity ai))
             {
                 return;
             }
 
-            byte speedIndex = (byte)(movableComponent.Speed / 2 < 1 ? 1 : movableComponent.Speed / 2);
-            int maxindex = movableComponent.Waypoints.Length > speedIndex ? speedIndex : movableComponent.Waypoints.Length;
-            Position<short> newPos = movableComponent.Waypoints[maxindex - 1];
-
-            if (!movableComponent.CanMove(newPos))
+            if (ai.Waypoints == null || ai.Waypoints.Length <= 0)
             {
                 return;
             }
 
-            movableComponent.Actual = movableComponent.Waypoints[maxindex - 1];
-            movableComponent.Waypoints = movableComponent.Waypoints.Skip(maxindex).ToArray();
+            byte speedIndex = (byte)(ai.Speed / 2 < 1 ? 1 : ai.Speed / 2);
+            int maxindex = ai.Waypoints.Length > speedIndex ? speedIndex : ai.Waypoints.Length;
+            Position<short> newPos = ai.Waypoints[maxindex - 1];
+
+            if (!ai.CanMove(newPos))
+            {
+                return;
+            }
+
+            ai.Position = ai.Waypoints[maxindex - 1];
+            ai.Waypoints = ai.Waypoints.Skip(maxindex).ToArray();
             Move(entity);
         }
     }

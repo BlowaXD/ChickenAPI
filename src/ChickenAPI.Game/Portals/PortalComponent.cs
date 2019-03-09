@@ -1,10 +1,9 @@
 ﻿using ChickenAPI.Data.Map;
 using ChickenAPI.Enums.Game.Portals;
-using ChickenAPI.Game.ECS.Components;
-using ChickenAPI.Game.ECS.Entities;
-using ChickenAPI.Game.Maps;
+using ChickenAPI.Game._ECS.Components;
+using ChickenAPI.Game._ECS.Entities;
 
-namespace ChickenAPI.Game.Features.Portals
+namespace ChickenAPI.Game.Portals
 {
     public class PortalComponent : IComponent
     {

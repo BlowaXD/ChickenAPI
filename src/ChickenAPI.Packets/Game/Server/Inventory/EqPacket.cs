@@ -10,7 +10,7 @@ namespace ChickenAPI.Packets.Game.Server.Inventory
         public long CharacterId { get; set; }
 
         [PacketIndex(1)]
-        public byte VisualType { get; set; }
+        public CharacterNameAppearance NameAppearance { get; set; }
 
         [PacketIndex(2)]
         public GenderType GenderType { get; set; }

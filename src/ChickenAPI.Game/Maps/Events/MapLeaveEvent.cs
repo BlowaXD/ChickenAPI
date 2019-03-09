@@ -1,9 +1,9 @@
-﻿using ChickenAPI.Game.ECS.Entities;
-using ChickenAPI.Game.Events;
+﻿using ChickenAPI.Game._ECS.Entities;
+using ChickenAPI.Game._Events;
 
 namespace ChickenAPI.Game.Maps.Events
 {
-    public class MapLeaveEvent : ChickenEventArgs
+    public class MapLeaveEvent : GameEntityEvent
     {
         public IMapLayer Map { get; set; }
     }

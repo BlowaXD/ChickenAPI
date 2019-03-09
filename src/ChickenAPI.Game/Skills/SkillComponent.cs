@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Autofac;
 using ChickenAPI.Core.IoC;
 using ChickenAPI.Data.Character;
+using ChickenAPI.Data.NpcMonster;
 using ChickenAPI.Data.Skills;
 using ChickenAPI.Enums.Game.Character;
-using ChickenAPI.Game.Data.AccessLayer.Skill;
-using ChickenAPI.Game.ECS.Components;
-using ChickenAPI.Game.ECS.Entities;
 using ChickenAPI.Game.Entities.Player;
+using ChickenAPI.Game.Skills.Extensions;
+using ChickenAPI.Game._ECS.Components;
+using ChickenAPI.Game._ECS.Entities;
 
 namespace ChickenAPI.Game.Skills
 {
     public class SkillComponent : IComponent
     {
+        private static readonly ISkillService SkillService = new Lazy<ISkillService>(() => ChickenContainer.Instance.Resolve<ISkillService>()).Value;
+
         public SkillComponent(IEntity entity)
         {
             Entity = entity;
@@ -24,25 +28,34 @@ namespace ChickenAPI.Game.Skills
             }
 
             int tmp = 200 + 20 * (byte)player.Character.Class;
-            AddSkill(SkillService.GetById(tmp));
-            AddSkill(SkillService.GetById(tmp + 1));
+            this.AddSkill(SkillService.GetById(tmp));
+            this.AddSkill(SkillService.GetById(tmp + 1));
 
-            if (player.Character.Class == CharacterClassType.Adventurer)
+            if (player.Character.Class != CharacterClassType.Adventurer)
             {
-                AddSkill(SkillService.GetById(tmp + 9));
+                return;
+            }
+
+            this.AddSkill(SkillService.GetById(tmp + 9));
+
+            IEnumerable<SkillDto> skills = SkillService.GetByClassIdAsync((byte)player.Character.Class).ConfigureAwait(false).GetAwaiter().GetResult();
+            foreach (SkillDto skillDto in skills.Where(s => s.LevelMinimum < player.JobLevel && s.Id >= 200 && s.Id != 209 && s.Id <= 210))
+            {
+                this.AddSkill(skillDto);
             }
         }
 
-        private void AddSkill(SkillDto skill)
+        public SkillComponent(IEntity entity, IEnumerable<NpcMonsterSkillDto> skills) : this(entity)
         {
-            if (!Skills.ContainsKey(skill.Id))
+            if (skills == null)
             {
-                Skills.Add(skill.Id, skill);
+                return;
             }
 
-            if (!SkillsByCastId.ContainsKey(skill.CastId))
+            // add skills to component
+            foreach (NpcMonsterSkillDto skill in skills)
             {
-                SkillsByCastId.Add(skill.CastId, skill);
+                this.AddSkill(skill.Skill);
             }
         }
 
@@ -56,13 +69,11 @@ namespace ChickenAPI.Game.Skills
             foreach (CharacterSkillDto characterSkill in skills)
             {
                 CharacterSkills.Add(characterSkill.Id, characterSkill);
-                AddSkill(characterSkill.Skill);
+                this.AddSkill(characterSkill.Skill);
             }
         }
 
         public Dictionary<Guid, CharacterSkillDto> CharacterSkills { get; } = new Dictionary<Guid, CharacterSkillDto>();
-
-        private static readonly ISkillService SkillService = new Lazy<ISkillService>(() => ChickenContainer.Instance.Resolve<ISkillService>()).Value;
 
         public Dictionary<long, SkillDto> Skills { get; } = new Dictionary<long, SkillDto>();
 
