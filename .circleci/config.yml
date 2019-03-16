@@ -1,0 +1,33 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: microsoft/dotnet:2.2-sdk-alpine
+    steps:
+      - checkout
+      - run: 
+            name: Build solution
+            command : | 
+                dotnet restore
+                dotnet build
+      - run: 
+            name: Test Solution
+            command : echo "todo"
+      - run: 
+            name: Build .NET package (nupkg)
+            environment: 
+               PACKAGE_PATH:src/ChickenAPI.Game.Extensions/
+            command : | 
+                dotnet pack $PACKAGE_PATH --output nupkgs /p:PackageVersion=$CI_COMMIT_TAG
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.$CI_COMMIT_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+      # Todo continue ChickenAPI.Game.Extensions in another repository
+      - run: 
+            name: Release ChickenAPI.Game.Extensions .NET package (nupkg)
+            environment: 
+               PACKAGE_PATH:src/ChickenAPI.Game.Extensions/
+            command : | 
+                dotnet pack $PACKAGE_PATH --output nupkgs /p:PackageVersion=$CI_COMMIT_TAG
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Extensions.$CI_COMMIT_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+      - run: 
+            name: Publish ChickenAPI.Game.Extensions .NET package
+            command : 
