@@ -34,16 +34,16 @@ jobs:
             environment: 
                PACKAGE_PATH:src/ChickenAPI.Game.Extensions/
             command : | 
-                dotnet pack $PACKAGE_PATH --output nupkgs /p:PackageVersion=$CI_COMMIT_TAG
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.$CI_COMMIT_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet pack $PACKAGE_PATH --output nupkgs /p:PackageVersion=$CIRCLE_TAG
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
       # Todo continue ChickenAPI.Game.Extensions in another repository
       - run: 
             name: Release ChickenAPI.Game.Extensions package (nuget)
             environment: 
                PACKAGE_PATH:src/ChickenAPI.Game.Extensions/
             command : | 
-                dotnet pack $PACKAGE_PATH --output nupkgs /p:PackageVersion=$CI_COMMIT_TAG
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Extensions.$CI_COMMIT_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet pack $PACKAGE_PATH --output nupkgs /p:PackageVersion=$CIRCLE_TAG
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Extensions.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
 workflows:
   version: 2
   build_accept_deploy:
@@ -58,10 +58,9 @@ workflows:
       - release_nuget_package:
           filters:  # using regex filters requires the entire branch to match
             tags:
-              only: /^v.*/
+              only: /^\A((\d+\.)+\d+)\z/
             branches:
               only:  # only branches matching the below regex filters will run
-                - dev
                 - develop
                 - master
           requires:
