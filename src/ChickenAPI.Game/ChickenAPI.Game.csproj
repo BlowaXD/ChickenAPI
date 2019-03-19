@@ -2,20 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageProjectUrl>https://github.com/BlowaXD/ChickenAPI</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/BlowaXD/ChickenAPI/master/docs/_media/logo_512.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/BlowaXD/ChickenAPI.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>nostale private server source API</PackageTags>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Copyright>GPL3.0</Copyright>
-    <PackageLicenseUrl>https://github.com/BlowaXD/ChickenAPI/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageReleaseNotes>First version, not stable at all</PackageReleaseNotes>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>0.2.0</Version>
+    
     <LangVersion>latest</LangVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Blowa</Authors>
+    <Copyright>2019</Copyright>
+    <PackageProjectUrl>https://github.com/BlowaXD/ChickenAPI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BlowaXD/ChickenAPI.git</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/BlowaXD/ChickenAPI/master/docs/_media/logo_512.png</PackageIconUrl>
+    <PackageTags>nostale, chickenapi, nostale private server source, nostale emulator</PackageTags>
+    <Version>0.2.0</Version>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>ChickenAPI's Core abstraction (IoC, Logging, Utils, EventPipelines, Delegates..)</Description>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseUrl>https://github.com/BlowaXD/ChickenAPI/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -32,14 +32,14 @@ jobs:
       - run: 
             name: Build ChickenAPI package (nuget)
             command : | 
-                chmod +X scripts/change_nuspec_versions.sh && scripts/change_nuspec_versions.sh $CIRCLE_TAG
-                chmod +x scripts/build_packages.sh && scripts/build_packages.sh
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Core.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Packets.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Enums.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Data.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Game.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Game.Extensions.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet build -c Release
+                dotnet pack -c Release -o nupkgs -v m
+                dotnet nuget push nupkgs/ChickenAPI.Core.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push nupkgs/ChickenAPI.Packets.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push nupkgs/ChickenAPI.Enums.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push nupkgs/ChickenAPI.Data.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push nupkgs/ChickenAPI.Game.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push nupkgs/ChickenAPI.Game.Extensions.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
 workflows:
   version: 2
   build_and_test:
