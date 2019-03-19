@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-16"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ChickenAPI.Packets</id>
+    <version>$(VERSION_OF_CHICKENAPI)</version>
+    <authors>BlowaXD</authors>
+    <projectUrl>http://github.com/BlowaXD/ChickenAPI</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/BlowaXD/ChickenAPI/develop/docs/_media/logo_256.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ChickenAPI.Packets is the collection of Nostale's Packet for ChickenAPI</description>
+    <summary>ChickenAPI is an API for Nostale Private Servers</summary>
+    <copyright>Copyright © BlowaXD 2019</copyright>
+    <language>en-US</language>
+  </metadata>
+</package>

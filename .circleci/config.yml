@@ -24,29 +24,25 @@ jobs:
       - run: 
             name: Test Code Quality
             command : echo "todo"
-  release_nuget_package:
+  release_nuget_packages:
     docker:
       - image: microsoft/dotnet:2.2-sdk-alpine
     steps:
       - checkout
       - run: 
             name: Build ChickenAPI package (nuget)
-            environment: 
-               PACKAGE_PATH:src/ChickenAPI.Game.Extensions/
             command : | 
-                dotnet pack $PACKAGE_PATH --output nupkgs /p:PackageVersion=$CIRCLE_TAG
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-      # Todo continue ChickenAPI.Game.Extensions in another repository
-      - run: 
-            name: Release ChickenAPI.Game.Extensions package (nuget)
-            environment: 
-               PACKAGE_PATH:src/ChickenAPI.Game.Extensions/
-            command : | 
-                dotnet pack $PACKAGE_PATH --output nupkgs /p:PackageVersion=$CIRCLE_TAG
-                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Extensions.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                chmod +X scripts/change_nuspec_versions.sh && scripts/change_nuspec_versions.sh $CIRCLE_TAG
+                chmod +x scripts/build_packages.sh && scripts/build_packages.sh
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Core.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Packets.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Enums.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Data.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Game.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push $PACKAGE_PATH/nupkgs/ChickenAPI.Game.Extensions.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
 workflows:
   version: 2
-  build_accept_deploy:
+  build_and_test:
     jobs:
       - build
       - test_unit_testing:
@@ -55,7 +51,7 @@ workflows:
       - test_code_quality:
           requires:
             - build
-      - release_nuget_package:
+      - release_nuget_packages:
           filters:  # using regex filters requires the entire branch to match
             tags:
               only: /^\A((\d+\.)+\d+)\z/
@@ -63,6 +59,3 @@ workflows:
               only:  # only branches matching the below regex filters will run
                 - develop
                 - master
-          requires:
-            - test_code_quality
-            - test_unit_testing
