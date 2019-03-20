@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -16,7 +16,6 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>ChickenAPI's Core abstraction (IoC, Logging, Utils, EventPipelines, Delegates..)</Description>
     <RepositoryType>git</RepositoryType>
-    <PackageLicenseUrl>https://github.com/BlowaXD/ChickenAPI/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>

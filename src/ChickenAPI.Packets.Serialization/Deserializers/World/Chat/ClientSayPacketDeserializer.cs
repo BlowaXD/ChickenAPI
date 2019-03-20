@@ -6,12 +6,12 @@ namespace ChickenAPI.Packets.Serialization.Deserializers.World.Chat
     {
         protected override string Header => "say";
 
-        protected override ClientSayPacket DeserializeImpl(string buffer)
+        protected override ClientSayPacket DeserializeImpl(string bufferWithoutHeader, bool isReturn)
         {
             return new ClientSayPacket
             {
                 Header = Header,
-                Message = buffer
+                Message = bufferWithoutHeader
             };
         }
     }
