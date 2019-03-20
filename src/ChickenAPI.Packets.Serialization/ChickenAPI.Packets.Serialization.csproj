@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Blowa</Authors>
+    <Copyright>2019</Copyright>
+    <PackageProjectUrl>https://github.com/BlowaXD/ChickenAPI</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BlowaXD/ChickenAPI.git</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/BlowaXD/ChickenAPI/master/docs/_media/logo_512.png</PackageIconUrl>
+    <PackageTags>nostale, chickenapi, nostale private server source, nostale emulator</PackageTags>
+    <Version>0.2.0</Version>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>ChickenAPI.Packets.Serialization is a lib of Nostale packets serializers and deserializers, based on ChickenAPI.Packets</Description>
+    <Product>ChickenAPI.Packets.Serialization</Product>
+    <PackageId>ChickenAPI.Packets.Serialization</PackageId>
+    <AssemblyName>ChickenAPI.Packets.Serialization</AssemblyName>
+    <RootNamespace>ChickenAPI.Packets.Serialization</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Serializers\Login\Client\" />
+    <Folder Include="Serializers\CharacterSelectionScreen\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChickenAPI.Packets\ChickenAPI.Packets.csproj" />
+  </ItemGroup>
+
+</Project>

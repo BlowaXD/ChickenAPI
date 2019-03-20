@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Data", "src\Chic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Game.Extensions", "src\ChickenAPI.Game.Extensions\ChickenAPI.Game.Extensions.csproj", "{1AB8153E-4E67-4576-87D7-4E2E426F36FF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Packets.Serialization", "src\ChickenAPI.Packets.Serialization\ChickenAPI.Packets.Serialization.csproj", "{94ED5894-B614-416F-AE46-C1CE885C13E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenAPI.Packets.Test", "test\ChickenAPI.Packets.Test\ChickenAPI.Packets.Test.csproj", "{663959AE-D2AE-4C74-8108-19E1B79EC7C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{1AB8153E-4E67-4576-87D7-4E2E426F36FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AB8153E-4E67-4576-87D7-4E2E426F36FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AB8153E-4E67-4576-87D7-4E2E426F36FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94ED5894-B614-416F-AE46-C1CE885C13E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94ED5894-B614-416F-AE46-C1CE885C13E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94ED5894-B614-416F-AE46-C1CE885C13E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94ED5894-B614-416F-AE46-C1CE885C13E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{663959AE-D2AE-4C74-8108-19E1B79EC7C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{663959AE-D2AE-4C74-8108-19E1B79EC7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{663959AE-D2AE-4C74-8108-19E1B79EC7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{663959AE-D2AE-4C74-8108-19E1B79EC7C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
