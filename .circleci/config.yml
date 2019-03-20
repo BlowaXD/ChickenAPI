@@ -14,8 +14,9 @@ jobs:
     docker:
       - image: microsoft/dotnet:2.2-sdk-alpine
     steps:
+      - checkout
       - run: 
-            name: Test Solution
+            name: Run tests on ChickenAPI.Packets
             command : |
                 dotnet test test/ChickenAPI.Packets.Test -v m
   test_code_quality:
