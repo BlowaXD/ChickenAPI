@@ -34,12 +34,12 @@ jobs:
             command : | 
                 dotnet build -c Release
                 dotnet pack -c Release -o nupkgs -v m
-                dotnet nuget push nupkgs/ChickenAPI.Core.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push nupkgs/ChickenAPI.Packets.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push nupkgs/ChickenAPI.Enums.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push nupkgs/ChickenAPI.Data.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push nupkgs/ChickenAPI.Game.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
-                dotnet nuget push nupkgs/ChickenAPI.Game.Extensions.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push src/ChickenAPI.Core/nupkgs/ChickenAPI.Core.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push src/ChickenAPI.Packets/nupkgs/ChickenAPI.Packets.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push src/ChickenAPI.Enums/nupkgs/ChickenAPI.Enums.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push src/ChickenAPI.Data/nupkgs/ChickenAPI.Data.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push src/ChickenAPI.Game/nupkgs/ChickenAPI.Game.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
+                dotnet nuget push src/ChickenAPI.Game.Extensions/nupkgs/ChickenAPI.Game.Extensions.$CIRCLE_TAG.nupkg -k $NUGET_API_KEY -s "https://api.nuget.org/v3/index.json"
 workflows:
   version: 2
   build_and_test:
@@ -52,10 +52,10 @@ workflows:
           requires:
             - build
       - release_nuget_packages:
+          requires:
+            - build
           filters:  # using regex filters requires the entire branch to match
             tags:
               only: /^\A((\d+\.)+\d+)\z/
             branches:
-              only:  # only branches matching the below regex filters will run
-                - develop
-                - master
+              ignore: /.*/
