@@ -2,7 +2,7 @@
 
 <img src="docs/_media/logo_512.png" height="256px"></img>
 
-[![Pipeline]([![CircleCI](https://circleci.com/gh/BlowaXD/ChickenAPI.svg?style=svg)](https://circleci.com/gh/BlowaXD/ChickenAPI))
+[![CircleCI](https://circleci.com/gh/BlowaXD/ChickenAPI/tree/develop.svg?style=svg)](https://circleci.com/gh/BlowaXD/ChickenAPI/tree/develop)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/575d0215793d4c9ca7cc333fe170a0eb)](https://app.codacy.com/app/BlowaXD/ChickenAPI?utm_source=github.com&utm_medium=referral&utm_content=BlowaXD/ChickenAPI&utm_campaign=badger)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](https://forthebadge.com)
 
