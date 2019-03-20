@@ -11,7 +11,8 @@ namespace ChickenAPI.Packets.Test
         [TestMethod]
         public void Test_Serializer_CancelPacket()
         {
-            const string stringPacket = "cancel 0 2";
+            // cancel {cancelPacketType} {targetId}
+            const string stringPacket = "cancel 2 0";
             IPacketSerializer packetSerializer = new CancelPacketSerializer();
             var packet = new CancelPacket
             {

@@ -16,7 +16,8 @@ jobs:
     steps:
       - run: 
             name: Test Solution
-            command : echo "todo"
+            command : |
+                dotnet test test/ChickenAPI.Packets.Test -v m
   test_code_quality:
     docker:
       - image: microsoft/dotnet:2.2-sdk-alpine

@@ -6,7 +6,7 @@ namespace ChickenAPI.Packets.Serializers.World.Server.Battle
     {
         protected override string SerializeImpl(CancelPacket packet)
         {
-            return $"cancel {packet.Type} {packet.TargetId}";
+            return $"cancel {(byte)packet.Type} {packet.TargetId}";
         }
     }
 }
