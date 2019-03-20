@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28705.295
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.PacketGeneratorCLI", "src\ChickenAPI.PacketGeneratorCLI\ChickenAPI.PacketGeneratorCLI.csproj", "{C286CAFA-6B47-4ED9-9531-29F47090F17C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Core", "src\ChickenAPI.Core\ChickenAPI.Core.csproj", "{FD111C37-72A1-4370-8909-CF86A797322F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Enums", "src\ChickenAPI.Enums\ChickenAPI.Enums.csproj", "{260F0C0B-5FD1-4C17-AAB0-77C7DCDA4F1A}"
@@ -13,16 +11,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Game", "src\Chic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Packets", "src\ChickenAPI.Packets\ChickenAPI.Packets.csproj", "{F60A8D18-3778-4896-B5D8-C311751C5B78}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Data", "src\ChickenAPI.Data\ChickenAPI.Data.csproj", "{A7339134-76C4-44AB-BA6A-CE2091ACA32E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChickenAPI.Game.Extensions", "src\ChickenAPI.Game.Extensions\ChickenAPI.Game.Extensions.csproj", "{1AB8153E-4E67-4576-87D7-4E2E426F36FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C286CAFA-6B47-4ED9-9531-29F47090F17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C286CAFA-6B47-4ED9-9531-29F47090F17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C286CAFA-6B47-4ED9-9531-29F47090F17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C286CAFA-6B47-4ED9-9531-29F47090F17C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD111C37-72A1-4370-8909-CF86A797322F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD111C37-72A1-4370-8909-CF86A797322F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD111C37-72A1-4370-8909-CF86A797322F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +37,14 @@ Global
 		{F60A8D18-3778-4896-B5D8-C311751C5B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F60A8D18-3778-4896-B5D8-C311751C5B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F60A8D18-3778-4896-B5D8-C311751C5B78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7339134-76C4-44AB-BA6A-CE2091ACA32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7339134-76C4-44AB-BA6A-CE2091ACA32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7339134-76C4-44AB-BA6A-CE2091ACA32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7339134-76C4-44AB-BA6A-CE2091ACA32E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AB8153E-4E67-4576-87D7-4E2E426F36FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AB8153E-4E67-4576-87D7-4E2E426F36FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AB8153E-4E67-4576-87D7-4E2E426F36FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AB8153E-4E67-4576-87D7-4E2E426F36FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
